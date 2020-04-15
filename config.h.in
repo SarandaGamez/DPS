@@ -1,0 +1,10 @@
+#ifndef CONFIG_H
+#define CONFIG_H
+#include <string>
+
+const std::string GAME_TITLE = "@GAME_TITLE@";
+const std::string GAME_VERSION_MAJOR = "@GAME_VERSION_MAJOR@";
+const std::string GAME_VERSION_MINOR = "@GAME_VERSION_MINOR@";
+const std::string GAME_VERSION_RELEASE = "@GAME_VERSION_RELEASE@";
+
+#endif // !CONFIG_H
