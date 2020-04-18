@@ -1,5 +1,5 @@
 #include "Game.h"
-#include "States/IntroState.h"
+#include "States/MenuState.h"
 #include "config.h"
 
 Game::Game(){
@@ -12,7 +12,7 @@ Game::Game(){
 	renderWindow->setKeyRepeatEnabled(false);
 
 	statesMachine.ConnectWithRenderWindow(renderWindow);
-	statesMachine.Push(std::unique_ptr<State>(new IntroState));
+	statesMachine.Push(std::unique_ptr<State>(new MenuState));
 	updater.ConnectWithAccessor(statesMachine);
 
 
