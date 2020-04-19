@@ -8,6 +8,8 @@ class MenuState : public State {
 	sf::Sprite sprite;
 	sf::Font font;
 	std::unique_ptr<Button> buttonPlay;
+	std::unique_ptr<Button> buttonLoad;
+	std::unique_ptr<Button> buttonSettings;
 	std::unique_ptr<Button> buttonExit;
 
 private:

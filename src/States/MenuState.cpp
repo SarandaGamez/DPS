@@ -21,13 +21,25 @@ void MenuState::OnEnter()
 		textures.GetTexture("MainMenu/ButtonClicked"),
 		font,
 		"play",
+		sf::Vector2f(renderWindow->getSize().x / 2, renderWindow->getSize().y / 2 - 200)));
+	buttonLoad = std::unique_ptr<Button>(new Button(
+		textures.GetTexture("MainMenu/Button"),
+		textures.GetTexture("MainMenu/ButtonClicked"),
+		font,
+		"load",
 		sf::Vector2f(renderWindow->getSize().x / 2, renderWindow->getSize().y / 2 - 100)));
+	buttonSettings = std::unique_ptr<Button>(new Button(
+		textures.GetTexture("MainMenu/Button"),
+		textures.GetTexture("MainMenu/ButtonClicked"),
+		font,
+		"settings",
+		sf::Vector2f(renderWindow->getSize().x / 2, renderWindow->getSize().y / 2)));
 	buttonExit = std::unique_ptr<Button>(new Button(
 		textures.GetTexture("MainMenu/Button"),
 		textures.GetTexture("MainMenu/ButtonClicked"),
 		font,
 		"exit",
-		sf::Vector2f(renderWindow->getSize().x / 2, renderWindow->getSize().y / 2)));
+		sf::Vector2f(renderWindow->getSize().x / 2, renderWindow->getSize().y / 2 + 100)));
 }
 
 void MenuState::OnLeave()
@@ -48,6 +60,8 @@ void MenuState::OnDraw()
 {
 	renderWindow->draw(sprite);
 	renderWindow->draw(*buttonPlay);
+	renderWindow->draw(*buttonLoad);
+	renderWindow->draw(*buttonSettings);
 	renderWindow->draw(*buttonExit);
 }
 
