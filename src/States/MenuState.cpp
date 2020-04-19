@@ -21,13 +21,13 @@ void MenuState::OnEnter()
 		textures.GetTexture("MainMenu/ButtonClicked"),
 		font,
 		"play",
-		{ 500,100 }));
+		sf::Vector2f(renderWindow->getSize().x / 2, renderWindow->getSize().y / 2 - 100)));
 	buttonExit = std::unique_ptr<Button>(new Button(
 		textures.GetTexture("MainMenu/Button"),
 		textures.GetTexture("MainMenu/ButtonClicked"),
 		font,
 		"exit",
-		{ 500,200 }));
+		sf::Vector2f(renderWindow->getSize().x / 2, renderWindow->getSize().y / 2)));
 }
 
 void MenuState::OnLeave()
