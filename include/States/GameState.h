@@ -6,7 +6,6 @@
 
 class GameState : public State {
 	sf::Sprite background;
-	sf::SoundBuffer punchSound;
 private:
 
 	virtual void OnHandleEvent() override;

@@ -1,5 +1,5 @@
 #include "States/IntroState.h"
-#include "States/MenuState.h"
+#include "States/GameState.h"
 #include "StatesMachine.h"
 #include <iostream>
 
@@ -31,7 +31,7 @@ void IntroState::OnHandleEvent()
 
 
 		if (slideshow->IsOver())
-			transition->Switch(std::unique_ptr<State>(new MenuState));
+			transition->Switch(std::unique_ptr<State>(new GameState));
 
 		slideshow->Next();
 	}

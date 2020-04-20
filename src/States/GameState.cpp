@@ -11,9 +11,10 @@ using std::endl;
 void GameState::OnEnter()
 {
 	cout << "Loading textures" << endl;
-
+	textures.Load("OfficeBackground", "assets/GUI/Office/ProsecutorsOffice.png");
 	cout << "Loading textures done" << endl;
 
+	background.setTexture(textures.GetTexture("OfficeBackground"));
 	cout << "Game loaded" << endl;
 }
 
