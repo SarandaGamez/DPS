@@ -13,11 +13,10 @@ void IntroState::OnEnter()
 	textures.Load("cinematic-intro-2", "assets/cinematics/intro/intro2.png");
 	textures.Load("cinematic-intro-3", "assets/cinematics/intro/intro3.png");
 	textures.Load("cinematic-intro-4", "assets/cinematics/intro/intro4.png");
-	slideshow = std::make_shared<Slideshow>(font);
-	slideshow->add("TESTESTSETSET 1", textures.GetTexture("cinematic-intro-1"));
-	slideshow->add("TESTESTSETSET 2", textures.GetTexture("cinematic-intro-2"));
-	slideshow->add("TESTESTSETSET 3", textures.GetTexture("cinematic-intro-3"));
-	slideshow->add("TESTESTSETSET 4", textures.GetTexture("cinematic-intro-4"));
+	slideshow = std::make_shared<Slideshow>();
+	slideshow->Add("There was a country where people were ruled by burgeois bastards", font, textures.GetTexture("cinematic-intro-1"));
+	slideshow->Add("People were very upset by this situation. They wanted equality!", font, textures.GetTexture("cinematic-intro-2"));
+	slideshow->Add("Afters years of capitalists despotism, poor people started a revolution", font, textures.GetTexture("cinematic-intro-3"));
 }
 
 void IntroState::OnLeave()
@@ -31,10 +30,10 @@ void IntroState::OnHandleEvent()
 			isGameFinished = true;
 
 
-		if (slideshow->isOver())
+		if (slideshow->IsOver())
 			transition->Switch(std::unique_ptr<State>(new MenuState));
 
-		slideshow->next();
+		slideshow->Next();
 	}
 }
 
@@ -47,6 +46,6 @@ void IntroState::OnUpdate()
 
 void IntroState::OnDraw()
 {
-	slideshow->draw(renderWindow);
+	slideshow->Draw(renderWindow);
 }
 

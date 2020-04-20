@@ -7,19 +7,18 @@
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/Sprite.hpp>
 #include <SFML/Graphics/Text.hpp>
+#include "Cinematics/Slide.h"
 
 class Slideshow {
 
-	int currentSlide = 0;
-	std::vector<std::shared_ptr<sf::Sprite>> sprites;
-	std::vector<std::string> captions;
-	sf::Text text;
+	int currentSlide;
+	std::vector <std::shared_ptr<Slide>> slides;
 public:
-	Slideshow(const sf::Font& font);
-	void add(const std::string& caption, const sf::Texture& texture);
-	void draw(std::shared_ptr<sf::RenderWindow> renderWindow);
-	void next();
-	bool isOver();
+	Slideshow();
+	void Add(const std::string& caption, const sf::Font& font, const sf::Texture& texture);
+	void Draw(std::shared_ptr<sf::RenderWindow> renderWindow);
+	void Next();
+	bool IsOver();
 
 };
 
