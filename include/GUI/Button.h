@@ -1,8 +1,6 @@
 #ifndef BUTTON_H
 #define BUTTON_H
 
-#include <sfml/Graphics/Sprite.hpp>
-#include <sfml/Graphics/Image.hpp>
 #include <sfml/Graphics.hpp>
 
 class Button : public sf::Drawable{
