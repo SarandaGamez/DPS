@@ -4,16 +4,15 @@
 #include "Utils/Signal.h"
 
 namespace gui {
+	namespace SignalTypes {
 
-	class SignalTypes {
-	public:
 		static utils::Signal::GUID onLeftMouseButtonPressed;
 		static utils::Signal::GUID onLeftMouseButtonReleased;
 		static utils::Signal::GUID onRightMouseButtonPressed;
 		static utils::Signal::GUID onRightMouseButtonReleased;
 		static utils::Signal::GUID onMouseEnter;
 		static utils::Signal::GUID onMouseLeave;
-	};
+	}
 }
 
 #endif // !GUI_SIGNAL_TYPES_H
