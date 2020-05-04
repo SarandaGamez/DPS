@@ -10,7 +10,6 @@ namespace gui {
 	class EventBehavior {
 	public:
 		void HandleEvent(const sf::Event& event);
-		EventBehavior(std::shared_ptr<gui::UIObject> guiObject);
 	protected:
 		virtual void OnHandleEvent(const sf::Event& event) = 0;
 		sf::Event::EventType eventType;

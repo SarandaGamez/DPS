@@ -7,9 +7,4 @@ namespace gui {
 		if (eventType == event.type)
 			OnHandleEvent(event);
 	}
-
-	EventBehavior::EventBehavior(std::shared_ptr<gui::UIObject> guiObject)
-	{
-		this->guiObject = guiObject;
-	}
 }
