@@ -14,13 +14,6 @@ namespace gui {
 		static utils::Signal::GUID onMouseEnter;
 		static utils::Signal::GUID onMouseLeave;
 	};
-
-	utils::Signal::GUID onLeftMouseButtonPressed = 0;
-	utils::Signal::GUID onLeftMouseButtonReleased = 0;
-	utils::Signal::GUID onRightMouseButtonPressed = 0;
-	utils::Signal::GUID onRightMouseButtonReleased = 0;
-	utils::Signal::GUID onMouseEnter = 0;
-	utils::Signal::GUID onMouseLeave = 0;
 }
 
 #endif // !GUI_SIGNAL_TYPES_H
