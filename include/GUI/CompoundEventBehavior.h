@@ -16,6 +16,7 @@ namespace gui {
 		std::list<std::shared_ptr<EventBehavior>> GetChildren();
 	private:
 		std::list<std::shared_ptr<EventBehavior>> children;
+		void OnHandleEvent(const sf::Event& event) {}
 	};
 }
 
