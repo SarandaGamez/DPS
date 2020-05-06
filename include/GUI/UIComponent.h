@@ -19,6 +19,9 @@ namespace gui {
 		virtual void Update() {}
 		void HandleEvent(const sf::Event&);
 		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const {}
+
+	protected:
+		virtual void OnSetPosition(sf::Vector2f position) {}
 	};
 
 }
