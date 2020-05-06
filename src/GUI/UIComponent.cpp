@@ -3,6 +3,7 @@
 void gui::UIComponent::SetPosition(sf::Vector2f position)
 {
 	this->position = position;
+	OnSetPosition(position);
 }
 
 sf::Vector2f gui::UIComponent::GetPosition()
