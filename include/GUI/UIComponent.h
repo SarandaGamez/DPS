@@ -10,7 +10,7 @@
 
 namespace gui {
 
-	class UIComponent : public sf::Drawable{
+	class UIComponent : public sf::Drawable, public gui::UIObject{
 		sf::Vector2f position;
 		gui::CompoundEventBehavior eventBehaviors;
 	public: 
