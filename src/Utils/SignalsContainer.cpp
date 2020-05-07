@@ -9,7 +9,7 @@ namespace utils {
 
 		auto signalItr = signals->find(guid);
 
-		if (signalItr != signals->end()) {
+		if (signalItr == signals->end()) {
 			signalItr = signals->insert(
 				std::pair<Signal::GUID, Signal>(guid, Signal())
 			).first;
