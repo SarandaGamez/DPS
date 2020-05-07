@@ -14,3 +14,8 @@ const sf::FloatRect& gui::ClickableComponent::GetRegion()
 {
 	return this->clickableRegion;
 }
+
+void gui::ClickableComponent::OnSetPosition(sf::Vector2f position)
+{
+	SetRegion({ position.x, position.y, clickableRegion.width, clickableRegion.height });
+}

@@ -13,6 +13,9 @@ namespace gui {
 		bool IsMouseInRegion(const sf::Vector2f& mousePosition);
 		void SetRegion(const sf::FloatRect& region);
 		const sf::FloatRect& GetRegion();
+
+	protected:
+		virtual void OnSetPosition(sf::Vector2f position);
 	};
 }
 
