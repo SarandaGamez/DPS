@@ -13,7 +13,7 @@ namespace gui {
 	public:
 		void SetTexture(const sf::Texture& texture);
 		const sf::FloatRect& GetGlobalBounds();
-		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
 	protected:
 		virtual void OnSetPosition(sf::Vector2f position);

@@ -10,7 +10,7 @@
 
 namespace gui {
 
-	class UIComponent {
+	class UIComponent : public sf::Drawable{
 		sf::Vector2f position;
 		gui::CompoundEventBehavior eventBehaviors;
 	public: 
@@ -18,7 +18,7 @@ namespace gui {
 		sf::Vector2f GetPosition();
 		virtual void Update() {}
 		void HandleEvent(const sf::Event&);
-		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const {}
+		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override {}
 
 	protected:
 		virtual void OnSetPosition(sf::Vector2f position) {}
