@@ -15,3 +15,8 @@ void gui::UIComponent::HandleEvent(const sf::Event& event)
 {
 	eventBehaviors.HandleEvent(event);
 }
+
+gui::CompoundEventBehavior& gui::UIComponent::GetEventBehaviors()
+{
+	return eventBehaviors;
+}

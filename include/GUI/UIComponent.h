@@ -22,6 +22,7 @@ namespace gui {
 
 	protected:
 		virtual void OnSetPosition(sf::Vector2f position) {}
+		gui::CompoundEventBehavior& GetEventBehaviors();
 	};
 
 }
