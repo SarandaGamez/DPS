@@ -10,7 +10,7 @@ namespace gui {
 
 	class MouseButtonPressedBehavior : public gui::EventBehavior {
 	public:
-		MouseButtonPressedBehavior(std::shared_ptr<gui::UIObject> guiObject);
+		MouseButtonPressedBehavior(gui::UIObject* guiObject);
 		virtual void OnHandleEvent(const sf::Event& event);
 	};
 

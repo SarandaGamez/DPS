@@ -2,7 +2,7 @@
 #include "GUI/SignalTypes.h"
 
 namespace gui {
-	gui::MouseButtonPressedBehavior::MouseButtonPressedBehavior(std::shared_ptr<gui::UIObject> guiObject)
+	gui::MouseButtonPressedBehavior::MouseButtonPressedBehavior(gui::UIObject* guiObject)
 	{
 		this->guiObject = guiObject;
 		this->eventType = sf::Event::MouseButtonPressed;
@@ -10,6 +10,9 @@ namespace gui {
 
 	void gui::MouseButtonPressedBehavior::OnHandleEvent(const sf::Event& event)
 	{
+		if (!guiObject)
+			return;
+
 		switch (event.mouseButton.button)
 		{
 		case sf::Mouse::Left:

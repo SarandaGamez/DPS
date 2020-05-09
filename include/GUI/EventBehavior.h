@@ -13,7 +13,7 @@ namespace gui {
 	protected:
 		virtual void OnHandleEvent(const sf::Event& event) = 0;
 		sf::Event::EventType eventType;
-		std::shared_ptr<gui::UIObject> guiObject;
+		gui::UIObject* guiObject;
 	};
 }
 
