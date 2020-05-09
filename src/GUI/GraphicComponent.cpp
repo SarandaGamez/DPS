@@ -5,7 +5,7 @@ void gui::GraphicComponent::SetTexture(const sf::Texture& texture)
 	this->sprite.setTexture(texture);
 }
 
-const sf::FloatRect& gui::GraphicComponent::GetGlobalBounds()
+sf::FloatRect gui::GraphicComponent::GetGlobalBounds() const
 {
 	return sprite.getGlobalBounds();
 }

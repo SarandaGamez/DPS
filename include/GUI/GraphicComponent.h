@@ -12,7 +12,7 @@ namespace gui {
 
 	public:
 		void SetTexture(const sf::Texture& texture);
-		const sf::FloatRect& GetGlobalBounds();
+		sf::FloatRect GetGlobalBounds() const;
 		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
 	protected:
