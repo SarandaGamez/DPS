@@ -13,33 +13,22 @@ void MenuState::OnEnter()
 {
 	cout << "Menu loaded" << endl;
 	textures.Load("MainMenu/Button", "assets/GUI/MainMenu/button.png");
-	textures.Load("MainMenu/ButtonClicked", "assets/GUI/MainMenu/buttonClicked.png");
-	font.loadFromFile("assets/fonts/cinematic.ttf");
 	
-	buttonPlay = std::unique_ptr<Button>(new Button(
+	buttonPlay = std::unique_ptr<gui::Button>(new gui::Button(
 		textures.GetTexture("MainMenu/Button"),
-		textures.GetTexture("MainMenu/ButtonClicked"),
-		font,
-		"play",
 		sf::Vector2f(renderWindow->getSize().x / 2, renderWindow->getSize().y / 2 - 200)));
-	buttonLoad = std::unique_ptr<Button>(new Button(
+	buttonLoad = std::unique_ptr<gui::Button>(new gui::Button(
 		textures.GetTexture("MainMenu/Button"),
-		textures.GetTexture("MainMenu/ButtonClicked"),
-		font,
-		"load",
 		sf::Vector2f(renderWindow->getSize().x / 2, renderWindow->getSize().y / 2 - 100)));
-	buttonSettings = std::unique_ptr<Button>(new Button(
+	buttonSettings = std::unique_ptr<gui::Button>(new gui::Button(
 		textures.GetTexture("MainMenu/Button"),
-		textures.GetTexture("MainMenu/ButtonClicked"),
-		font,
-		"settings",
 		sf::Vector2f(renderWindow->getSize().x / 2, renderWindow->getSize().y / 2)));
-	buttonExit = std::unique_ptr<Button>(new Button(
+	buttonExit = std::unique_ptr<gui::Button>(new gui::Button(
 		textures.GetTexture("MainMenu/Button"),
-		textures.GetTexture("MainMenu/ButtonClicked"),
-		font,
-		"exit",
 		sf::Vector2f(renderWindow->getSize().x / 2, renderWindow->getSize().y / 2 + 100)));
+
+	buttonPlay->GetSignal(gui::SignalTypes::onLeftMouseButtonReleased).Connect(std::bind(&MenuState::StartTheGame, this));
+	buttonExit->GetSignal(gui::SignalTypes::onLeftMouseButtonReleased).Connect(std::bind(&MenuState::CloseGameWindow, this));
 }
 
 void MenuState::OnLeave()
@@ -47,35 +36,43 @@ void MenuState::OnLeave()
 	cout << "Menu unloaded" << endl;
 }
 
+void MenuState::StartTheGame()
+{
+	if (buttonPlay->IsMouseInRegion(mousePosition)) {
+		transition->Switch(std::unique_ptr<State>(new IntroState));
+	}
+}
+
+void MenuState::CloseGameWindow()
+{
+	if (buttonExit->IsMouseInRegion(mousePosition)) {
+		this->isGameFinished = true;
+	}
+}
+
 void MenuState::OnUpdate()
 {
-	if (buttonExit->IsClicked())
-		isGameFinished = true;
-
-	if (buttonPlay->IsClicked())
-		transition->Switch(std::unique_ptr<State>(new IntroState));
 }
 
 void MenuState::OnDraw()
 {
 	renderWindow->draw(sprite);
-	renderWindow->draw(*buttonPlay);
-	renderWindow->draw(*buttonLoad);
-	renderWindow->draw(*buttonSettings);
-	renderWindow->draw(*buttonExit);
+	buttonPlay->draw(renderWindow);
+	buttonLoad->draw(renderWindow);
+	buttonSettings->draw(renderWindow);
+	buttonExit->draw(renderWindow);
 }
 
 void MenuState::OnHandleEvent()
 {
+	mousePosition = { static_cast<float>(event.mouseButton.x), static_cast<float>(event.mouseButton.y) };
+
 	if (event.type == sf::Event::KeyPressed)
 	{
 		if (event.key.code == sf::Keyboard::Escape)
 			isGameFinished = true;
 	}
-
-	if (event.type == sf::Event::MouseButtonReleased) {
-		buttonPlay->CheckClick(renderWindow->mapPixelToCoords({ sf::Mouse::getPosition(*renderWindow) }));
-		buttonExit->CheckClick(renderWindow->mapPixelToCoords({ sf::Mouse::getPosition(*renderWindow) }));
-	}
+	buttonExit->HandleEvent(event);
+	buttonPlay->HandleEvent(event);
 }
 

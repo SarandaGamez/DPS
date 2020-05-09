@@ -7,10 +7,11 @@
 class MenuState : public State {
 	sf::Sprite sprite;
 	sf::Font font;
-	std::unique_ptr<Button> buttonPlay;
-	std::unique_ptr<Button> buttonLoad;
-	std::unique_ptr<Button> buttonSettings;
-	std::unique_ptr<Button> buttonExit;
+	std::unique_ptr<gui::Button> buttonPlay;
+	std::unique_ptr<gui::Button> buttonLoad;
+	std::unique_ptr<gui::Button> buttonSettings;
+	std::unique_ptr<gui::Button> buttonExit;
+
 
 private:
 
@@ -20,6 +21,9 @@ private:
 	virtual void OnDraw() override;
 	virtual void OnEnter() override;
 	virtual void OnLeave() override;
+
+	void StartTheGame();
+	void CloseGameWindow();
 };
 
 #endif // !MENU_STATE_H

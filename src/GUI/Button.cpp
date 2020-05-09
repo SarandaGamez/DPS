@@ -1,53 +1,37 @@
 #include "GUI/Button.h"
+#include "GUI/MouseButtonReleasedBehavior.h"
 
-Button::Button(const sf::Texture& normalTexture, const sf::Texture& clickedTexture, const sf::Font& font, const std::string& text, const sf::Vector2f& position)
-{
-	normalSprite.setTexture(normalTexture);
-	clickedSprite.setTexture(clickedTexture);
-	currentSprite = &normalSprite;
-	isClicked = false;
-	this->text.setFont(font);
-	this->text.setCharacterSize(35);
-	SetText(text);
-	SetPosition(position);
+namespace gui {
 
+	Button::Button(const sf::Texture& texture, const sf::Vector2f& position)
+	{
+		SetTexture(texture);
+		SetPosition(position);
+		SetRegion(graphic.GetGlobalBounds());
+
+
+		GetEventBehaviors().Add(std::make_shared<gui::MouseButtonReleasedBehavior>(this));
+	}
+
+	void Button::SetTexture(const sf::Texture& texture)
+	{
+		this->graphic.SetTexture(texture);
+	}
+
+	void Button::Update()
+	{
+		this->graphic.Update();
+	}
+
+	void Button::draw(std::shared_ptr<sf::RenderWindow> renderWindow) const
+	{
+		renderWindow->draw(graphic);
+	}
+
+	void Button::OnSetPosition(sf::Vector2f position)
+	{
+		gui::ClickableComponent::OnSetPosition(position);
+		graphic.SetPosition(position);
+		SetRegion(graphic.GetGlobalBounds());
+	}
 }
-
-void Button::CheckClick(sf::Vector2f click)
-{
-	bool contains = currentSprite->getGlobalBounds().contains(click);
-	SetClicked(contains);
-}
-
- void Button::SetText(std::string text)
-{
-	 this->text.setString(text);
-}
-
- void Button::SetPosition(sf::Vector2f position)
- {
-	 this->normalSprite.setPosition(position);
-	 this->clickedSprite.setPosition(position);
-	 this->text.setPosition(position.x + 5, position.y + 5);
- }
-
- void Button::SetClicked(bool state)
- {
-	 this->isClicked = state;
-	 if (isClicked) {
-		 this->currentSprite = &clickedSprite;
-		 return;
-	 }
-	 this->currentSprite = &normalSprite;
- }
-
- bool Button::IsClicked()
- {
-	 return isClicked;
- }
-
- void Button::draw(sf::RenderTarget& target, sf::RenderStates states) const
- {
-	 target.draw(*currentSprite, states);
-	 target.draw(text, states);
- }

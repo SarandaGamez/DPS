@@ -2,23 +2,25 @@
 #define BUTTON_H
 
 #include <sfml/Graphics.hpp>
+#include "GUI/ClickableComponent.h"
+#include "GUI/GraphicComponent.h"
 
-class Button : public sf::Drawable{
-public:
-	Button(const sf::Texture& normalTexture, const sf::Texture& clickedTexture, const sf::Font& font, const std::string& text,const sf::Vector2f& position);
-	void SetText(std::string text);
-	void SetPosition(sf::Vector2f position);
-	void CheckClick(sf::Vector2f click);
-	void SetClicked(bool state);
-	bool IsClicked();
+namespace gui {
 
-	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
-private:
-	sf::Sprite normalSprite;
-	sf::Sprite clickedSprite;
-	sf::Sprite* currentSprite;
-	sf::Text text;
-	bool isClicked;
-};
+	class Button : public gui::ClickableComponent {
+
+	public:
+		Button(const sf::Texture& texture, const sf::Vector2f& position);
+		void SetTexture(const sf::Texture& texture);
+		void Update();
+		void draw(std::shared_ptr<sf::RenderWindow> renderWindow) const;
+
+	private:
+		gui::GraphicComponent graphic;
+
+	protected:
+		virtual void OnSetPosition(sf::Vector2f position);
+	};
+}
 
 #endif // BUTTON_H
