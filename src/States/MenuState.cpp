@@ -13,18 +13,19 @@ void MenuState::OnEnter()
 {
 	cout << "Menu loaded" << endl;
 	textures.Load("MainMenu/Button", "assets/GUI/MainMenu/button.png");
-	
-	buttonPlay = std::unique_ptr<gui::Button>(new gui::Button(
-		textures.GetTexture("MainMenu/Button"),
+	font.loadFromFile("assets/fonts/cinematic.ttf");
+
+	buttonPlay = std::unique_ptr<gui::ClickableText>(new gui::ClickableText(
+		font, "Play",
 		sf::Vector2f(renderWindow->getSize().x / 2, renderWindow->getSize().y / 2 - 200)));
-	buttonLoad = std::unique_ptr<gui::Button>(new gui::Button(
-		textures.GetTexture("MainMenu/Button"),
+	buttonLoad = std::unique_ptr<gui::ClickableText>(new gui::ClickableText(
+		font, "Load",
 		sf::Vector2f(renderWindow->getSize().x / 2, renderWindow->getSize().y / 2 - 100)));
-	buttonSettings = std::unique_ptr<gui::Button>(new gui::Button(
-		textures.GetTexture("MainMenu/Button"),
+	buttonSettings = std::unique_ptr<gui::ClickableText>(new gui::ClickableText(
+		font, "Settings",
 		sf::Vector2f(renderWindow->getSize().x / 2, renderWindow->getSize().y / 2)));
-	buttonExit = std::unique_ptr<gui::Button>(new gui::Button(
-		textures.GetTexture("MainMenu/Button"),
+	buttonExit = std::unique_ptr<gui::ClickableText>(new gui::ClickableText(
+		font, "Exit",
 		sf::Vector2f(renderWindow->getSize().x / 2, renderWindow->getSize().y / 2 + 100)));
 
 	buttonPlay->GetSignal(gui::SignalTypes::onLeftMouseButtonReleased).Connect(std::bind(&MenuState::StartTheGame, this));

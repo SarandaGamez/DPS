@@ -15,7 +15,7 @@ void gui::TextComponent::SetCharacterSize(unsigned int size)
 	this->text.setCharacterSize(size);
 }
 
-const sf::FloatRect& gui::TextComponent::GetGlobalBounds()
+sf::FloatRect gui::TextComponent::GetGlobalBounds()
 {
 	return this->text.getGlobalBounds();
 }
