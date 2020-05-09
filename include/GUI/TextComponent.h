@@ -14,7 +14,7 @@ namespace gui {
 		void SetFont(const sf::Font& font);
 		void SetText(const std::string& text);
 		void SetCharacterSize(unsigned int size);
-		const sf::FloatRect& GetGlobalBounds();
+		sf::FloatRect GetGlobalBounds();
 		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 	protected:
