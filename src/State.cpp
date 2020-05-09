@@ -1,5 +1,8 @@
 #include "State.h"
+#include <SFML/System/Vector2.hpp>
 #include <stdexcept>
+
+sf::Vector2f State::mousePosition = { 0,0 };
 
 void State::ConnectWithStateTransition(StateTransition* transition)
 {
