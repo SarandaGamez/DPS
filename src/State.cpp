@@ -17,6 +17,7 @@ void State::ConnectWithRenderWindow(std::shared_ptr<sf::RenderWindow> renderWind
 void State::HandleEvent(sf::Event event)
 {
 	this->event = event;
+	mousePosition = { static_cast<float>(event.mouseButton.x), static_cast<float>(event.mouseButton.y) };
 	OnHandleEvent();
 }
 

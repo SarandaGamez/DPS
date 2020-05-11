@@ -66,8 +66,6 @@ void MenuState::OnDraw()
 
 void MenuState::OnHandleEvent()
 {
-	mousePosition = { static_cast<float>(event.mouseButton.x), static_cast<float>(event.mouseButton.y) };
-
 	if (event.type == sf::Event::KeyPressed)
 	{
 		if (event.key.code == sf::Keyboard::Escape)
