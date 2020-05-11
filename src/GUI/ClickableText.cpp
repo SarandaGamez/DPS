@@ -8,8 +8,6 @@ namespace gui {
 		SetFont(font);
 		SetText(caption);
 		SetPosition(position);
-
-		GetEventBehaviors().Add(std::make_shared<gui::MouseButtonReleasedBehavior>(this));
 	}
 	void ClickableText::SetFont(const sf::Font& font)
 	{

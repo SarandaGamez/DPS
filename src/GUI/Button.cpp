@@ -8,9 +8,6 @@ namespace gui {
 		SetTexture(texture);
 		SetPosition(position);
 		SetRegion(graphic.GetGlobalBounds());
-
-
-		GetEventBehaviors().Add(std::make_shared<gui::MouseButtonReleasedBehavior>(this));
 	}
 
 	void Button::SetTexture(const sf::Texture& texture)
