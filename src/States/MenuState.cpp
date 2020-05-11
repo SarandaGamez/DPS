@@ -39,16 +39,13 @@ void MenuState::OnLeave()
 
 void MenuState::StartTheGame()
 {
-	if (buttonPlay->IsMouseInRegion(mousePosition)) {
-		transition->Switch(std::unique_ptr<State>(new IntroState));
-	}
+	transition->Switch(std::unique_ptr<State>(new IntroState));
 }
 
 void MenuState::CloseGameWindow()
 {
-	if (buttonExit->IsMouseInRegion(mousePosition)) {
-		this->isGameFinished = true;
-	}
+	this->isGameFinished = true;
+
 }
 
 void MenuState::OnUpdate()

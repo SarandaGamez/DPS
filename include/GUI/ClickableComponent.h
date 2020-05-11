@@ -17,6 +17,7 @@ namespace gui {
 
 	protected:
 		virtual void OnSetPosition(sf::Vector2f position);
+		virtual bool CheckEventCondition(const sf::Event& event);
 	};
 }
 
