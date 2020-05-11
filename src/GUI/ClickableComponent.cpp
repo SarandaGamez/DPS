@@ -10,7 +10,7 @@ void gui::ClickableComponent::SetRegion(const sf::FloatRect& region)
 	this->clickableRegion = region;
 }
 
-const sf::FloatRect& gui::ClickableComponent::GetRegion()
+sf::FloatRect gui::ClickableComponent::GetRegion()
 {
 	return this->clickableRegion;
 }
