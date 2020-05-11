@@ -31,7 +31,6 @@ protected:
 
 	sf::Time deltaTime;
 	sf::Event event;
-	static sf::Vector2f mousePosition;
 
 	virtual void OnHandleEvent() {}
     virtual void OnUpdate() = 0;
