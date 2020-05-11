@@ -21,10 +21,10 @@ namespace gui {
 		text.Update();
 	}
 
-	void TextButton::draw(std::shared_ptr<sf::RenderWindow> renderWindow) const
+	void TextButton::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	{
-		gui::Button::draw(renderWindow);
-		renderWindow->draw(text);
+		gui::Button::draw(target, states);
+		target.draw(text, states);
 	}
 
 	void TextButton::OnSetPosition(sf::Vector2f position)

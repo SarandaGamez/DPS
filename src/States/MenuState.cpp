@@ -55,10 +55,10 @@ void MenuState::OnUpdate()
 void MenuState::OnDraw()
 {
 	renderWindow->draw(sprite);
-	buttonPlay->draw(renderWindow);
-	buttonLoad->draw(renderWindow);
-	buttonSettings->draw(renderWindow);
-	buttonExit->draw(renderWindow);
+	renderWindow->draw(*buttonPlay);
+	renderWindow->draw(*buttonLoad);
+	renderWindow->draw(*buttonSettings);
+	renderWindow->draw(*buttonExit);
 }
 
 void MenuState::OnHandleEvent()

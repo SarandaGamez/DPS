@@ -15,7 +15,7 @@ namespace gui {
 		void SetText(const std::string& string);
 		void SetCharacterSize(unsigned int size);
 		void Update();
-		void draw(std::shared_ptr<sf::RenderWindow> renderWindow) const;
+		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
 	private:
 		gui::TextComponent text;

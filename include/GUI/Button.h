@@ -13,7 +13,7 @@ namespace gui {
 		Button(const sf::Texture& texture, const sf::Vector2f& position);
 		void SetTexture(const sf::Texture& texture);
 		void Update();
-		void draw(std::shared_ptr<sf::RenderWindow> renderWindow) const;
+		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
 	private:
 		gui::GraphicComponent graphic;

@@ -27,9 +27,9 @@ namespace gui {
 		this->text.Update();
 	}
 
-	void ClickableText::draw(std::shared_ptr<sf::RenderWindow> renderWindow) const
+	void ClickableText::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	{
-		renderWindow->draw(this->text);
+		target.draw(text, states);
 	}
 
 	void ClickableText::OnSetPosition(sf::Vector2f position)

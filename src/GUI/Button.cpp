@@ -20,9 +20,9 @@ namespace gui {
 		this->graphic.Update();
 	}
 
-	void Button::draw(std::shared_ptr<sf::RenderWindow> renderWindow) const
+	void Button::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	{
-		renderWindow->draw(graphic);
+		target.draw(graphic, states);
 	}
 
 	void Button::OnSetPosition(sf::Vector2f position)
