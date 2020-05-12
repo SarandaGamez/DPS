@@ -12,24 +12,19 @@ using std::endl;
 void MenuState::OnEnter()
 {
 	cout << "Menu loaded" << endl;
-	textures.Load("MainMenu/Button", "assets/GUI/MainMenu/button.png");
 	font.loadFromFile("assets/fonts/cinematic.ttf");
 
-	buttonPlay = std::unique_ptr<gui::ClickableText>(new gui::ClickableText(
-		font, "Play",
-		sf::Vector2f(renderWindow->getSize().x / 2, renderWindow->getSize().y / 2 - 200)));
-	buttonLoad = std::unique_ptr<gui::ClickableText>(new gui::ClickableText(
-		font, "Load",
-		sf::Vector2f(renderWindow->getSize().x / 2, renderWindow->getSize().y / 2 - 100)));
-	buttonSettings = std::unique_ptr<gui::ClickableText>(new gui::ClickableText(
-		font, "Settings",
-		sf::Vector2f(renderWindow->getSize().x / 2, renderWindow->getSize().y / 2)));
-	buttonExit = std::unique_ptr<gui::ClickableText>(new gui::ClickableText(
-		font, "Exit",
-		sf::Vector2f(renderWindow->getSize().x / 2, renderWindow->getSize().y / 2 + 100)));
+	sf::Vector2f windowCenter = { renderWindow->getSize().x / 2.0f, renderWindow->getSize().y / 2.0f };
+	
+	components.Add(std::shared_ptr<gui::ClickableText>(new gui::ClickableText(font, "Play", { 0, -200 })))
+		->GetSignal(gui::SignalTypes::onLeftMouseButtonReleased).Connect(std::bind(&MenuState::StartTheGame, this));
+	components.Add(std::shared_ptr<gui::ClickableText>(new gui::ClickableText(font, "Load", { 0, -100 })));
+	components.Add(std::shared_ptr<gui::ClickableText>(new gui::ClickableText(font, "Settings", { 0,0 })));
+	components.Add(std::shared_ptr<gui::ClickableText>(new gui::ClickableText(font, "Exit", { 0, 100 })))
+		->GetSignal(gui::SignalTypes::onLeftMouseButtonReleased).Connect(std::bind(&MenuState::CloseGameWindow, this));
 
-	buttonPlay->GetSignal(gui::SignalTypes::onLeftMouseButtonReleased).Connect(std::bind(&MenuState::StartTheGame, this));
-	buttonExit->GetSignal(gui::SignalTypes::onLeftMouseButtonReleased).Connect(std::bind(&MenuState::CloseGameWindow, this));
+	components.SetPosition(windowCenter);
+
 }
 
 void MenuState::OnLeave()
@@ -50,15 +45,13 @@ void MenuState::CloseGameWindow()
 
 void MenuState::OnUpdate()
 {
+	components.Update();
 }
 
 void MenuState::OnDraw()
 {
 	renderWindow->draw(sprite);
-	renderWindow->draw(*buttonPlay);
-	renderWindow->draw(*buttonLoad);
-	renderWindow->draw(*buttonSettings);
-	renderWindow->draw(*buttonExit);
+	renderWindow->draw(components);
 }
 
 void MenuState::OnHandleEvent()
@@ -68,7 +61,7 @@ void MenuState::OnHandleEvent()
 		if (event.key.code == sf::Keyboard::Escape)
 			isGameFinished = true;
 	}
-	buttonExit->HandleEvent(event);
-	buttonPlay->HandleEvent(event);
+
+	components.HandleEvent(event);
 }
 

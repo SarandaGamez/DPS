@@ -2,15 +2,14 @@
 #define MENU_STATE_H
 
 #include "State.h"
+#include "GUI/UIComponent.h"
+#include "GUI/CompoundUIComponents.h"
 #include "GUI/ClickableText.h"
 
 class MenuState : public State {
 	sf::Sprite sprite;
 	sf::Font font;
-	std::unique_ptr<gui::ClickableText> buttonPlay;
-	std::unique_ptr<gui::ClickableText> buttonLoad;
-	std::unique_ptr<gui::ClickableText> buttonSettings;
-	std::unique_ptr<gui::ClickableText> buttonExit;
+	gui::CompoundUIComponents components;
 
 private:
 
