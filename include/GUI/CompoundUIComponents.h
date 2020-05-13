@@ -15,12 +15,14 @@ namespace gui {
 		const std::list<std::shared_ptr<gui::UIComponent>>& GetComponents();
 		void Update();
 		void HandleEvent(const sf::Event& event);
-		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 	private:
 		sf::Vector2f compositePosition = { 0,0 };
 		std::list <std::shared_ptr<gui::UIComponent>> children;
+		
+	protected:
 		void OnSetPosition(sf::Vector2f position) override;
+		virtual void OnDraw(sf::RenderTarget& target, sf::RenderStates states) const override;
 	};
 }
 

@@ -34,15 +34,6 @@ void gui::CompoundUIComponents::HandleEvent(const sf::Event& event)
 		component->HandleEvent(event);
 }
 
-void gui::CompoundUIComponents::draw(sf::RenderTarget& target, sf::RenderStates states) const
-{
-	if (children.empty())
-		return;
-
-	for (auto component : children)
-		component->draw(target, states);
-}
-
 void gui::CompoundUIComponents::OnSetPosition(sf::Vector2f position)
 {
 	if (children.empty())
@@ -53,4 +44,13 @@ void gui::CompoundUIComponents::OnSetPosition(sf::Vector2f position)
 			component->GetPosition().y + position.y - compositePosition.y });
 
 	this->compositePosition = position;
+}
+
+void gui::CompoundUIComponents::OnDraw(sf::RenderTarget& target, sf::RenderStates states) const
+{
+	if (children.empty())
+		return;
+
+	for (auto component : children)
+		component->draw(target, states);
 }

@@ -9,10 +9,12 @@ namespace gui {
 	class Window : public gui::CompoundUIComponents{
 	public:
 		void SetBackground(std::shared_ptr<gui::GraphicComponent> background);
-		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 	private:
 		std::shared_ptr<gui::GraphicComponent> background;
+
+	protected:
+		virtual void OnDraw(sf::RenderTarget& target, sf::RenderStates states) const;
 	};
 }
 

@@ -13,8 +13,13 @@ sf::Vector2f gui::UIComponent::GetPosition()
 
 void gui::UIComponent::HandleEvent(const sf::Event& event)
 {
-	if(CheckEventCondition(event))
+	if (CheckEventCondition(event))
 		eventBehaviors.HandleEvent(event);
+}
+
+void gui::UIComponent::draw(sf::RenderTarget& target, sf::RenderStates states) const
+{
+	OnDraw(target, states);
 }
 
 gui::CompoundEventBehavior& gui::UIComponent::GetEventBehaviors()

@@ -15,13 +15,13 @@ namespace gui {
 
 		gui::TextComponent& GetText();
 		void Update();
-		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
 	private:
 		gui::TextComponent text;
 
 	protected:
 		virtual void OnSetPosition(sf::Vector2f position);
+		virtual void OnDraw(sf::RenderTarget& target, sf::RenderStates states) const override;
 	};
 }
 

@@ -27,15 +27,15 @@ namespace gui {
 		this->text.Update();
 	}
 
-	void ClickableText::draw(sf::RenderTarget& target, sf::RenderStates states) const
-	{
-		target.draw(text, states);
-	}
-
 	void ClickableText::OnSetPosition(sf::Vector2f position)
 	{
 		gui::ClickableComponent::OnSetPosition(position);
 		text.SetPosition(position);
 		SetRegion(text.GetGlobalBounds());
+	}
+
+	void ClickableText::OnDraw(sf::RenderTarget& target, sf::RenderStates states) const
+	{
+		target.draw(text, states);
 	}
 }

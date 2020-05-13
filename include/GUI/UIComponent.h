@@ -18,10 +18,11 @@ namespace gui {
 		sf::Vector2f GetPosition();
 		virtual void Update() {}
 		void HandleEvent(const sf::Event&);
-		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override {}
+		void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
 	protected:
 		virtual void OnSetPosition(sf::Vector2f position) {}
+		virtual void OnDraw(sf::RenderTarget& target, sf::RenderStates states) const {}
 		virtual bool CheckEventCondition(const sf::Event& event) { return true; }
 		gui::CompoundEventBehavior& GetEventBehaviors();
 	};

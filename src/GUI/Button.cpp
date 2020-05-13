@@ -19,16 +19,16 @@ namespace gui {
 	{
 		this->graphic.Update();
 	}
-
-	void Button::draw(sf::RenderTarget& target, sf::RenderStates states) const
-	{
-		target.draw(graphic, states);
-	}
-
+	
 	void Button::OnSetPosition(sf::Vector2f position)
 	{
 		gui::ClickableComponent::OnSetPosition(position);
 		graphic.SetPosition(position);
 		SetRegion(graphic.GetGlobalBounds());
+	}
+
+	void Button::OnDraw(sf::RenderTarget& target, sf::RenderStates states) const
+	{
+		target.draw(graphic, states);
 	}
 }

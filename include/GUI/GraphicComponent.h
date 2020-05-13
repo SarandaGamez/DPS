@@ -13,10 +13,10 @@ namespace gui {
 	public:
 		void SetTexture(const sf::Texture& texture);
 		sf::FloatRect GetGlobalBounds() const;
-		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
 	protected:
 		virtual void OnSetPosition(sf::Vector2f position);
+		virtual void OnDraw(sf::RenderTarget& target, sf::RenderStates states) const override;
 	};
 }
 

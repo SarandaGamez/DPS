@@ -13,13 +13,13 @@ namespace gui {
 		Button(const sf::Texture& texture, const sf::Vector2f& position);
 		void SetTexture(const sf::Texture& texture);
 		void Update();
-		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
 	private:
 		gui::GraphicComponent graphic;
 
 	protected:
 		virtual void OnSetPosition(sf::Vector2f position);
+		virtual void OnDraw(sf::RenderTarget& target, sf::RenderStates states) const override;
 	};
 }
 
