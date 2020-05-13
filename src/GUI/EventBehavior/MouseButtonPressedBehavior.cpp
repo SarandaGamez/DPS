@@ -1,5 +1,5 @@
-#include "GUI/MouseButtonPressedBehavior.h"
-#include "GUI/SignalTypes.h"
+#include "GUI/EventBehavior/MouseButtonPressedBehavior.h"
+#include "GUI/EventBehavior/SignalTypes.h"
 
 namespace gui {
 	gui::MouseButtonPressedBehavior::MouseButtonPressedBehavior(gui::UIObject* guiObject)

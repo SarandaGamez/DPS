@@ -1,7 +1,7 @@
 #ifndef GUI_MOUSE_BUTTON_PRESSED_BEHAVIOR_H
 #define GUI_MOUSE_BUTTON_PRESSED_BEHAVIOR_H
 
-#include "GUI/EventBehavior.h"
+#include "GUI/EventBehavior/EventBehavior.h"
 #include "GUI/UIObject.h"
 #include <SFML/Window/Event.hpp>
 #include <memory>

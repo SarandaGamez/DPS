@@ -1,4 +1,4 @@
-#include "GUI/SignalTypes.h"
+#include "GUI/EventBehavior/SignalTypes.h"
 
 utils::Signal::GUID gui::SignalTypes::onLeftMouseButtonPressed = 0;
 utils::Signal::GUID gui::SignalTypes::onLeftMouseButtonReleased = 0;

@@ -1,4 +1,4 @@
-#include "GUI\EventBehavior.h"
+#include "GUI/EventBehavior/EventBehavior.h"
 
 namespace gui {
 	   

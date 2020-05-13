@@ -1,7 +1,7 @@
 #ifndef GUI_UIOBJECT_H
 #define GUI_UIOBJECT_H
 
-#include "GUI/SignalTypes.h"
+#include "GUI/EventBehavior/SignalTypes.h"
 #include "Utils/SignalsContainer.h"
 
 namespace gui {

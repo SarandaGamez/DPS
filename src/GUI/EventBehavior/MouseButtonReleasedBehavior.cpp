@@ -1,5 +1,5 @@
-#include "GUI/MouseButtonReleasedBehavior.h"
-#include "GUI/SignalTypes.h"
+#include "GUI/EventBehavior/MouseButtonReleasedBehavior.h"
+#include "GUI/EventBehavior/SignalTypes.h"
 
 namespace gui {
 	gui::MouseButtonReleasedBehavior::MouseButtonReleasedBehavior(gui::UIObject* guiObject)

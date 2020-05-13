@@ -4,7 +4,7 @@
 #include <SFML/Window/Event.hpp>
 #include <list>
 #include <memory>
-#include "GUI/EventBehavior.h"
+#include "GUI/EventBehavior/EventBehavior.h"
 
 namespace gui {
 

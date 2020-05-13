@@ -1,4 +1,4 @@
-#include "GUI/MouseButtonReleasedBehavior.h"
+#include "GUI/EventBehavior/MouseButtonReleasedBehavior.h"
 #include "GUI/TextButton.h"
 
 namespace gui {

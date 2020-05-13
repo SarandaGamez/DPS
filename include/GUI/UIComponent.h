@@ -5,7 +5,8 @@
 #include <SFML/Window/Event.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/RenderStates.hpp>
-#include "GUI/CompoundEventBehavior.h"
+#include "GUI/EventBehavior/CompoundEventBehavior.h"
+#include "GUI/UIObject.h"
 #include <memory>
 
 namespace gui {

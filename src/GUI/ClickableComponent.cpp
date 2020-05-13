@@ -1,5 +1,5 @@
-#include "GUI\ClickableComponent.h"
-#include "GUI\MouseButtonClickedBehavior.h"
+#include "GUI/ClickableComponent.h"
+#include "GUI/EventBehavior/MouseButtonClickedBehavior.h"
 
 gui::ClickableComponent::ClickableComponent()
 {

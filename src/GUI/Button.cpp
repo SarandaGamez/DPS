@@ -1,5 +1,5 @@
 #include "GUI/Button.h"
-#include "GUI/MouseButtonReleasedBehavior.h"
+#include "GUI/EventBehavior/MouseButtonReleasedBehavior.h"
 
 namespace gui {
 
