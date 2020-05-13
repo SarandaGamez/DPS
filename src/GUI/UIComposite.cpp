@@ -1,22 +1,22 @@
-#include "GUI/CompoundUIComponents.h"
+#include "GUI/UIComposite.h"
 
-std::shared_ptr<gui::UIComponent> gui::CompoundUIComponents::Add(std::shared_ptr<gui::UIComponent> component)
+std::shared_ptr<gui::UIComponent> gui::UIComposite::Add(std::shared_ptr<gui::UIComponent> component)
 {
 	this->children.push_back(component);
 	return component;
 }
 
-void gui::CompoundUIComponents::Remove(std::shared_ptr<gui::UIComponent> component)
+void gui::UIComposite::Remove(std::shared_ptr<gui::UIComponent> component)
 {
 	this->children.remove(component);
 }
 
-const std::list<std::shared_ptr<gui::UIComponent>>& gui::CompoundUIComponents::GetComponents()
+const std::list<std::shared_ptr<gui::UIComponent>>& gui::UIComposite::GetComponents()
 {
 	return this->children;
 }
 
-void gui::CompoundUIComponents::Update()
+void gui::UIComposite::Update()
 {
 	if (children.empty())
 		return;
@@ -25,7 +25,7 @@ void gui::CompoundUIComponents::Update()
 		component->Update();
 }
 
-void gui::CompoundUIComponents::HandleEvent(const sf::Event& event)
+void gui::UIComposite::HandleEvent(const sf::Event& event)
 {
 	if (children.empty())
 		return;
@@ -34,7 +34,7 @@ void gui::CompoundUIComponents::HandleEvent(const sf::Event& event)
 		component->HandleEvent(event);
 }
 
-void gui::CompoundUIComponents::OnSetPosition(sf::Vector2f position)
+void gui::UIComposite::OnSetPosition(sf::Vector2f position)
 {
 	if (children.empty())
 		return;
@@ -46,7 +46,7 @@ void gui::CompoundUIComponents::OnSetPosition(sf::Vector2f position)
 	this->compositePosition = position;
 }
 
-void gui::CompoundUIComponents::OnDraw(sf::RenderTarget& target, sf::RenderStates states) const
+void gui::UIComposite::OnDraw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	if (children.empty())
 		return;

@@ -3,13 +3,13 @@
 
 #include "State.h"
 #include "GUI/UIComponent.h"
-#include "GUI/CompoundUIComponents.h"
+#include "GUI/UIComposite.h"
 #include "GUI/ClickableText.h"
 
 class MenuState : public State {
 	sf::Sprite sprite;
 	sf::Font font;
-	gui::CompoundUIComponents components;
+	gui::UIComposite components;
 
 private:
 

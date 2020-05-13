@@ -8,7 +8,7 @@
 #include <SFML/Graphics.hpp>
 
 namespace gui {
-	class CompoundUIComponents : public gui::UIComponent{
+	class UIComposite : public gui::UIComponent{
 	public:
 		std::shared_ptr<gui::UIComponent> Add(std::shared_ptr<gui::UIComponent> component);
 		void Remove(std::shared_ptr<gui::UIComponent> component);
