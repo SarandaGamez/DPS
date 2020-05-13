@@ -4,6 +4,7 @@
 #include "GUI/UIObject.h"
 #include <SFML/Window/Event.hpp>
 #include <memory>
+#include <vector>
 
 namespace gui {
 
@@ -12,8 +13,11 @@ namespace gui {
 		void HandleEvent(const sf::Event& event);
 	protected:
 		virtual void OnHandleEvent(const sf::Event& event) = 0;
-		sf::Event::EventType eventType;
+		void AddEventType(sf::Event::EventType eventType);
 		gui::UIObject* guiObject;
+
+	private:
+		std::vector<sf::Event::EventType> eventType;
 	};
 }
 

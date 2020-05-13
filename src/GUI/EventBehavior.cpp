@@ -7,7 +7,15 @@ namespace gui {
 		if (!guiObject)
 			return;
 
-		if (eventType == event.type)
-			OnHandleEvent(event);
+		if (eventType.empty())
+			return;
+
+		for(auto type: eventType)
+			if(event.type == type)
+				OnHandleEvent(event);
+	}
+	void EventBehavior::AddEventType(sf::Event::EventType eventType)
+	{
+		this->eventType.push_back(eventType);
 	}
 }

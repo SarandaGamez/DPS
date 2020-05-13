@@ -5,7 +5,7 @@ namespace gui {
 	gui::MouseButtonPressedBehavior::MouseButtonPressedBehavior(gui::UIObject* guiObject)
 	{
 		this->guiObject = guiObject;
-		this->eventType = sf::Event::MouseButtonPressed;
+		AddEventType(sf::Event::MouseButtonPressed);
 	}
 
 	void gui::MouseButtonPressedBehavior::OnHandleEvent(const sf::Event& event)

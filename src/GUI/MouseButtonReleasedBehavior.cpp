@@ -5,7 +5,7 @@ namespace gui {
 	gui::MouseButtonReleasedBehavior::MouseButtonReleasedBehavior(gui::UIObject* guiObject)
 	{
 		this->guiObject = guiObject;
-		this->eventType = sf::Event::MouseButtonReleased;
+		AddEventType(sf::Event::MouseButtonReleased);
 	}
 
 	void gui::MouseButtonReleasedBehavior::OnHandleEvent(const sf::Event& event)

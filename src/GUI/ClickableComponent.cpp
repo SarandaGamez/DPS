@@ -1,9 +1,9 @@
 #include "GUI\ClickableComponent.h"
-#include "GUI\MouseButtonReleasedBehavior.h"
+#include "GUI\MouseButtonClickedBehavior.h"
 
 gui::ClickableComponent::ClickableComponent()
 {
-	GetEventBehaviors().Add(std::make_shared<gui::MouseButtonReleasedBehavior>(this));
+	GetEventBehaviors().Add(std::make_shared<gui::MouseButtonClickedBehavior>(this));
 }
 
 bool gui::ClickableComponent::IsMouseInRegion(const sf::Vector2f& mousePosition)
