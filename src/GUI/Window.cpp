@@ -9,6 +9,6 @@ void gui::Window::SetBackground(std::shared_ptr<gui::GraphicComponent> backgroun
 
 void gui::Window::OnDraw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-	gui::CompoundUIComponents::draw(target, states);
+	gui::UIComposite::OnDraw(target, states);
 	background->draw(target, states);
 }
