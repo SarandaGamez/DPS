@@ -14,6 +14,6 @@ sf::FloatRect gui::Window::GetWindowArea()
 
 void gui::Window::OnDraw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-	gui::UIComposite::OnDraw(target, states);
 	background->draw(target, states);
+	gui::UIComposite::OnDraw(target, states);
 }
