@@ -7,6 +7,11 @@ void gui::Window::SetBackground(std::shared_ptr<gui::GraphicComponent> backgroun
 	Add(this->background);
 }
 
+sf::FloatRect gui::Window::GetWindowArea()
+{
+	return this->background->GetGlobalBounds();
+}
+
 void gui::Window::OnDraw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	gui::UIComposite::OnDraw(target, states);
