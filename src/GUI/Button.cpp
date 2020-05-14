@@ -19,6 +19,11 @@ namespace gui {
 	{
 		this->graphic.Update();
 	}
+
+	gui::GraphicComponent& Button::GetGraphicComponent()
+	{
+		return this->graphic;
+	}
 	
 	void Button::OnSetPosition(sf::Vector2f position)
 	{

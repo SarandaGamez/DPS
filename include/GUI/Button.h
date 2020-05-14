@@ -13,6 +13,7 @@ namespace gui {
 		Button(const sf::Texture& texture, const sf::Vector2f& position);
 		void SetTexture(const sf::Texture& texture);
 		void Update();
+		gui::GraphicComponent& GetGraphicComponent();
 
 	private:
 		gui::GraphicComponent graphic;
