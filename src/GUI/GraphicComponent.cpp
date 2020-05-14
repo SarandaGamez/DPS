@@ -10,6 +10,11 @@ sf::FloatRect gui::GraphicComponent::GetGlobalBounds() const
 	return sprite.getGlobalBounds();
 }
 
+sf::Sprite& gui::GraphicComponent::GetSprite()
+{
+	return this->sprite;
+}
+
 void gui::GraphicComponent::OnSetPosition(sf::Vector2f position)
 {
 	this->sprite.setPosition(position);
