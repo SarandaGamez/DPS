@@ -3,8 +3,6 @@
 void gui::Window::SetBackground(std::shared_ptr<gui::GraphicComponent> background)
 {
 	this->background = background;
-	Remove(this->background);
-	Add(this->background);
 }
 
 sf::FloatRect gui::Window::GetWindowArea()
@@ -16,4 +14,10 @@ void gui::Window::OnDraw(sf::RenderTarget& target, sf::RenderStates states) cons
 {
 	background->draw(target, states);
 	gui::UIComposite::OnDraw(target, states);
+}
+
+void gui::Window::OnSetPosition(sf::Vector2f position)
+{
+	gui::UIComposite::OnSetPosition(position);
+	background->SetPosition(position);
 }

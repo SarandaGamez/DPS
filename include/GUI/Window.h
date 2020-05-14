@@ -16,6 +16,7 @@ namespace gui {
 
 	protected:
 		virtual void OnDraw(sf::RenderTarget& target, sf::RenderStates states) const; 
+		virtual void OnSetPosition(sf::Vector2f position) override;
 	};
 }
 
