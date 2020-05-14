@@ -5,22 +5,22 @@ namespace gui {
 
 	Button::Button(const sf::Texture& texture, const sf::Vector2f& position)
 	{
-		SetTexture(texture);
+		graphic = std::make_shared<gui::GraphicComponent>(texture);
 		SetPosition(position);
-		SetRegion(graphic.GetGlobalBounds());
+		SetRegion(graphic->GetGlobalBounds());
 	}
 
 	void Button::SetTexture(const sf::Texture& texture)
 	{
-		this->graphic.SetTexture(texture);
+		this->graphic->SetTexture(texture);
 	}
 
 	void Button::Update()
 	{
-		this->graphic.Update();
+		this->graphic->Update();
 	}
 
-	gui::GraphicComponent& Button::GetGraphicComponent()
+	std::shared_ptr<gui::GraphicComponent> Button::GetGraphicComponent()
 	{
 		return this->graphic;
 	}
@@ -28,12 +28,12 @@ namespace gui {
 	void Button::OnSetPosition(sf::Vector2f position)
 	{
 		gui::ClickableComponent::OnSetPosition(position);
-		graphic.SetPosition(position);
-		SetRegion(graphic.GetGlobalBounds());
+		graphic->SetPosition(position);
+		SetRegion(graphic->GetGlobalBounds());
 	}
 
 	void Button::OnDraw(sf::RenderTarget& target, sf::RenderStates states) const
 	{
-		target.draw(graphic, states);
+		target.draw(*graphic, states);
 	}
 }

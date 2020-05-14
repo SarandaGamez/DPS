@@ -1,5 +1,10 @@
 #include "GUI\GraphicComponent.h"
 
+gui::GraphicComponent::GraphicComponent(const sf::Texture& texture)
+{
+	SetTexture(texture);
+}
+
 void gui::GraphicComponent::SetTexture(const sf::Texture& texture)
 {
 	this->sprite.setTexture(texture);

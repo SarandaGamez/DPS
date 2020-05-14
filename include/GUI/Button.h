@@ -13,10 +13,10 @@ namespace gui {
 		Button(const sf::Texture& texture, const sf::Vector2f& position);
 		void SetTexture(const sf::Texture& texture);
 		void Update();
-		gui::GraphicComponent& GetGraphicComponent();
+		std::shared_ptr<gui::GraphicComponent> GetGraphicComponent();
 
 	private:
-		gui::GraphicComponent graphic;
+		std::shared_ptr<gui::GraphicComponent> graphic;
 
 	protected:
 		virtual void OnSetPosition(sf::Vector2f position);

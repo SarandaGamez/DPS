@@ -11,6 +11,7 @@ namespace gui {
 		sf::Sprite sprite;
 
 	public:
+		GraphicComponent(const sf::Texture& texture);
 		void SetTexture(const sf::Texture& texture);
 		sf::FloatRect GetGlobalBounds() const;
 		sf::Sprite& GetSprite();
