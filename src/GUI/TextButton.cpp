@@ -31,7 +31,7 @@ namespace gui {
 
 	void TextButton::OnDraw(sf::RenderTarget& target, sf::RenderStates states) const
 	{
-		gui::Button::draw(target, states);
+		gui::Button::OnDraw(target, states);
 		target.draw(text, states);
 	}
 
