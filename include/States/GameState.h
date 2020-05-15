@@ -16,6 +16,7 @@ class GameState : public State {
 	std::vector<std::shared_ptr<gui::UIComposite>> components;
 	gui::UICompositeBuilder compositeBuilder;
 	std::shared_ptr<gui::Window> dialogWindow;
+	unsigned short currentLayer = 0;
 private:
 
 	virtual void OnHandleEvent() override;

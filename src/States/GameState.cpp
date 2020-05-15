@@ -51,6 +51,7 @@ void GameState::OnEnter()
 		->GetSignal(gui::SignalTypes::onLeftMouseButtonReleased).Connect(std::bind(&GameState::CloseDialog, this));
 	dialogWindow = dialogWindowBuilder.GetResult();
 	dialogWindow->SetPosition({renderWindow->getSize().x / 2 - dialogWindow->GetWindowArea().width / 2, renderWindow->getSize().y / 2 - dialogWindow->GetWindowArea().height / 2 });
+	dialogWindow->SetLayer(1);
 	components.push_back(dialogWindow);
 	CloseDialog();
 
@@ -67,6 +68,7 @@ void GameState::OpenDialog()
 	cout << "TEST" << endl;
 	dialogWindow->SetVisible(true);
 	dialogWindow->SetActive(true);
+	this->currentLayer = 1;
 }
 
 void GameState::CloseDialog()
@@ -74,6 +76,7 @@ void GameState::CloseDialog()
 	cout << "TEST2" << endl;
 	dialogWindow->SetVisible(false);
 	dialogWindow->SetActive(false);
+	this->currentLayer = 0;
 }
 
 void GameState::AddUIComponent(std::shared_ptr<gui::UIComponent> component)
@@ -87,7 +90,8 @@ void GameState::OnUpdate()
 {
 	if(!components.empty())
 	for (auto &comp : components)
-		comp->Update();
+		if(comp->GetLayer() == currentLayer)
+			comp->Update();
 
 }
 
@@ -98,7 +102,8 @@ void GameState::OnHandleEvent()
 
 	if (!components.empty())
 	for (auto &comp : components)
-		comp->HandleEvent(event);
+		if (comp->GetLayer() == currentLayer)
+			comp->HandleEvent(event);
 }
 
 void GameState::OnDraw()
@@ -107,5 +112,6 @@ void GameState::OnDraw()
 
 	if (!components.empty())
 	for (auto &comp : components)
-		renderWindow->draw(*comp);
+		if (comp->GetLayer() == currentLayer)
+			renderWindow->draw(*comp);
 }

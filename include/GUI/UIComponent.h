@@ -16,6 +16,7 @@ namespace gui {
 		gui::CompoundEventBehavior eventBehaviors;
 		bool isVisible = true;
 		bool isActive = true;
+		unsigned short layer = 0;
 	public: 
 		void SetPosition(sf::Vector2f position);
 		sf::Vector2f GetPosition();
@@ -25,8 +26,10 @@ namespace gui {
 
 		void SetActive(bool isActive);
 		void SetVisible(bool isVisible);
+		void SetLayer(unsigned short layer);
 		bool IsActive() const;
 		bool IsVisible() const;
+		unsigned short GetLayer() const;
 
 	protected:
 		virtual void OnSetPosition(sf::Vector2f position) {}

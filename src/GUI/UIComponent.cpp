@@ -34,6 +34,11 @@ void gui::UIComponent::SetVisible(bool isVisible)
 	this->isVisible = isVisible;
 }
 
+void gui::UIComponent::SetLayer(unsigned short layer)
+{
+	this->layer = layer;
+}
+
 bool gui::UIComponent::IsActive() const
 {
 	return isActive;
@@ -42,6 +47,11 @@ bool gui::UIComponent::IsActive() const
 bool gui::UIComponent::IsVisible() const
 {
 	return isVisible;
+}
+
+unsigned short gui::UIComponent::GetLayer() const
+{
+	return this->layer;
 }
 
 gui::CompoundEventBehavior& gui::UIComponent::GetEventBehaviors()
