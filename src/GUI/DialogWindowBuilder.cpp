@@ -26,7 +26,7 @@ void gui::DialogWindowBuilder::SetCaption(const std::string& caption, const sf::
 	this->caption = std::shared_ptr<gui::TextComponent>(new gui::TextComponent);
 	this->caption->SetFont(font);
 	this->caption->SetText(caption);
-	this->caption->SetPosition({ window->GetWindowArea().width / 2 - this->caption->GetGlobalBounds().width / 2, window->GetWindowArea().height / 4 });
+	AlignCaption(caption);
 }
 
 std::shared_ptr<gui::TextButton> gui::DialogWindowBuilder::AddOption(const std::string& caption, const sf::Font& font, const sf::Texture& buttonTexture)
@@ -61,4 +61,21 @@ void gui::DialogWindowBuilder::AlignButtons()
 	for (int i = 0; i < buttons.size(); i++) {
 		buttons[i]->SetPosition({ windowCenter.x - buttonsWidth * i / 2, windowCenter.y });
 	}
+
 }
+
+void gui::DialogWindowBuilder::AlignCaption(const std::string& caption)
+{
+	auto textAreaWidth = this->window->GetWindowArea().width * 0.8f;
+	auto textSize = this->caption->GetGlobalBounds();
+
+	if (textSize.width >= textAreaWidth) {
+		this->caption->SetCharacterSize(textAreaWidth / caption.length());
+	}
+
+	textSize = this->caption->GetGlobalBounds();
+
+
+	this->caption->SetPosition({ window->GetWindowArea().width / 2 - textSize.width / 2, window->GetWindowArea().height / 4 });
+}
+

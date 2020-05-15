@@ -29,6 +29,7 @@ namespace gui {
 		std::vector<std::shared_ptr<gui::TextButton>> buttons;
 
 		void AlignButtons();
+		void AlignCaption(const std::string& caption);
 	};
 }
 
