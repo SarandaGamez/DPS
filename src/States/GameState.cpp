@@ -37,6 +37,10 @@ void GameState::OnEnter()
 	clickable->GetSignal(gui::SignalTypes::onLeftMouseButtonReleased).Connect(std::bind(&GameState::OpenDialog, this));
 	AddUIComponent(clickable);
 
+	clickable = buttonsBuilder.BuildClickableRegion({ 850, 875, 210, 75 });
+	clickable->GetSignal(gui::SignalTypes::onLeftMouseButtonReleased).Connect(std::bind(&GameState::OpenDialog, this));
+	AddUIComponent(clickable);
+
 	background.setTexture(textures.GetTexture("OfficeBackground"));
 
 	auto windowBgr = std::shared_ptr<gui::GraphicComponent>(new gui::GraphicComponent(textures.GetTexture("Window")));
@@ -45,7 +49,6 @@ void GameState::OnEnter()
 	dialogWindowBuilder.SetCaption("Feature is not available at the moment", font);
 	dialogWindowBuilder.AddOption("Close", font, textures.GetTexture("Button"))
 		->GetSignal(gui::SignalTypes::onLeftMouseButtonReleased).Connect(std::bind(&GameState::CloseDialog, this));
-	dialogWindowBuilder.AddOption("Comming soon", font, textures.GetTexture("Button"));
 	dialogWindow = dialogWindowBuilder.GetResult();
 	dialogWindow->SetPosition({renderWindow->getSize().x / 2 - dialogWindow->GetWindowArea().width / 2, renderWindow->getSize().y / 2 - dialogWindow->GetWindowArea().height / 2 });
 	components.push_back(dialogWindow);
