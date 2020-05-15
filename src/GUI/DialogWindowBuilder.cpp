@@ -54,12 +54,13 @@ void gui::DialogWindowBuilder::AlignButtons()
 {
 	float buttonsWidth = 0;
 	for (auto button : buttons)
-		buttonsWidth += button->GetRegion().width + window->GetWindowArea().width * 0.05f;
+		buttonsWidth += button->GetRegion().width;
+	buttonsWidth /= buttons.size();
 
-	sf::Vector2f windowCenter = { window->GetWindowArea().width / 2.0f, window->GetWindowArea().height / 1.5f };
+	auto firstButtonPos = (window->GetWindowArea().width - (buttonsWidth + 50) * buttons.size() + 50) / 2;
 
 	for (int i = 0; i < buttons.size(); i++) {
-		buttons[i]->SetPosition({ windowCenter.x - buttonsWidth * i / 2, windowCenter.y });
+		buttons[i]->SetPosition({ firstButtonPos + (buttonsWidth + 50) * i, window->GetWindowArea().height / 1.5f });
 	}
 
 }
