@@ -19,6 +19,8 @@ namespace gui {
 	private:
 		gui::TextComponent text;
 
+		void ScaleText(unsigned int characterSize);
+
 	protected:
 		virtual void OnSetPosition(sf::Vector2f position);
 		virtual void OnDraw(sf::RenderTarget& target, sf::RenderStates states) const override;

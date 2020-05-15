@@ -7,6 +7,7 @@ namespace gui {
 	{
 		GetText().SetFont(font);
 		GetText().SetText(text);
+		ScaleText(GetGraphicComponent()->GetGlobalBounds().width / text.length());
 		SetPosition(position);
 	}
 
@@ -19,6 +20,14 @@ namespace gui {
 	{
 		gui::Button::Update();
 		text.Update();
+	}
+
+	void TextButton::ScaleText(unsigned int characterSize)
+	{
+		if (characterSize >= 28)
+			GetText().SetCharacterSize(28);
+		else
+			GetText().SetCharacterSize(characterSize);
 	}
 
 	void TextButton::OnSetPosition(sf::Vector2f position)
