@@ -1,9 +1,14 @@
-cmake_minimum_required (VERSION 2.8.12)
+cmake_minimum_required (VERSION 3.1)
 
-# add c++11 standard to compiler
-add_compile_options(-std=c++11)
+# add c++17 standard to compiler
+add_compile_options(-std=c++17)
+
 
 project(DPS)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
 set(BINDIR ${PROJECT_BINARY_DIR})
 set(SRCDIR ${PROJECT_SOURCE_DIR})
