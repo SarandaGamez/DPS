@@ -13,13 +13,35 @@ sf::Vector2f gui::UIComponent::GetPosition()
 
 void gui::UIComponent::HandleEvent(const sf::Event& event)
 {
-	if (CheckEventCondition(event))
-		eventBehaviors.HandleEvent(event);
+	if(isActive)
+		if (CheckEventCondition(event))
+			eventBehaviors.HandleEvent(event);
 }
 
 void gui::UIComponent::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-	OnDraw(target, states);
+	if(isVisible)
+		OnDraw(target, states);
+}
+
+void gui::UIComponent::SetActive(bool isActive)
+{
+	this->isActive = isActive;
+}
+
+void gui::UIComponent::SetVisible(bool isVisible)
+{
+	this->isVisible = isVisible;
+}
+
+bool gui::UIComponent::IsActive() const
+{
+	return isActive;
+}
+
+bool gui::UIComponent::IsVisible() const
+{
+	return isVisible;
 }
 
 gui::CompoundEventBehavior& gui::UIComponent::GetEventBehaviors()

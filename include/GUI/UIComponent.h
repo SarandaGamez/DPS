@@ -14,12 +14,19 @@ namespace gui {
 	class UIComponent : public sf::Drawable, public gui::UIObject{
 		sf::Vector2f position;
 		gui::CompoundEventBehavior eventBehaviors;
+		bool isVisible = true;
+		bool isActive = true;
 	public: 
 		void SetPosition(sf::Vector2f position);
 		sf::Vector2f GetPosition();
 		virtual void Update() {}
 		void HandleEvent(const sf::Event&);
 		void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+
+		void SetActive(bool isActive);
+		void SetVisible(bool isVisible);
+		bool IsActive() const;
+		bool IsVisible() const;
 
 	protected:
 		virtual void OnSetPosition(sf::Vector2f position) {}

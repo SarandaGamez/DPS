@@ -5,6 +5,7 @@ namespace gui {
 
 	Button::Button(const sf::Texture& texture, const sf::Vector2f& position)
 	{
+		gui::ClickableComponent::ClickableComponent();
 		graphic = std::make_shared<gui::GraphicComponent>(texture);
 		SetPosition(position);
 		SetRegion(graphic->GetGlobalBounds());

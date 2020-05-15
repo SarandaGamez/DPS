@@ -29,7 +29,8 @@ void gui::UIComposite::HandleEvent(const sf::Event& event)
 {
 	if (children.empty())
 		return;
-
+	
+	if (IsActive())
 	for (auto component : children)
 		component->HandleEvent(event);
 }
@@ -39,9 +40,9 @@ void gui::UIComposite::OnSetPosition(sf::Vector2f position)
 	if (children.empty())
 		return;
 
-	for (auto component : children)
-		component->SetPosition({ component->GetPosition().x + position.x - compositePosition.x,
-			component->GetPosition().y + position.y - compositePosition.y });
+		for (auto component : children)
+			component->SetPosition({ component->GetPosition().x + position.x - compositePosition.x,
+				component->GetPosition().y + position.y - compositePosition.y });
 
 	this->compositePosition = position;
 }
@@ -51,6 +52,7 @@ void gui::UIComposite::OnDraw(sf::RenderTarget& target, sf::RenderStates states)
 	if (children.empty())
 		return;
 
-	for (auto component : children)
-		component->draw(target, states);
+	if (IsVisible())
+		for (auto component : children)
+			component->draw(target, states);
 }
