@@ -11,42 +11,9 @@ sf::Vector2f gui::UIComponent::GetPosition()
 	return position;
 }
 
-void gui::UIComponent::HandleEvent(const sf::Event& event)
-{
-	if(isActive)
-		if (CheckEventCondition(event))
-			eventBehaviors.HandleEvent(event);
-}
-
-void gui::UIComponent::draw(sf::RenderTarget& target, sf::RenderStates states) const
-{
-	if(isVisible)
-		OnDraw(target, states);
-}
-
-void gui::UIComponent::SetActive(bool isActive)
-{
-	this->isActive = isActive;
-}
-
-void gui::UIComponent::SetVisible(bool isVisible)
-{
-	this->isVisible = isVisible;
-}
-
 void gui::UIComponent::SetLayer(unsigned short layer)
 {
 	this->layer = layer;
-}
-
-bool gui::UIComponent::IsActive() const
-{
-	return isActive;
-}
-
-bool gui::UIComponent::IsVisible() const
-{
-	return isVisible;
 }
 
 unsigned short gui::UIComponent::GetLayer() const
@@ -54,7 +21,45 @@ unsigned short gui::UIComponent::GetLayer() const
 	return this->layer;
 }
 
+void gui::UIComponent::SetActive(bool isActive)
+{
+	state.SetActive(isActive);
+}
+
+bool gui::UIComponent::IsActive() const
+{
+	return state.IsActive();
+}
+
+void gui::UIComponent::SetVisible(bool isVisible)
+{
+	state.SetVisible(isVisible);
+}
+
+bool gui::UIComponent::IsVisible() const
+{
+	return state.IsVisible();
+}
+
+void gui::UIComponent::HandleEvent(const sf::Event& event)
+{
+	if(IsActive())
+		if (CheckEventCondition(event))
+			eventBehaviors.HandleEvent(event);
+}
+
+void gui::UIComponent::draw(sf::RenderTarget& target, sf::RenderStates states) const
+{
+	if(IsVisible())
+		OnDraw(target, states);
+}
+
 gui::CompoundEventBehavior& gui::UIComponent::GetEventBehaviors()
 {
 	return eventBehaviors;
+}
+
+gui::UIState& gui::UIComponent::GetState()
+{
+	return state;
 }

@@ -6,36 +6,38 @@
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/RenderStates.hpp>
 #include "GUI/EventBehavior/CompoundEventBehavior.h"
+#include "GUI/UIState.h"
 #include "GUI/UIObject.h"
 #include <memory>
 
 namespace gui {
-
 	class UIComponent : public sf::Drawable, public gui::UIObject{
 		sf::Vector2f position;
 		gui::CompoundEventBehavior eventBehaviors;
-		bool isVisible = true;
-		bool isActive = true;
+		gui::UIState state;
 		unsigned short layer = 0;
 	public: 
 		void SetPosition(sf::Vector2f position);
 		sf::Vector2f GetPosition();
+
+		void SetLayer(unsigned short layer);
+		unsigned short GetLayer() const;
+		
+		void SetActive(bool isActive);
+		bool IsActive() const;
+
+		void SetVisible(bool isVisible);
+		bool IsVisible() const;
+
 		virtual void Update() {}
 		void HandleEvent(const sf::Event&);
 		void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
-
-		void SetActive(bool isActive);
-		void SetVisible(bool isVisible);
-		void SetLayer(unsigned short layer);
-		bool IsActive() const;
-		bool IsVisible() const;
-		unsigned short GetLayer() const;
-
 	protected:
 		virtual void OnSetPosition(sf::Vector2f position) {}
 		virtual void OnDraw(sf::RenderTarget& target, sf::RenderStates states) const {}
 		virtual bool CheckEventCondition(const sf::Event& event) { return true; }
 		gui::CompoundEventBehavior& GetEventBehaviors();
+		gui::UIState& GetState();
 	};
 
 }
