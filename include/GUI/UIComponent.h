@@ -29,6 +29,9 @@ namespace gui {
 		void SetVisible(bool isVisible);
 		bool IsVisible() const;
 
+		void SetMouseInRegion(bool isMouseInRegion);
+		bool IsMouseInRegion() const;
+
 		virtual void Update() {}
 		void HandleEvent(const sf::Event&);
 		void draw(sf::RenderTarget& target, sf::RenderStates states) const override;

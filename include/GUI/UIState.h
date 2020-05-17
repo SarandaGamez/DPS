@@ -10,10 +10,13 @@ namespace gui {
 	public:
 		void SetActive(bool isActive);
 		void SetVisible(bool isVisible);
+		void SetMouseInRegion(bool isMouseInRegion);
 		bool IsActive() const;
 		bool IsVisible() const;
+		bool IsMouseInRegion() const;
 
 	private:
+		bool isMouseInRegion = false;
 		bool isVisible = true;
 		bool isActive = true;
 	};

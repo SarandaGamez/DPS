@@ -41,6 +41,16 @@ bool gui::UIComponent::IsVisible() const
 	return state.IsVisible();
 }
 
+void gui::UIComponent::SetMouseInRegion(bool isMouseInRegion)
+{
+	state.SetMouseInRegion(isMouseInRegion);
+}
+
+bool gui::UIComponent::IsMouseInRegion() const
+{
+	return state.IsMouseInRegion();
+}
+
 void gui::UIComponent::HandleEvent(const sf::Event& event)
 {
 	if(IsActive())
