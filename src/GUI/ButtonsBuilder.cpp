@@ -10,6 +10,13 @@ void gui::ButtonsBuilder::SetFont(const sf::Font& font)
 	this->font = &font;
 }
 
+std::shared_ptr<gui::HoverableComponent> gui::ButtonsBuilder::BuildHoverableRegion(sf::FloatRect region)
+{
+	auto hoverable = std::shared_ptr<gui::HoverableComponent>(new HoverableComponent);
+	hoverable->SetRegion(region);
+	return hoverable;
+}
+
 std::shared_ptr<gui::ClickableComponent> gui::ButtonsBuilder::BuildClickableRegion(sf::FloatRect region)
 {
 	auto clickable = std::shared_ptr<gui::ClickableComponent>(new ClickableComponent);
