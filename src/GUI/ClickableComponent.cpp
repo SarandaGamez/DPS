@@ -29,5 +29,6 @@ void gui::ClickableComponent::OnSetPosition(sf::Vector2f position)
 bool gui::ClickableComponent::CheckEventCondition(const sf::Event& event)
 {
 	sf::Vector2f mousePosition = { static_cast<float>(event.mouseButton.x), static_cast<float>(event.mouseButton.y) };
-	return IsMouseInRegion(mousePosition);
+	gui::UIComponent::SetMouseInRegion(IsMouseInRegion(mousePosition));
+	return gui::UIComponent::IsMouseInRegion();
 }
