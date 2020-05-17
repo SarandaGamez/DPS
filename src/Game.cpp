@@ -6,7 +6,7 @@ Game::Game(){
 
 	std::string title = GAME_TITLE + " " + GAME_VERSION_MAJOR + "." + GAME_VERSION_MINOR + "-" + GAME_VERSION_RELEASE;
 
-	renderWindow = std::make_shared<sf::RenderWindow>(sf::VideoMode::getDesktopMode(), title, sf::Style::Fullscreen);
+	renderWindow = std::make_shared<sf::RenderWindow>(sf::VideoMode::getDesktopMode(), title);// , sf::Style::Fullscreen);
 	renderWindow->setFramerateLimit(60);
 	renderWindow->setVerticalSyncEnabled(true);
 	renderWindow->setKeyRepeatEnabled(false);
