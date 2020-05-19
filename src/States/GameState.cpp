@@ -3,6 +3,7 @@
 #include "StatesMachine.h"
 #include "GUI/DialogWindowBuilder.h"
 #include "GUI/ButtonsBuilder.h"
+#include "GUI/ComponentsBuilder.h"
 #include "GUI/TooltipComponent.h"
 #include <string>
 #include "Utils/StringUtils.h"
@@ -82,32 +83,15 @@ void GameState::OnEnter()
 	noteText3 = utils::StringUtils::BreakLines(noteText3, 25);
 	noteText4 = utils::StringUtils::BreakLines(noteText4, 25);
 
-	auto note1 = std::shared_ptr<gui::TextComponent>(new gui::TextComponent());
-	note1->SetText(noteText);	
-	note1->SetFont(font);
-	note1->SetCharacterSize(20);
-	note1->SetPosition({ 100 * 0.8f, 250 * 0.75f });
-	auto note2 = std::shared_ptr<gui::TextComponent>(new gui::TextComponent());
-	note2->SetText(noteText2);
-	note2->SetFont(font);
-	note2->SetCharacterSize(20);
-	note2->SetPosition({ 1025 * 0.8f, 250 * 0.75f }); 
-	auto note3 = std::shared_ptr<gui::TextComponent>(new gui::TextComponent());
-	note2->SetText(noteText3);
-	note2->SetFont(font);
-	note2->SetCharacterSize(20);
-	note2->SetPosition({ 1025 * 0.8f, 250 * 0.75f }); 
-	auto note4 = std::shared_ptr<gui::TextComponent>(new gui::TextComponent());
-	note2->SetText(noteText4);
-	note2->SetFont(font);
-	note2->SetCharacterSize(20);
-	note2->SetPosition({ 1025 * 0.8f, 250 * 0.75f });
+	auto firstPage = gui::ComponentsBuilder::BuildTextComponent(font, 20, { 100 * 0.8f, 250 * 0.75f });
+	auto secondPage = gui::ComponentsBuilder::BuildTextComponent(font, 20, { 1025 * 0.8f, 250 * 0.75f });
+
 	auto notebookWindow = std::shared_ptr<gui::Window>(new gui::Window());
 	notebookWindow->SetBackground(notebookBgr);
 	notebookWindow->SetLayer(1); 
-	
 
-	notebook = std::shared_ptr<controllers::Notebook>(new controllers::Notebook(notebookWindow, note1, note2));
+
+	notebook = std::shared_ptr<controllers::Notebook>(new controllers::Notebook(notebookWindow, firstPage, secondPage));
 	notebook->AddText(noteText);
 	notebook->AddText(noteText2);
 	notebook->AddText(noteText3);
