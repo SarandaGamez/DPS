@@ -16,6 +16,7 @@ class GameState : public State {
 	std::vector<std::shared_ptr<gui::UIComposite>> components;
 	gui::UICompositeBuilder compositeBuilder;
 	std::shared_ptr<gui::Window> dialogWindow;
+	std::shared_ptr<gui::Window> notebookWindow;
 	unsigned short currentLayer = 0;
 private:
 
@@ -29,6 +30,8 @@ private:
 
 	void OpenDialog();
 	void CloseDialog();
+	void OpenNotebook();
+	void CloseNotebook();
 	void AddUIComponent(std::shared_ptr<gui::UIComponent> component);
 };
 
