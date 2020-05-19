@@ -7,6 +7,7 @@
 #include "GUI/UIComposite.h"
 #include "GUI/UICompositeBuilder.h"
 #include "GUI/Window.h"
+#include "Controllers/NotebookController.h"
 #include <vector>
 #include <memory>
 
@@ -16,7 +17,7 @@ class GameState : public State {
 	std::vector<std::shared_ptr<gui::UIComposite>> components;
 	gui::UICompositeBuilder compositeBuilder;
 	std::shared_ptr<gui::Window> dialogWindow;
-	std::shared_ptr<gui::Window> notebookWindow;
+	std::shared_ptr<controllers::Notebook> notebook;
 	unsigned short currentLayer = 0;
 private:
 
