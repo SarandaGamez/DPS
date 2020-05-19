@@ -154,8 +154,18 @@ void GameState::OnUpdate()
 
 void GameState::OnHandleEvent()
 {
-	if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
+	if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) {
+		if (currentLayer <= 0)
 			isGameFinished = true;
+		else {
+			for (auto& comp : components)
+				if (comp->GetLayer() == currentLayer) {
+					comp->SetActive(false);
+					comp->SetVisible(false);
+				}
+			currentLayer--;
+		}
+	}
 
 	if (!components.empty())
 	for (auto &comp : components)
