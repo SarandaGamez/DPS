@@ -2,7 +2,7 @@
 #define GUI_MOUSE_BUTTON_CLICKED_BEHAVIOR_H
 
 #include "GUI/EventBehavior/EventBehavior.h"
-#include "GUI/UIObject.h"
+#include "Utils/SignalObject.h"
 #include <SFML/Window/Event.hpp>
 #include <memory>
 
@@ -10,7 +10,7 @@ namespace gui {
 
 	class MouseButtonClickedBehavior : public gui::EventBehavior {
 	public:
-		MouseButtonClickedBehavior(gui::UIObject* guiObject);
+		MouseButtonClickedBehavior(utils::SignalObject* signalObject);
 		virtual void OnHandleEvent(const sf::Event& event);
 	private:
 		bool isPressed = false;

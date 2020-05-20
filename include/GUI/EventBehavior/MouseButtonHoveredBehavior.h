@@ -2,7 +2,7 @@
 #define GUI_MOUSE_BUTTON_MOVE_BEHAVIOR_H
 
 #include "GUI/EventBehavior/EventBehavior.h"
-#include "GUI/UIObject.h"
+#include "Utils/SignalObject.h"
 #include "GUI/UIState.h"
 #include <SFML/Window/Event.hpp>
 #include <memory>
@@ -13,7 +13,7 @@ namespace gui {
 		gui::UIState* state;
 		bool haveEntered = false;
 	public:
-		MouseButtonHoveredBehavior(gui::UIObject* guiObject, gui::UIState* state);
+		MouseButtonHoveredBehavior(utils::SignalObject* signalObject, gui::UIState* state);
 		virtual void OnHandleEvent(const sf::Event& event);
 	};
 

@@ -1,12 +1,12 @@
-#ifndef GUI_UIOBJECT_H
-#define GUI_UIOBJECT_H
+#ifndef UTILS_SIGNAL_OBJECT_H
+#define UTILS_SIGNAL_OBJECT_H
 
 #include "GUI/EventBehavior/SignalTypes.h"
 #include "Utils/SignalsContainer.h"
 
-namespace gui {
+namespace utils {
 
-	class UIObject {
+	class SignalObject {
 	public:
 		utils::Signal& GetSignal(utils::Signal::GUID& id);
 

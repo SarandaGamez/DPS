@@ -1,7 +1,7 @@
 #ifndef GUI_SFML_EVENT_HANDLER_H
 #define GUI_SFML_EVENT_HANDLER_H
 
-#include "GUI/UIObject.h"
+#include "Utils/SignalObject.h"
 #include <SFML/Window/Event.hpp>
 #include <memory>
 #include <vector>
@@ -14,7 +14,7 @@ namespace gui {
 	protected:
 		virtual void OnHandleEvent(const sf::Event& event) = 0;
 		void AddEventType(sf::Event::EventType eventType);
-		gui::UIObject* guiObject;
+		utils::SignalObject* signalObject;
 
 	private:
 		std::vector<sf::Event::EventType> eventType;

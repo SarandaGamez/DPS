@@ -2,7 +2,7 @@
 #define GUI_MOUSE_BUTTON_RELEASED_BEHAVIOR_H
 
 #include "GUI/EventBehavior/EventBehavior.h"
-#include "GUI/UIObject.h"
+#include "Utils/SignalObject.h"
 #include <SFML/Window/Event.hpp>
 #include <memory>
 
@@ -10,7 +10,7 @@ namespace gui {
 
 	class MouseButtonReleasedBehavior : public gui::EventBehavior {
 	public:
-		MouseButtonReleasedBehavior(gui::UIObject* guiObject);
+		MouseButtonReleasedBehavior(utils::SignalObject* signalObject);
 		virtual void OnHandleEvent(const sf::Event& event);
 	};
 

@@ -7,11 +7,11 @@
 #include <SFML/Graphics/RenderStates.hpp>
 #include "GUI/EventBehavior/CompoundEventBehavior.h"
 #include "GUI/UIState.h"
-#include "GUI/UIObject.h"
+#include "Utils/SignalObject.h"
 #include <memory>
 
 namespace gui {
-	class UIComponent : public sf::Drawable, public gui::UIObject{
+	class UIComponent : public sf::Drawable, public utils::SignalObject{
 		sf::Vector2f position;
 		gui::CompoundEventBehavior eventBehaviors;
 		gui::UIState state;

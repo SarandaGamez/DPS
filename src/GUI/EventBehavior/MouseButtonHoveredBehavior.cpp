@@ -3,26 +3,26 @@
 
 namespace gui {
 
-	MouseButtonHoveredBehavior::MouseButtonHoveredBehavior(gui::UIObject* guiObject, gui::UIState* state)
+	MouseButtonHoveredBehavior::MouseButtonHoveredBehavior(utils::SignalObject* signalObject, gui::UIState* state)
 	{
-		this->guiObject = guiObject;
+		this->signalObject = signalObject;
 		this->state = state;
 		AddEventType(sf::Event::MouseMoved);
 	}
 
 	void MouseButtonHoveredBehavior::OnHandleEvent(const sf::Event& event)
 	{
-		if (!guiObject)
+		if (!signalObject)
 			return;
 
 		if (state->IsMouseInRegion() == true && haveEntered == false) {
-			guiObject->GetSignal(SignalTypes::onMouseEnter)();
+			signalObject->GetSignal(SignalTypes::onMouseEnter)();
 			haveEntered = true;
 			return;
 		}
 		
 		if (state->IsMouseInRegion() == false && haveEntered == true) {
-			guiObject->GetSignal(SignalTypes::onMouseLeave)();
+			signalObject->GetSignal(SignalTypes::onMouseLeave)();
 			haveEntered = false;
 			return;
 		}

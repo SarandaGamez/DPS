@@ -4,7 +4,7 @@ namespace gui {
 	   
 	void EventBehavior::HandleEvent(const sf::Event& event)
 	{
-		if (!guiObject)
+		if (!signalObject)
 			return;
 
 		if (eventType.empty())
