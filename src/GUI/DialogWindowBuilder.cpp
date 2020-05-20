@@ -13,11 +13,13 @@ gui::DialogWindowBuilder::DialogWindowBuilder(std::shared_ptr<gui::Window> windo
 void gui::DialogWindowBuilder::Reset(std::shared_ptr<gui::Window> window)
 {
 	this->window = window;
+	buttons.clear();
+	caption = nullptr;
 }
 
 void gui::DialogWindowBuilder::Reset(std::shared_ptr<gui::GraphicComponent> background)
 {
-	window = std::shared_ptr<gui::Window>(new gui::Window);
+	Reset(std::shared_ptr<gui::Window>(new gui::Window));
 	window->SetBackground(background);
 }
 
@@ -47,7 +49,9 @@ std::shared_ptr<gui::Window> gui::DialogWindowBuilder::GetResult()
 		for (auto button : buttons)
 			window->Add(button);
 
-	return window;
+	auto result = window;
+	window = nullptr;
+	return result;
 }
 
 void gui::DialogWindowBuilder::AlignButtons()
