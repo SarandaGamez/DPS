@@ -169,10 +169,12 @@ void GameState::OnHandleEvent()
 		}
 
 		if (event.key.code == sf::Keyboard::Right) {
-			notebook->NextPage();
+			if(notebook->GetWindow()->IsActive())
+				notebook->NextPage();
 		}
 		if (event.key.code == sf::Keyboard::Left) {
-			notebook->PreviousPage();
+			if (notebook->GetWindow()->IsActive())
+				notebook->PreviousPage();
 		}
 	}
 
