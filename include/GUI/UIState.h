@@ -1,11 +1,9 @@
 #ifndef GUI_UI_STATE_H
 #define GUI_UI_STATE_H
 
-#include "GUI/UIObject.h"
-
 namespace gui {
 
-	class UIState : public gui::UIObject {
+	class UIState {
 		
 	public:
 		void SetActive(bool isActive);
