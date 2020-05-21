@@ -1,6 +1,6 @@
-#include "Controllers/NotebookController.h"
+#include "GUI/Notebook.h"
 
-controllers::Notebook::Notebook(std::shared_ptr<gui::Window> window, std::shared_ptr<gui::TextComponent> firstPage, std::shared_ptr<gui::TextComponent> secondPage)
+gui::Notebook::Notebook(std::shared_ptr<gui::Window> window, std::shared_ptr<gui::TextComponent> firstPage, std::shared_ptr<gui::TextComponent> secondPage)
 {
 	this->window = window;
 	this->firstPage = firstPage;
@@ -9,7 +9,7 @@ controllers::Notebook::Notebook(std::shared_ptr<gui::Window> window, std::shared
 	this->window->Add(secondPage);
 }
 
-void controllers::Notebook::NextPage()
+void gui::Notebook::NextPage()
 {
 	if (currentPage + 2 <= theLastPage) {
 		currentPage += 2;
@@ -17,7 +17,7 @@ void controllers::Notebook::NextPage()
 	}
 }
 
-void controllers::Notebook::PreviousPage()
+void gui::Notebook::PreviousPage()
 {
 	if (currentPage >= 2) {
 		currentPage -= 2;
@@ -25,7 +25,7 @@ void controllers::Notebook::PreviousPage()
 	}
 }
 
-void controllers::Notebook::AddText(const std::string& text)
+void gui::Notebook::AddText(const std::string& text)
 {
 	this->texts.push_back(text);
 
@@ -37,12 +37,12 @@ void controllers::Notebook::AddText(const std::string& text)
 	ChangePage();
 }
 
-std::shared_ptr<gui::Window> controllers::Notebook::GetWindow()
+std::shared_ptr<gui::Window> gui::Notebook::GetWindow()
 {
 	return window;
 }
 
-void controllers::Notebook::ChangePage()
+void gui::Notebook::ChangePage()
 {
 	if (texts.size() > 0) {
 		firstPage->SetText(texts[currentPage]);

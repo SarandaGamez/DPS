@@ -6,7 +6,7 @@
 #include <memory>
 #include <vector>
 
-namespace controllers {
+namespace gui {
 
 	class Notebook{
 	public:

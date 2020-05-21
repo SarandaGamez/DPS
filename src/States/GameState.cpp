@@ -81,7 +81,7 @@ void GameState::OnEnter()
 	notebookWindow->SetBackground(notebookBgr);
 	notebookWindow->SetLayer(1);
 
-	notebook = std::shared_ptr<controllers::Notebook>(new controllers::Notebook(notebookWindow, firstPage, secondPage));
+	notebook = std::shared_ptr<gui::Notebook>(new gui::Notebook(notebookWindow, firstPage, secondPage));
 
 	std::string noteTexts[4];
 	noteTexts[0] = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas porta aliquet lobortis. Vivamus molestie purus in tellus tincidunt efficitur. Donec vitae tellus augue. Nunc scelerisque bibendum arcu, a feugiat libero accumsan porttitor. Phasellus ut purus ac felis dignissim vulputate eu nec metus. Vestibulum sit amet odio aliquet, ultricies lorem ut, laoreet quam. Aenean tempus pretium lacus et suscipit. Duis dignissim, orci non varius consequat, lectus ex ultricies risus, tempus porttitor libero turpis nec libero. Maecenas augue neque, faucibus condimentum tortor quis, feugiat venenatis quam. Sed pretium sem arcu, sed fermentum nisi porttitor in. Nam laoreet, augue quis aliquam placerat, lacus dolor pellentesque libero, vel molestie enim lectus sit amet nulla. Cras vel condimentum mauris. Vivamus justo tellus, tempor id velit non, convallis pulvinar erat. Maecenas pellentesque sem at neque porta, sed porttitor enim laoreet. Nulla eget odio et risus hendrerit sollicitudin a vitae nisi.";
