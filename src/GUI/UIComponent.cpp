@@ -20,37 +20,6 @@ unsigned short gui::UIComponent::GetLayer() const
 {
 	return this->layer;
 }
-
-void gui::UIComponent::SetActive(bool isActive)
-{
-	state.SetActive(isActive);
-}
-
-bool gui::UIComponent::IsActive() const
-{
-	return state.IsActive();
-}
-
-void gui::UIComponent::SetVisible(bool isVisible)
-{
-	state.SetVisible(isVisible);
-}
-
-bool gui::UIComponent::IsVisible() const
-{
-	return state.IsVisible();
-}
-
-void gui::UIComponent::SetMouseInRegion(bool isMouseInRegion)
-{
-	state.SetMouseInRegion(isMouseInRegion);
-}
-
-bool gui::UIComponent::IsMouseInRegion() const
-{
-	return state.IsMouseInRegion();
-}
-
 void gui::UIComponent::HandleEvent(const sf::Event& event)
 {
 	if(IsActive())
@@ -67,9 +36,4 @@ void gui::UIComponent::draw(sf::RenderTarget& target, sf::RenderStates states) c
 gui::CompoundEventBehavior& gui::UIComponent::GetEventBehaviors()
 {
 	return eventBehaviors;
-}
-
-gui::UIState& gui::UIComponent::GetState()
-{
-	return state;
 }

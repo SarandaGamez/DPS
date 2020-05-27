@@ -6,15 +6,13 @@
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/RenderStates.hpp>
 #include "GUI/EventBehavior/CompoundEventBehavior.h"
-#include "GUI/UIState.h"
-#include "Utils/SignalObject.h"
+#include "Utils/StateObject.h"
 #include <memory>
 
 namespace gui {
-	class UIComponent : public sf::Drawable, public utils::SignalObject{
+	class UIComponent : public sf::Drawable, public utils::StateObject{
 		sf::Vector2f position;
 		gui::CompoundEventBehavior eventBehaviors;
-		gui::UIState state;
 		unsigned short layer = 0;
 	public: 
 		void SetPosition(sf::Vector2f position);
@@ -22,15 +20,6 @@ namespace gui {
 
 		void SetLayer(unsigned short layer);
 		unsigned short GetLayer() const;
-		
-		void SetActive(bool isActive);
-		bool IsActive() const;
-
-		void SetVisible(bool isVisible);
-		bool IsVisible() const;
-
-		void SetMouseInRegion(bool isMouseInRegion);
-		bool IsMouseInRegion() const;
 
 		virtual void Update() {}
 		void HandleEvent(const sf::Event&);
@@ -40,7 +29,6 @@ namespace gui {
 		virtual void OnDraw(sf::RenderTarget& target, sf::RenderStates states) const {}
 		virtual bool CheckEventCondition(const sf::Event& event) { return true; }
 		gui::CompoundEventBehavior& GetEventBehaviors();
-		gui::UIState& GetState();
 	};
 
 }

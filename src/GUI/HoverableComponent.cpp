@@ -3,7 +3,7 @@
 
 gui::HoverableComponent::HoverableComponent()
 {
-	GetEventBehaviors().Add(std::shared_ptr<gui::MouseButtonHoveredBehavior>(new gui::MouseButtonHoveredBehavior(this, &GetState())));
+	GetEventBehaviors().Add(std::shared_ptr<gui::MouseButtonHoveredBehavior>(new gui::MouseButtonHoveredBehavior(this)));
 }
 
 bool gui::HoverableComponent::IsMouseInRegion(const sf::Vector2f& mousePosition)

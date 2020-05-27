@@ -1,10 +1,10 @@
-#ifndef GUI_UI_STATE_H
-#define GUI_UI_STATE_H
+#ifndef UTILS_STATE_OBJECT_H
+#define UTILS_STATE_OBJECT_H
 
-namespace gui {
+#include "Utils/SignalObject.h"
 
-	class UIState {
-		
+namespace utils {
+	class StateObject : public utils::SignalObject{
 	public:
 		void SetActive(bool isActive);
 		void SetVisible(bool isVisible);
@@ -12,7 +12,6 @@ namespace gui {
 		bool IsActive() const;
 		bool IsVisible() const;
 		bool IsMouseInRegion() const;
-
 	private:
 		bool isMouseInRegion = false;
 		bool isVisible = true;
@@ -20,4 +19,4 @@ namespace gui {
 	};
 }
 
-#endif // !GUI_UI_STATE_H
+#endif // UTILS_STATE_OBJECT_H
