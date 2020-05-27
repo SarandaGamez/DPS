@@ -3,17 +3,16 @@
 
 #include "GUI/EventBehavior/EventBehavior.h"
 #include "Utils/SignalObject.h"
-#include "GUI/UIState.h"
+#include "Utils/StateObject.h"
 #include <SFML/Window/Event.hpp>
 #include <memory>
 
 namespace gui {
 
 	class MouseButtonHoveredBehavior : public gui::EventBehavior {
-		gui::UIState* state;
 		bool haveEntered = false;
 	public:
-		MouseButtonHoveredBehavior(utils::SignalObject* signalObject, gui::UIState* state);
+		MouseButtonHoveredBehavior(utils::StateObject* state);
 		virtual void OnHandleEvent(const sf::Event& event);
 	};
 

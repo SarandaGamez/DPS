@@ -2,16 +2,16 @@
 #include "GUI/EventBehavior/SignalTypes.h"
 
 namespace gui {
-	gui::MouseButtonClickedBehavior::MouseButtonClickedBehavior(utils::SignalObject* signalObject)
+	gui::MouseButtonClickedBehavior::MouseButtonClickedBehavior(utils::StateObject* state)
 	{
-		this->signalObject = signalObject;
+		this->object = state;
 		AddEventType(sf::Event::MouseButtonReleased);
 		AddEventType(sf::Event::MouseButtonPressed);
 	}
 
 	void gui::MouseButtonClickedBehavior::OnHandleEvent(const sf::Event& event)
 	{
-		if (!signalObject)
+		if (!object)
 			return;
 
 		if (event.type == sf::Event::MouseButtonReleased) {
@@ -19,10 +19,10 @@ namespace gui {
 				switch (pressedButton)
 				{
 				case sf::Mouse::Left:
-					signalObject->GetSignal(SignalTypes::onLeftMouseButtonReleased)();
+					object->GetSignal(SignalTypes::onLeftMouseButtonReleased)();
 					break;
 				case sf::Mouse::Right:
-					signalObject->GetSignal(SignalTypes::onRightMouseButtonReleased)();
+					object->GetSignal(SignalTypes::onRightMouseButtonReleased)();
 					break;
 				}
 			}
@@ -36,10 +36,10 @@ namespace gui {
 				switch (pressedButton)
 				{
 				case sf::Mouse::Left:
-					signalObject->GetSignal(SignalTypes::onLeftMouseButtonPressed)();
+					object->GetSignal(SignalTypes::onLeftMouseButtonPressed)();
 					break;
 				case sf::Mouse::Right:
-					signalObject->GetSignal(SignalTypes::onRightMouseButtonPressed)();
+					object->GetSignal(SignalTypes::onRightMouseButtonPressed)();
 					break;
 				}
 			}

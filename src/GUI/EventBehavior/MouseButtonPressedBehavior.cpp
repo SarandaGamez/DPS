@@ -2,24 +2,24 @@
 #include "GUI/EventBehavior/SignalTypes.h"
 
 namespace gui {
-	gui::MouseButtonPressedBehavior::MouseButtonPressedBehavior(utils::SignalObject* signalObject)
+	gui::MouseButtonPressedBehavior::MouseButtonPressedBehavior(utils::StateObject* state)
 	{
-		this->signalObject = signalObject;
+		this->object = state;
 		AddEventType(sf::Event::MouseButtonPressed);
 	}
 
 	void gui::MouseButtonPressedBehavior::OnHandleEvent(const sf::Event& event)
 	{
-		if (!signalObject)
+		if (!object)
 			return;
 
 		switch (event.mouseButton.button)
 		{
 		case sf::Mouse::Left:
-			signalObject->GetSignal(SignalTypes::onLeftMouseButtonPressed)();
+			object->GetSignal(SignalTypes::onLeftMouseButtonPressed)();
 			break;
 		case sf::Mouse::Right:
-			signalObject->GetSignal(SignalTypes::onRightMouseButtonPressed)();
+			object->GetSignal(SignalTypes::onRightMouseButtonPressed)();
 			break;
 		}
 	}
