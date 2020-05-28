@@ -6,6 +6,7 @@
 #include "GUI/ComponentsBuilder.h"
 #include "GUI/TooltipComponent.h"
 #include "Controllers/NotebookController.h"
+#include "Controllers/DebugController.h"
 #include <string>
 #include "Utils/StringUtils.h"
 
@@ -71,6 +72,7 @@ void GameState::OnEnter()
 
 	// Notebook
 	controllers.push_back(std::shared_ptr<ctrl::Controller>(new ctrl::NotebookController(renderWindow, textures, transition)));
+	controllers.push_back(std::shared_ptr<ctrl::Controller>(new ctrl::DebugController(renderWindow, textures, transition)));
 
 
 	cout << "Game loaded" << endl;
