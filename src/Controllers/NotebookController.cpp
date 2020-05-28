@@ -19,7 +19,7 @@ ctrl::NotebookController::NotebookController(std::shared_ptr<sf::RenderWindow> r
 
 	//Notebook button
 	button = buttonsBuilder.BuildClickableRegion({ 850, 875, 210, 75 });
-	button->GetSignal(gui::SignalTypes::onLeftMouseButtonReleased).Connect(std::bind(&NotebookController::OpenNotebook, this));
+	button->GetSignal(gui::SignalTypes::onLeftMouseButtonReleased).Connect([=]() { this->isWindowOpen = true; });
 
 	//Notebook background
 	auto notebookBgr = std::shared_ptr<gui::GraphicComponent>(new gui::GraphicComponent(textures.GetTexture("Notebook")));
@@ -56,12 +56,23 @@ ctrl::NotebookController::~NotebookController()
 void ctrl::NotebookController::Update(sf::Time time)
 {
 	this->notebook->GetWindow()->Update();
+	if (isWindowOpen && this->notebook->GetWindow()->IsActive() == false)
+		OpenNotebook();
+	else if (isWindowOpen == false && this->notebook->GetWindow()->IsActive() == true)
+		CloseNotebook();
 }
 
 void ctrl::NotebookController::HandleEvent(sf::Event event)
 {
 	this->notebook->GetWindow()->HandleEvent(event);
 	this->button->HandleEvent(event);
+
+	if (event.type == sf::Event::KeyPressed) {
+
+		if (event.key.code == sf::Keyboard::Escape && currentLayer > 0 && notebook->GetWindow()->IsActive()) {
+			isWindowOpen = false;
+		}
+	}
 
 	if (event.key.code == sf::Keyboard::Right) {
 		if (notebook->GetWindow()->IsActive())

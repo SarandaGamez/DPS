@@ -71,7 +71,7 @@ void GameState::OnEnter()
 
 	// Notebook
 	controllers.push_back(std::shared_ptr<ctrl::Controller>(new ctrl::NotebookController(renderWindow, textures, transition)));
-	
+
 
 	cout << "Game loaded" << endl;
 }
@@ -119,22 +119,6 @@ void GameState::OnUpdate()
 
 void GameState::OnHandleEvent()
 {
-	if (event.type == sf::Event::KeyPressed) {
-
-		if (event.key.code == sf::Keyboard::Escape) {
-			if (currentLayer <= 0)
-				isGameFinished = true;
-			else {
-				for (auto& comp : components)
-					if (comp->GetLayer() == currentLayer) {
-						comp->SetActive(false);
-						comp->SetVisible(false);
-					}
-				currentLayer--;
-			}
-		}
-	}
-
 	if (!components.empty())
 	for (auto &comp : components)
 		if (comp->GetLayer() == currentLayer)
