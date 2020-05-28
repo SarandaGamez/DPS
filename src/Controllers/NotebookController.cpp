@@ -10,9 +10,9 @@
 using std::cout;
 using std::endl;
 
-ctrl::NotebookController::NotebookController(std::shared_ptr<sf::RenderWindow> renderWindow, TexturesHolder& textures, StateTransition* transition) : Controller(renderWindow,textures,transition)
+ctrl::NotebookController::NotebookController()
 {
-	textures.Load("Notebook", "assets/GUI/Office/Notebook.png");
+	textures->Load("Notebook", "assets/GUI/Office/Notebook.png");
 	font.loadFromFile("assets/fonts/cinematic.ttf");
 
 	gui::ButtonsBuilder buttonsBuilder;
@@ -22,7 +22,7 @@ ctrl::NotebookController::NotebookController(std::shared_ptr<sf::RenderWindow> r
 	button->GetSignal(gui::SignalTypes::onLeftMouseButtonReleased).Connect([=]() { notebook->GetWindow()->SetActive(true); });
 
 	//Notebook background
-	auto notebookBgr = std::shared_ptr<gui::GraphicComponent>(new gui::GraphicComponent(textures.GetTexture("Notebook")));
+	auto notebookBgr = std::shared_ptr<gui::GraphicComponent>(new gui::GraphicComponent(textures->GetTexture("Notebook")));
 	notebookBgr->GetSprite().setScale(0.8f, 0.75f);
 
 	//Notebook text pages

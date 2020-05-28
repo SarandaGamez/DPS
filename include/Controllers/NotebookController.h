@@ -13,7 +13,7 @@ namespace ctrl {
 
 	class NotebookController : public ctrl::Controller {
 	public:
-		NotebookController(std::shared_ptr<sf::RenderWindow> renderWindow, TexturesHolder& textures, StateTransition* transition);
+		NotebookController();
 		~NotebookController();
 
 		virtual void Update(sf::Time time);

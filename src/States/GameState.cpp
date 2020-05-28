@@ -28,6 +28,7 @@ void GameState::OnEnter()
 	font.loadFromFile("assets/fonts/cinematic.ttf");
 	cout << "Loading textures done" << endl;
 
+	ctrl::Controller::Initialize(renderWindow, textures, transition);
 	gui::ButtonsBuilder buttonsBuilder;
 
 	auto tooltip = std::shared_ptr<gui::TooltipComponent>(new gui::TooltipComponent(textures.GetTexture("Button"), font, "Not Available", { 1250, 400 }));
@@ -70,9 +71,9 @@ void GameState::OnEnter()
 	components.push_back(dialogWindow);
 	CloseDialog();
 
-	// Notebook
-	controllers.push_back(std::shared_ptr<ctrl::Controller>(new ctrl::NotebookController(renderWindow, textures, transition)));
-	controllers.push_back(std::shared_ptr<ctrl::Controller>(new ctrl::DebugController(renderWindow, textures, transition)));
+	// Controllers
+	controllers.push_back(std::shared_ptr<ctrl::Controller>(new ctrl::NotebookController));
+	controllers.push_back(std::shared_ptr<ctrl::Controller>(new ctrl::DebugController));
 
 
 	cout << "Game loaded" << endl;

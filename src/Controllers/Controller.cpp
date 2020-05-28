@@ -1,10 +1,15 @@
 #include "Controllers\Controller.h"
 
-ctrl::Controller::Controller(std::shared_ptr<sf::RenderWindow> renderWindow, TexturesHolder& texturesHolder, StateTransition* transition)
-{
-	this->renderWindow = renderWindow;
-	this->textures = &texturesHolder;
-	this->transition = transition;
-}
+
+StateTransition* ctrl::Controller::transition = nullptr;
+std::shared_ptr<sf::RenderWindow> ctrl::Controller::renderWindow = nullptr;
+TexturesHolder* ctrl::Controller::textures = nullptr;
 
 unsigned int ctrl::Controller::currentLayer = 0;
+
+void ctrl::Controller::Initialize(std::shared_ptr<sf::RenderWindow> renderWindow, TexturesHolder& texturesHolder, StateTransition* transition)
+{
+	ctrl::Controller::renderWindow = renderWindow;
+	ctrl::Controller::textures = &texturesHolder;
+	ctrl::Controller::transition = transition;
+}

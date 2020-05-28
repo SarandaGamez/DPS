@@ -1,6 +1,6 @@
 #include "Controllers/DebugController.h"
 
-ctrl::DebugController::DebugController(std::shared_ptr<sf::RenderWindow> renderWindow, TexturesHolder& textures, StateTransition* transition) : Controller(renderWindow, textures, transition)
+ctrl::DebugController::DebugController()
 {
 }
 
