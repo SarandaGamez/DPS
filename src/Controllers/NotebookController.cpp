@@ -19,7 +19,7 @@ ctrl::NotebookController::NotebookController(std::shared_ptr<sf::RenderWindow> r
 
 	//Notebook button
 	button = buttonsBuilder.BuildClickableRegion({ 850, 875, 210, 75 });
-	button->GetSignal(gui::SignalTypes::onLeftMouseButtonReleased).Connect([=]() { this->isWindowOpen = true; });
+	button->GetSignal(gui::SignalTypes::onLeftMouseButtonReleased).Connect([=]() { notebook->GetWindow()->SetActive(true); });
 
 	//Notebook background
 	auto notebookBgr = std::shared_ptr<gui::GraphicComponent>(new gui::GraphicComponent(textures.GetTexture("Notebook")));
@@ -30,7 +30,7 @@ ctrl::NotebookController::NotebookController(std::shared_ptr<sf::RenderWindow> r
 	auto secondPage = gui::ComponentsBuilder::BuildTextComponent(font, 20, { 1025 * 0.8f, 250 * 0.75f });
 
 	//Notebook compound window
-	auto notebookWindow = std::shared_ptr<gui::Window>(new gui::Window());
+	notebookWindow = std::shared_ptr<gui::Window>(new gui::Window());
 	notebookWindow->SetBackground(notebookBgr);
 	notebookWindow->SetLayer(1);
 
@@ -46,7 +46,7 @@ ctrl::NotebookController::NotebookController(std::shared_ptr<sf::RenderWindow> r
 		notebook->AddText(utils::StringUtils::BreakLines(text, 25));
 
 	notebookWindow->SetPosition({ renderWindow->getSize().x / 2 - notebookWindow->GetWindowArea().width / 2, renderWindow->getSize().y / 2 - notebookWindow->GetWindowArea().height / 2 });
-	CloseNotebook();
+	notebookWindow->SetActive(false);
 }
 
 ctrl::NotebookController::~NotebookController()
@@ -55,52 +55,48 @@ ctrl::NotebookController::~NotebookController()
 
 void ctrl::NotebookController::Update(sf::Time time)
 {
-	this->notebook->GetWindow()->Update();
-	if (isWindowOpen && this->notebook->GetWindow()->IsActive() == false)
+	notebookWindow->Update();
+	if (notebookWindow->IsActive() == true && notebookWindow->IsVisible() == false)
 		OpenNotebook();
-	else if (isWindowOpen == false && this->notebook->GetWindow()->IsActive() == true)
+	else if (notebookWindow->IsActive() == false && notebookWindow->IsVisible() == true)
 		CloseNotebook();
 }
 
 void ctrl::NotebookController::HandleEvent(sf::Event event)
 {
-	this->notebook->GetWindow()->HandleEvent(event);
-	this->button->HandleEvent(event);
+	notebookWindow->HandleEvent(event);
+	button->HandleEvent(event);
 
 	if (event.type == sf::Event::KeyPressed) {
 
-		if (event.key.code == sf::Keyboard::Escape && currentLayer > 0 && notebook->GetWindow()->IsActive()) {
-			isWindowOpen = false;
+		if (event.key.code == sf::Keyboard::Escape && currentLayer > 0 && notebookWindow->IsActive()) {
+			notebookWindow->SetActive(false);
 		}
 	}
 
 	if (event.key.code == sf::Keyboard::Right) {
-		if (notebook->GetWindow()->IsActive())
+		if (notebookWindow->IsActive())
 			notebook->NextPage();
 	}
 	if (event.key.code == sf::Keyboard::Left) {
-		if (notebook->GetWindow()->IsActive())
+		if (notebookWindow->IsActive())
 			notebook->PreviousPage();
 	}
 }
 
 void ctrl::NotebookController::Draw() const
 {
-	renderWindow->draw(*notebook->GetWindow());
+	renderWindow->draw(*notebookWindow);
 }
 
 void ctrl::NotebookController::OpenNotebook()
 {
-	cout << "Open Notebook" << endl;
-	notebook->GetWindow()->SetVisible(true);
-	notebook->GetWindow()->SetActive(true);
-	this->currentLayer = 1;
+	notebookWindow->SetVisible(true);
+	currentLayer = 1;
 }
 
 void ctrl::NotebookController::CloseNotebook()
 {
-	cout << "Close Notebook" << endl;
-	notebook->GetWindow()->SetVisible(false);
-	notebook->GetWindow()->SetActive(false);
-	this->currentLayer = 0;
+	notebookWindow->SetVisible(false);
+	currentLayer = 0;
 }

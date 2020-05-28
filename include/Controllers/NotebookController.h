@@ -22,10 +22,10 @@ namespace ctrl {
 	private:
 		sf::Font font;
 		std::shared_ptr<gui::Notebook> notebook;
+		std::shared_ptr<gui::Window> notebookWindow;
 		std::shared_ptr<gui::ClickableComponent> button;
 		void OpenNotebook();
 		void CloseNotebook();
-		bool isWindowOpen = false;
 	};
 }
 
