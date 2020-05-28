@@ -14,9 +14,9 @@ namespace ctrl {
 
 		static void Initialize(std::shared_ptr<sf::RenderWindow> renderWindow, TexturesHolder& texturesHolder, StateTransition* transition);
 
-		virtual void Update(sf::Time time) = 0;
-		virtual void HandleEvent(sf::Event event) = 0;
-		virtual void Draw() const = 0;
+		virtual void Update(sf::Time time) {}
+		virtual void HandleEvent(sf::Event event) {}
+		virtual void Draw() const {}
 	protected:
 		static TexturesHolder* textures;
 		static StateTransition* transition;
