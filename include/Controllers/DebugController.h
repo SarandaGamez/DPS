@@ -2,6 +2,8 @@
 #define CTRL_DEBUG_CONTROLLER_H
 
 #include "Controllers/Controller.h"
+#include <memory>
+#include "GUI/TextComponent.h"
 
 namespace ctrl {
 	class DebugController : public ctrl::Controller {
@@ -13,7 +15,9 @@ namespace ctrl {
 		virtual void HandleEvent(sf::Event event);
 		virtual void Draw() const;
 	private:
+		sf::Font font;
 		bool isWindowClosed = false;
+		std::shared_ptr<gui::TextComponent> debugText;
 	};
 }
 
