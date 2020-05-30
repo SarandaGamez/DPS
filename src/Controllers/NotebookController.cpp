@@ -19,7 +19,11 @@ ctrl::NotebookController::NotebookController()
 
 	//Notebook button
 	button = buttonsBuilder.BuildClickableRegion({ 850, 875, 210, 75 });
-	button->GetSignal(gui::SignalTypes::onLeftMouseButtonReleased).Connect([=]() { notebook->GetWindow()->SetActive(true); });
+	button->GetSignal(gui::SignalTypes::onLeftMouseButtonReleased).Connect([=]() { 
+		if(currentLayer == 0 && notebook->GetWindow()->IsActive() == false)
+			notebook->GetWindow()->SetActive(true);
+			currentLayer = 1;
+		});
 
 	//Notebook background
 	auto notebookBgr = std::shared_ptr<gui::GraphicComponent>(new gui::GraphicComponent(textures->GetTexture("Notebook")));
@@ -71,6 +75,7 @@ void ctrl::NotebookController::HandleEvent(sf::Event event)
 
 		if (event.key.code == sf::Keyboard::Escape && currentLayer > 0 && notebookWindow->IsActive()) {
 			notebookWindow->SetActive(false);
+			currentLayer = 0;
 		}
 	}
 
@@ -92,11 +97,9 @@ void ctrl::NotebookController::Draw() const
 void ctrl::NotebookController::OpenNotebook()
 {
 	notebookWindow->SetVisible(true);
-	currentLayer = 1;
 }
 
 void ctrl::NotebookController::CloseNotebook()
 {
 	notebookWindow->SetVisible(false);
-	currentLayer = 0;
 }
