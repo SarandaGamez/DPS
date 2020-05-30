@@ -22,7 +22,7 @@ namespace gui {
 		unsigned short GetLayer() const;
 
 		virtual void Update() {}
-		void HandleEvent(const sf::Event&);
+		virtual void HandleEvent(const sf::Event& event);
 		void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 	protected:
 		virtual void OnSetPosition(sf::Vector2f position) {}

@@ -13,8 +13,8 @@ namespace gui {
 		std::shared_ptr<gui::UIComponent> Add(std::shared_ptr<gui::UIComponent> component);
 		void Remove(std::shared_ptr<gui::UIComponent> component);
 		const std::list<std::shared_ptr<gui::UIComponent>>& GetComponents();
-		void Update();
-		void HandleEvent(const sf::Event& event);
+		void Update() override;
+		void HandleEvent(const sf::Event& event) override;
 
 	private:
 		sf::Vector2f compositePosition = { 0,0 };
