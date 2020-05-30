@@ -12,7 +12,7 @@ using std::endl;
 
 ctrl::NotebookController::NotebookController()
 {
-	textures->Load("Notebook", "assets/GUI/Office/Notebook.png");
+	textures->Load("Notebook", "assets/graphics/GUI/Notebook.png");
 	font.loadFromFile("assets/fonts/cinematic.ttf");
 
 	gui::ButtonsBuilder buttonsBuilder;

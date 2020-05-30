@@ -20,11 +20,10 @@ void GameState::OnEnter()
 {
 	// Global assets and controllers initialization
 	cout << "Loading textures" << endl;
-	textures.Load("OfficeBackground", "assets/GUI/Office/ProsecutorsOffice.png");
-	textures.Load("Window", "assets/GUI/Office/Window.png");
-	textures.Load("Notebook", "assets/GUI/Office/Notebook.png");
-	textures.Load("DialogWindow", "assets/GUI/Office/DialogWindow.png");
-	textures.Load("Button", "assets/GUI/MainMenu/Button.png");
+	textures.Load("OfficeBackground", "assets/graphics/locations/ProsecutorsOffice.png");
+	textures.Load("Window", "assets/graphics/GUI/Window.png");
+	textures.Load("DialogWindow", "assets/graphics/GUI/DialogWindow.png");
+	textures.Load("Button", "assets/graphics/GUI/Button.png");
 	font.loadFromFile("assets/fonts/cinematic.ttf");
 	cout << "Loading textures done" << endl;
 
