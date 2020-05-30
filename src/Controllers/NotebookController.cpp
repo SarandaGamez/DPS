@@ -75,7 +75,6 @@ void ctrl::NotebookController::HandleEvent(sf::Event event)
 
 		if (event.key.code == sf::Keyboard::Escape && currentLayer > 0 && notebookWindow->IsActive()) {
 			notebookWindow->SetActive(false);
-			currentLayer = 0;
 		}
 	}
 
@@ -102,4 +101,5 @@ void ctrl::NotebookController::OpenNotebook()
 void ctrl::NotebookController::CloseNotebook()
 {
 	notebookWindow->SetVisible(false);
+	currentLayer = 0;
 }

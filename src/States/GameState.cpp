@@ -7,6 +7,7 @@
 #include "GUI/TooltipComponent.h"
 #include "Controllers/NotebookController.h"
 #include "Controllers/DebugController.h"
+#include "Controllers/IngameMenuController.h"
 #include <string>
 #include "Utils/StringUtils.h"
 
@@ -17,7 +18,6 @@ using std::endl;
 
 void GameState::OnEnter()
 {
-
 	// Global assets and controllers initialization
 	cout << "Loading textures" << endl;
 	textures.Load("OfficeBackground", "assets/GUI/Office/ProsecutorsOffice.png");
@@ -74,6 +74,7 @@ void GameState::OnEnter()
 	// Controllers
 	controllers.push_back(std::shared_ptr<ctrl::Controller>(new ctrl::NotebookController));
 	controllers.push_back(std::shared_ptr<ctrl::Controller>(new ctrl::DebugController));
+	controllers.push_back(std::shared_ptr<ctrl::Controller>(new ctrl::IngameMenuController));
 
 
 	cout << "Game loaded" << endl;
