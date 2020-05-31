@@ -68,6 +68,7 @@ void ctrl::NotebookController::Update(sf::Time time)
 
 void ctrl::NotebookController::HandleEvent(sf::Event event)
 {
+	sf::Vector2f mousePosition = { static_cast<float>(event.mouseButton.x), static_cast<float>(event.mouseButton.y) };
 	notebookWindow->HandleEvent(event);
 	button->HandleEvent(event);
 
@@ -76,6 +77,11 @@ void ctrl::NotebookController::HandleEvent(sf::Event event)
 		if (event.key.code == sf::Keyboard::Escape && currentLayer > 0 && notebookWindow->IsActive()) {
 			notebookWindow->SetActive(false);
 		}
+	}
+
+	if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) {
+		if (!notebookWindow->GetWindowArea().contains(mousePosition))
+			notebookWindow->SetActive(false);
 	}
 
 	if (event.key.code == sf::Keyboard::Right) {
