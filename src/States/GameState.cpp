@@ -117,7 +117,7 @@ void GameState::OnUpdate()
 
 	if (!controllers.empty())
 		for (auto& contr : controllers)
-			contr->Update(sf::Time::Zero);
+			contr->Update(deltaTime);
 
 }
 
