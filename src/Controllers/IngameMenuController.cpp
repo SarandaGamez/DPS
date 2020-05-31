@@ -16,10 +16,14 @@ ctrl::IngameMenuController::IngameMenuController()
 	buttonsBuilder.SetTexture(textures->GetTexture("Button"));
 
 	gui::ClickableStructuresBuilder clickabletStructures;
-	clickabletStructures.Add(buttonsBuilder.BuildTextButton("Save", { 700,100 }));
-	clickabletStructures.Add(buttonsBuilder.BuildTextButton("Load", { 700,100 }));
-	clickabletStructures.Add(buttonsBuilder.BuildTextButton("Resume", { 500,100 }));
-	clickabletStructures.Add(buttonsBuilder.BuildTextButton("Exit", { 200,100 }))
+	clickabletStructures.Add(buttonsBuilder.BuildTextButton("Save", { 0,0 }));
+	clickabletStructures.Add(buttonsBuilder.BuildTextButton("Load", { 0,0 }));
+	clickabletStructures.Add(buttonsBuilder.BuildTextButton("Resume", { 0,0 }))
+		->GetSignal(gui::SignalTypes::onLeftMouseButtonReleased).Connect([=]() {
+		menuWindow->SetActive(false);
+		CloseMenu(); 
+			});
+	clickabletStructures.Add(buttonsBuilder.BuildTextButton("Exit", { 0,0 }))
 		->GetSignal(gui::SignalTypes::onLeftMouseButtonReleased).Connect([=]() {renderWindow->close(); });
 	clickabletStructures.SetPosition({ menuWindow->GetWindowArea().width / 2.f, menuWindow->GetWindowArea().height/2});
 	menuWindow->Add(clickabletStructures.MakeVertical(menuWindow->GetWindowArea().height/2));
