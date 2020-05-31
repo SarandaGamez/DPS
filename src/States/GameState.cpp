@@ -28,6 +28,7 @@ void GameState::OnEnter()
 	cout << "Loading textures done" << endl;
 
 	ctrl::Controller::Initialize(renderWindow, textures, transition);
+	gui::ComponentsBuilder::SetFont(&font);
 	gui::ButtonsBuilder buttonsBuilder;
 
 	auto tooltip = std::shared_ptr<gui::TooltipComponent>(new gui::TooltipComponent(textures.GetTexture("Button"), font, "Not Available", { 1250, 400 }));

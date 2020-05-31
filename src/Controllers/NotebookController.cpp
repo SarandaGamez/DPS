@@ -30,8 +30,8 @@ ctrl::NotebookController::NotebookController()
 	notebookBgr->GetSprite().setScale(2.f, 1.75f);
 
 	//Notebook text pages
-	auto firstPage = gui::ComponentsBuilder::BuildTextComponent(font, 20, { 80, 250 * 0.75f });
-	auto secondPage = gui::ComponentsBuilder::BuildTextComponent(font, 20, { 850, 125 });
+	auto firstPage = gui::ComponentsBuilder::BuildTextComponent(20, { 80, 185});
+	auto secondPage = gui::ComponentsBuilder::BuildTextComponent(20, { 850, 125 });
 
 	//Notebook compound window
 	notebookWindow = std::shared_ptr<gui::Window>(new gui::Window());
