@@ -15,18 +15,18 @@ ctrl::IngameMenuController::IngameMenuController()
 	buttonsBuilder.SetFont(font);
 	buttonsBuilder.SetTexture(textures->GetTexture("Button"));
 
-	gui::ClickableStructuresBuilder clickabletStructures;
-	clickabletStructures.Add(buttonsBuilder.BuildTextButton("Save", { 0,0 }));
-	clickabletStructures.Add(buttonsBuilder.BuildTextButton("Load", { 0,0 }));
-	clickabletStructures.Add(buttonsBuilder.BuildTextButton("Resume", { 0,0 }))
+	gui::ClickableStructuresBuilder clickableStructures;
+	clickableStructures.Add(buttonsBuilder.BuildTextButton("Save", { 0,0 }));
+	clickableStructures.Add(buttonsBuilder.BuildTextButton("Load", { 0,0 }));
+	clickableStructures.Add(buttonsBuilder.BuildTextButton("Resume", { 0,0 }))
 		->GetSignal(gui::SignalTypes::onLeftMouseButtonReleased).Connect([=]() {
 		menuWindow->SetActive(false);
 		CloseMenu(); 
 			});
-	clickabletStructures.Add(buttonsBuilder.BuildTextButton("Exit", { 0,0 }))
+	clickableStructures.Add(buttonsBuilder.BuildTextButton("Exit", { 0,0 }))
 		->GetSignal(gui::SignalTypes::onLeftMouseButtonReleased).Connect([=]() {renderWindow->close(); });
-	clickabletStructures.SetPosition({ menuWindow->GetWindowArea().width / 2.f, menuWindow->GetWindowArea().height/2});
-	menuWindow->Add(clickabletStructures.MakeVertical(menuWindow->GetWindowArea().height/2));
+	clickableStructures.SetPosition({ menuWindow->GetWindowArea().width / 2.f, menuWindow->GetWindowArea().height/2});
+	menuWindow->Add(clickableStructures.MakeVertical(menuWindow->GetWindowArea().height/2));
 	menuWindow->SetPosition( { renderWindow->getSize().x / 2.f - menuWindow->GetWindowArea().width / 2, 0 });
 
 	
