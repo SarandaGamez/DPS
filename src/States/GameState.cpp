@@ -8,6 +8,7 @@
 #include "Controllers/NotebookController.h"
 #include "Controllers/DebugController.h"
 #include "Controllers/IngameMenuController.h"
+#include "Controllers/LeftSideMenuController.h"
 #include <string>
 #include "Utils/StringUtils.h"
 
@@ -75,6 +76,7 @@ void GameState::OnEnter()
 	controllers.push_back(std::shared_ptr<ctrl::Controller>(new ctrl::NotebookController));
 	controllers.push_back(std::shared_ptr<ctrl::Controller>(new ctrl::DebugController));
 	controllers.push_back(std::shared_ptr<ctrl::Controller>(new ctrl::IngameMenuController));
+	controllers.push_back(std::shared_ptr<ctrl::Controller>(new ctrl::LeftSideMenuController));
 
 
 	cout << "Game loaded" << endl;
