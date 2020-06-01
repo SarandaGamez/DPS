@@ -31,8 +31,3 @@ void State::Draw()
 {
 	OnDraw();
 }
-
-bool State::IsGameFinished()
-{
-	return isGameFinished;
-}

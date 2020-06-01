@@ -74,9 +74,9 @@ void GameState::OnEnter()
 
 	// Controllers
 	controllers.push_back(std::shared_ptr<ctrl::Controller>(new ctrl::NotebookController));
-	controllers.push_back(std::shared_ptr<ctrl::Controller>(new ctrl::DebugController));
 	controllers.push_back(std::shared_ptr<ctrl::Controller>(new ctrl::IngameMenuController));
 	controllers.push_back(std::shared_ptr<ctrl::Controller>(new ctrl::LeftSideMenuController));
+	controllers.push_back(std::shared_ptr<ctrl::Controller>(new ctrl::DebugController));
 
 
 	cout << "Game loaded" << endl;

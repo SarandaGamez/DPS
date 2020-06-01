@@ -1,8 +1,9 @@
 #include "Game.h"
 #include "States/MenuState.h"
+#include "States/GameState.h"
 #include "config.h"
 
-Game::Game(){
+Game::Game() {
 
 	std::string title = GAME_TITLE + " " + GAME_VERSION_MAJOR + "." + GAME_VERSION_MINOR + "-" + GAME_VERSION_RELEASE;
 
@@ -12,7 +13,7 @@ Game::Game(){
 	renderWindow->setKeyRepeatEnabled(false);
 
 	statesMachine.ConnectWithRenderWindow(renderWindow);
-	statesMachine.Push(std::unique_ptr<State>(new MenuState));
+	statesMachine.Push(std::unique_ptr<State>(new GameState));
 	updater.ConnectWithAccessor(statesMachine);
 
 
@@ -26,9 +27,6 @@ void Game::RunLoop()
 
 	while (renderWindow->isOpen())
 	{
-		if (!updater.IsRunning())
-			renderWindow->close();
-
 		while (renderWindow->pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed)

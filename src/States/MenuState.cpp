@@ -39,7 +39,7 @@ void MenuState::StartTheGame()
 
 void MenuState::CloseGameWindow()
 {
-	this->isGameFinished = true;
+	renderWindow->close();
 
 }
 
@@ -59,7 +59,7 @@ void MenuState::OnHandleEvent()
 	if (event.type == sf::Event::KeyPressed)
 	{
 		if (event.key.code == sf::Keyboard::Escape)
-			isGameFinished = true;
+			renderWindow->close();
 	}
 
 	components.HandleEvent(event);

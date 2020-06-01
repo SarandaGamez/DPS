@@ -11,8 +11,6 @@ public:
     void ConnectWithStateTransition(StateTransition* transition);
 	void ConnectWithRenderWindow(std::shared_ptr<sf::RenderWindow> renderWindow);
 
-	bool IsGameFinished();
-
     virtual void OnEnter() = 0;
     virtual void OnLeave() = 0;
     virtual void OnShow() {}
@@ -26,8 +24,6 @@ protected:
     StateTransition* transition;
 	std::shared_ptr<sf::RenderWindow> renderWindow;
 	TexturesHolder textures;
-
-	bool isGameFinished = false;
 
 	sf::Time deltaTime;
 	sf::Event event;

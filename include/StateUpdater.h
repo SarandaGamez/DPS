@@ -8,7 +8,6 @@
 
 class StateUpdater
 {
-    bool isRunning = true;
     StateAccessor* accessor = nullptr;
 public:
     void ConnectWithAccessor(StateAccessor& accessor);
@@ -16,7 +15,6 @@ public:
     void Update(sf::Time elapsedTime);
     void Draw();
 
-    bool IsRunning();
 };
 
 #endif // STATE_UPDATER_H
