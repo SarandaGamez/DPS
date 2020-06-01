@@ -14,7 +14,7 @@ namespace gui {
 		TextButton(const sf::Texture& texture, const sf::Font& font, const std::string& text, sf::Vector2f position);
 
 		gui::TextComponent& GetText();
-		void Update();
+		void Update(sf::Time time) override;
 
 	private:
 		gui::TextComponent text;

@@ -11,7 +11,7 @@ namespace gui {
 
 	public:
 		TooltipComponent(const sf::Texture& texture, const sf::Font& font, const std::string& text, const sf::Vector2f& position);
-		void Update();
+		void Update(sf::Time time) override;
 		void ScaleText(unsigned int characterSize);
 	private:
 		std::shared_ptr<gui::GraphicComponent> background;

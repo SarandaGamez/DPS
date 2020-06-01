@@ -45,7 +45,7 @@ void MenuState::CloseGameWindow()
 
 void MenuState::OnUpdate()
 {
-	components.Update();
+	components.Update(deltaTime);
 }
 
 void MenuState::OnDraw()

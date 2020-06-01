@@ -14,7 +14,7 @@ namespace gui {
 		void SetFont(const sf::Font& font);
 		void SetText(const std::string& string);
 		void SetCharacterSize(unsigned int size);
-		void Update();
+		virtual void Update(sf::Time time);
 
 	private:
 		gui::TextComponent text;

@@ -21,7 +21,7 @@ namespace gui {
 		void SetLayer(unsigned short layer);
 		unsigned short GetLayer() const;
 
-		virtual void Update() {}
+		virtual void Update(sf::Time time) {}
 		virtual void HandleEvent(const sf::Event& event);
 		void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 	protected:

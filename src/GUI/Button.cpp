@@ -16,9 +16,9 @@ namespace gui {
 		this->graphic->SetTexture(texture);
 	}
 
-	void Button::Update()
+	void Button::Update(sf::Time time)
 	{
-		this->graphic->Update();
+		this->graphic->Update(time);
 	}
 
 	std::shared_ptr<gui::GraphicComponent> Button::GetGraphicComponent()

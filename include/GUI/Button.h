@@ -12,7 +12,7 @@ namespace gui {
 	public:
 		Button(const sf::Texture& texture, const sf::Vector2f& position);
 		void SetTexture(const sf::Texture& texture);
-		void Update();
+		virtual void Update(sf::Time time) override;
 		std::shared_ptr<gui::GraphicComponent> GetGraphicComponent();
 
 	private:

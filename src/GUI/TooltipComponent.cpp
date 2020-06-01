@@ -10,11 +10,11 @@ gui::TooltipComponent::TooltipComponent(const sf::Texture& texture, const sf::Fo
 	SetPosition(position);
 }
 
-void gui::TooltipComponent::Update()
+void gui::TooltipComponent::Update(sf::Time time)
 {
-	gui::UIComponent::Update();
-	background->Update();
-	caption->Update();
+	gui::UIComponent::Update(time);
+	background->Update(time);
+	caption->Update(time);
 }
 
 void gui::TooltipComponent::ScaleText(unsigned int characterSize)

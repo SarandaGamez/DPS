@@ -59,7 +59,7 @@ ctrl::NotebookController::~NotebookController()
 
 void ctrl::NotebookController::Update(sf::Time time)
 {
-	notebookWindow->Update();
+	notebookWindow->Update(time);
 	if (notebookWindow->IsActive() == true && notebookWindow->IsVisible() == false)
 		OpenNotebook();
 	else if (notebookWindow->IsActive() == false && notebookWindow->IsVisible() == true)

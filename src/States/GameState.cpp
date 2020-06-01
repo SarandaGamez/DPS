@@ -113,7 +113,7 @@ void GameState::OnUpdate()
 	if(!components.empty())
 	for (auto &comp : components)
 		if(comp->GetLayer() == currentLayer)
-			comp->Update();
+			comp->Update(deltaTime);
 
 	if (!controllers.empty())
 		for (auto& contr : controllers)

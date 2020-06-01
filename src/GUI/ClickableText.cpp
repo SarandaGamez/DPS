@@ -22,9 +22,9 @@ namespace gui {
 		this->SetCharacterSize(size);
 	}
 
-	void ClickableText::Update()
+	void ClickableText::Update(sf::Time time)
 	{
-		this->text.Update();
+		this->text.Update(time);
 	}
 
 	void ClickableText::OnSetPosition(sf::Vector2f position)

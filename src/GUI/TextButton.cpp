@@ -16,10 +16,10 @@ namespace gui {
 		return this->text;
 	}
 
-	void TextButton::Update()
+	void TextButton::Update(sf::Time time)
 	{
-		gui::Button::Update();
-		text.Update();
+		gui::Button::Update(time);
+		text.Update(time);
 	}
 
 	void TextButton::ScaleText(unsigned int characterSize)

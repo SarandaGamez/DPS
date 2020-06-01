@@ -16,13 +16,13 @@ const std::list<std::shared_ptr<gui::UIComponent>>& gui::UIComposite::GetCompone
 	return this->children;
 }
 
-void gui::UIComposite::Update()
+void gui::UIComposite::Update(sf::Time time)
 {
 	if (children.empty())
 		return;
 
 	for (auto component : children)
-		component->Update();
+		component->Update(time);
 }
 
 void gui::UIComposite::HandleEvent(const sf::Event& event)
