@@ -8,6 +8,7 @@
 #include "Controllers/Controller.h"
 #include "GUI/ClickableComponent.h"
 #include "GUI/Notebook.h"
+#include "GUI/Button.h"
 
 namespace ctrl {
 
@@ -24,8 +25,8 @@ namespace ctrl {
 		std::shared_ptr<gui::Notebook> notebook;
 		std::shared_ptr<gui::Window> notebookWindow;
 		std::shared_ptr<gui::ClickableComponent> button;
-		void OpenNotebook();
-		void CloseNotebook();
+		std::shared_ptr<gui::Button> leftArrow;
+		std::shared_ptr<gui::Button> rightArrow;
 	};
 }
 
