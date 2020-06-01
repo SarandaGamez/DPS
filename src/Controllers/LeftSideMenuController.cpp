@@ -8,16 +8,14 @@ ctrl::LeftSideMenuController::LeftSideMenuController()
 
 	menuWindow = std::shared_ptr<gui::Window>(new gui::Window);
 	menuWindow->SetBackground(std::shared_ptr<gui::GraphicComponent>(new gui::GraphicComponent( textures->GetTexture("SideWindow") )));
-	CloseMenu();
+	isMenuOpen = false;
 
 	auto hoverableRegion = std::shared_ptr<gui::HoverableComponent>(new gui::HoverableComponent);
 	hoverableRegion->SetRegion(menuWindow->GetWindowArea());
 	hoverableRegion->GetSignal(gui::SignalTypes::onMouseEnter).Connect([=]() {
-		OpenMenu();
-		currentLayer = 1;
-		});
-	hoverableRegion->GetSignal(gui::SignalTypes::onMouseLeave).Connect([=]() {
-		CloseMenu();
+		if (currentLayer == 0 && isMenuOpen == false) {
+			isMenuOpen = true;
+		}
 		});
 
 	menuWindow->Add(hoverableRegion);
@@ -29,7 +27,18 @@ ctrl::LeftSideMenuController::~LeftSideMenuController()
 
 void ctrl::LeftSideMenuController::Update(sf::Time time)
 {
-	menuWindow->Update(time);
+	sf::Vector2f mousePosition = renderWindow->mapPixelToCoords(sf::Mouse::getPosition(*renderWindow));
+
+	if (isMenuOpen == true && menuWindow->IsVisible() == false)
+		menuWindow->SetVisible(true);
+
+	if (menuWindow->IsVisible() == true){
+
+		if (isMenuOpen == false || menuWindow->GetWindowArea().contains(mousePosition) == false || currentLayer != 0) {
+			isMenuOpen = false;
+			menuWindow->SetVisible(false);
+		}
+	}
 }
 
 void ctrl::LeftSideMenuController::HandleEvent(sf::Event event)
@@ -40,15 +49,4 @@ void ctrl::LeftSideMenuController::HandleEvent(sf::Event event)
 void ctrl::LeftSideMenuController::Draw() const
 {
 	renderWindow->draw(*menuWindow);
-}
-
-void ctrl::LeftSideMenuController::OpenMenu()
-{
-	menuWindow->SetVisible(true);
-}
-
-void ctrl::LeftSideMenuController::CloseMenu()
-{
-	menuWindow->SetVisible(false);
-	currentLayer = 0;
 }

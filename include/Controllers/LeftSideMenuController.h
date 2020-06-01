@@ -16,8 +16,7 @@ namespace ctrl {
 		virtual void Draw() const;
 	private:
 		std::shared_ptr<gui::Window> menuWindow;
-		void OpenMenu();
-		void CloseMenu();
+		bool isMenuOpen;
 	};
 }
 
