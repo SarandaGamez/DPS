@@ -7,7 +7,7 @@ ctrl::IngameMenuController::IngameMenuController()
 	font.loadFromFile("assets/fonts/cinematic.ttf");
 
 	menuWindow = std::shared_ptr<gui::Window>(new gui::Window);
-	menuWindow->SetBackground(std::shared_ptr<gui::GraphicComponent>( new gui::GraphicComponent(textures->GetTexture("Window"))));
+	menuWindow->SetBackground(std::shared_ptr<gui::GraphicComponent>(new gui::GraphicComponent(textures->GetTexture("Window"))));
 	CloseMenu();
 	menuWindow->SetActive(false);
 
@@ -15,21 +15,29 @@ ctrl::IngameMenuController::IngameMenuController()
 	buttonsBuilder.SetFont(font);
 	buttonsBuilder.SetTexture(textures->GetTexture("Button"));
 
+	button = buttonsBuilder.BuildTextButton("Menu", { 0, (float)renderWindow->getSize().y - textures->GetTexture("Button").getSize().y });
+	button->GetSignal(gui::SignalTypes::onLeftMouseButtonReleased).Connect([=]() {
+		if (currentLayer == 0) {
+			menuWindow->SetActive(true);
+			currentLayer = 1;
+		}
+		});
+
 	gui::ClickableStructuresBuilder clickableStructures;
 	clickableStructures.Add(buttonsBuilder.BuildTextButton("Save", { 0,0 }));
 	clickableStructures.Add(buttonsBuilder.BuildTextButton("Load", { 0,0 }));
 	clickableStructures.Add(buttonsBuilder.BuildTextButton("Resume", { 0,0 }))
 		->GetSignal(gui::SignalTypes::onLeftMouseButtonReleased).Connect([=]() {
 		menuWindow->SetActive(false);
-		CloseMenu(); 
+		CloseMenu();
 			});
 	clickableStructures.Add(buttonsBuilder.BuildTextButton("Exit", { 0,0 }))
 		->GetSignal(gui::SignalTypes::onLeftMouseButtonReleased).Connect([=]() {renderWindow->close(); });
-	clickableStructures.SetPosition({ menuWindow->GetWindowArea().width / 2.f, menuWindow->GetWindowArea().height/2});
-	menuWindow->Add(clickableStructures.MakeVertical(menuWindow->GetWindowArea().height/2));
-	menuWindow->SetPosition( { renderWindow->getSize().x / 2.f - menuWindow->GetWindowArea().width / 2, 0 });
+	clickableStructures.SetPosition({ menuWindow->GetWindowArea().width / 2.f, menuWindow->GetWindowArea().height / 2 });
+	menuWindow->Add(clickableStructures.MakeVertical(menuWindow->GetWindowArea().height / 2));
+	menuWindow->SetPosition({ renderWindow->getSize().x / 2.f - menuWindow->GetWindowArea().width / 2, 0 });
 
-	
+
 
 }
 
@@ -61,12 +69,15 @@ void ctrl::IngameMenuController::HandleEvent(sf::Event event)
 	}
 
 	menuWindow->HandleEvent(event);
+	button->HandleEvent(event);
 
 }
 
 void ctrl::IngameMenuController::Draw() const
 {
 	renderWindow->draw(*menuWindow);
+	if(currentLayer == 0)
+		renderWindow->draw(*button);
 }
 
 void ctrl::IngameMenuController::OpenMenu()

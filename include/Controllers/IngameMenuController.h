@@ -2,6 +2,7 @@
 #define CTRL_INGAME_MENU_CONTROLLER_H
 
 #include "Controllers/Controller.h"
+#include "GUI/TextButton.h"
 #include "GUI/Window.h"
 #include <memory>
 
@@ -17,6 +18,7 @@ namespace ctrl {
 	private:
 		sf::Font font;
 		std::shared_ptr<gui::Window> menuWindow;
+		std::shared_ptr<gui::TextButton> button;
 		void OpenMenu();
 		void CloseMenu();
 	};
