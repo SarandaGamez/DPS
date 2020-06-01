@@ -16,7 +16,6 @@ namespace ctrl {
 		virtual void Draw() const;
 	private:
 		sf::Font font;
-		std::shared_ptr<gui::UIComposite> options;
 		std::shared_ptr<gui::Window> menuWindow;
 		void OpenMenu();
 		void CloseMenu();
