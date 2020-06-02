@@ -125,7 +125,7 @@ void GameState::OnUpdate(sf::Time elapsedTimes)
 
 }
 
-void GameState::OnHandleEvent()
+void GameState::OnHandleEvent(sf::Event event)
 {
 	if (!components.empty())
 	for (auto &comp : components)

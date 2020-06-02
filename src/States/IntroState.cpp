@@ -23,7 +23,7 @@ void IntroState::OnLeave()
 {
 }
 
-void IntroState::OnHandleEvent()
+void IntroState::OnHandleEvent(sf::Event event)
 {
 	if (event.type == sf::Event::KeyPressed) {
 		if (event.key.code == sf::Keyboard::Escape)

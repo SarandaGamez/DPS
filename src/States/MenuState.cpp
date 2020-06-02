@@ -54,7 +54,7 @@ void MenuState::OnDraw()
 	renderWindow->draw(components);
 }
 
-void MenuState::OnHandleEvent()
+void MenuState::OnHandleEvent(sf::Event event)
 {
 	if (event.type == sf::Event::KeyPressed)
 	{

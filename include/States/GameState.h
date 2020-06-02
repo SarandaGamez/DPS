@@ -22,7 +22,7 @@ class GameState : public State {
 	unsigned short currentLayer = 0;
 private:
 
-	virtual void OnHandleEvent() override;
+	virtual void OnHandleEvent(sf::Event event) override;
 	virtual void OnDraw() override;
 
 	virtual void OnUpdate(sf::Time elapsedTimes) override;

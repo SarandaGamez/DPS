@@ -14,8 +14,7 @@ void State::ConnectWithRenderWindow(std::shared_ptr<sf::RenderWindow> renderWind
 
 void State::HandleEvent(sf::Event event)
 {
-	this->event = event;
-	OnHandleEvent();
+	OnHandleEvent(event);
 }
 
 void State::Update(sf::Time deltaTime)

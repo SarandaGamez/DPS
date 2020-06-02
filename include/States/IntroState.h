@@ -11,7 +11,7 @@ private:
 	sf::Texture texture;
 	std::shared_ptr<Slideshow> slideshow;
 
-	virtual void OnHandleEvent() override;
+	virtual void OnHandleEvent(sf::Event event) override;
 	virtual void OnUpdate(sf::Time elapsedTimes) override;
 
 	virtual void OnEnter() override;

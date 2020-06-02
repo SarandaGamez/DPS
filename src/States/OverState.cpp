@@ -11,7 +11,7 @@ void OverState::OnDraw()
 {
 }
 
-void OverState::OnHandleEvent()
+void OverState::OnHandleEvent(sf::Event event)
 {
 	if (event.type == sf::Event::KeyPressed)
 		transition->Switch(std::unique_ptr<State>(new MenuState()));

@@ -25,9 +25,7 @@ protected:
 	std::shared_ptr<sf::RenderWindow> renderWindow;
 	TexturesHolder textures;
 
-	sf::Event event;
-
-	virtual void OnHandleEvent() {}
+	virtual void OnHandleEvent(sf::Event event) {}
     virtual void OnUpdate(sf::Time elapsedTimes) = 0;
 	virtual void OnDraw() {}
 };

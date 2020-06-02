@@ -13,7 +13,7 @@ class MenuState : public State {
 
 private:
 
-	virtual void OnHandleEvent() override;
+	virtual void OnHandleEvent(sf::Event event) override;
 
 	virtual void OnUpdate(sf::Time elapsedTimes) override;
 	virtual void OnDraw() override;
