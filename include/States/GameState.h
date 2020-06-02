@@ -8,7 +8,7 @@
 #include "GUI/UICompositeBuilder.h"
 #include "GUI/Window.h"
 #include "GUI/Notebook.h"
-#include "Controllers/Controller.h"
+#include "Controllers/Controllers.h"
 #include <vector>
 #include <memory>
 
@@ -16,7 +16,7 @@ class GameState : public State {
 	sf::Sprite background;
 	sf::Font font;
 	std::vector<std::shared_ptr<gui::UIComposite>> components;
-	std::vector<std::shared_ptr<ctrl::Controller>> controllers;
+	ctrl::Controllers controllers;
 	gui::UICompositeBuilder compositeBuilder;
 	std::shared_ptr<gui::Window> dialogWindow;
 	unsigned short currentLayer = 0;

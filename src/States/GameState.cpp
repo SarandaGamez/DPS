@@ -74,11 +74,11 @@ void GameState::OnEnter()
 	CloseDialog();
 
 	// Controllers
-	controllers.push_back(std::shared_ptr<ctrl::Controller>(new ctrl::NotebookController));
-	controllers.push_back(std::shared_ptr<ctrl::Controller>(new ctrl::IngameMenuController));
-	controllers.push_back(std::shared_ptr<ctrl::Controller>(new ctrl::LeftSideMenuController));
-	controllers.push_back(std::shared_ptr<ctrl::Controller>(new ctrl::DebugController));
-	controllers.push_back(std::shared_ptr<ctrl::Controller>(new ctrl::TurnsController));
+	controllers.Add(new ctrl::NotebookController);
+	controllers.Add(new ctrl::IngameMenuController);
+	controllers.Add(new ctrl::LeftSideMenuController);
+	controllers.Add(new ctrl::DebugController);
+	controllers.Add(new ctrl::TurnsController);
 
 
 	cout << "Game loaded" << endl;
@@ -118,11 +118,7 @@ void GameState::OnUpdate(sf::Time elapsedTimes)
 	for (auto &comp : components)
 		if(comp->GetLayer() == currentLayer)
 			comp->Update(elapsedTimes);
-
-	if (!controllers.empty())
-		for (auto& contr : controllers)
-			contr->Update(elapsedTimes);
-
+	controllers.Update(elapsedTimes);
 }
 
 void GameState::OnHandleEvent(sf::Event event)
@@ -131,10 +127,7 @@ void GameState::OnHandleEvent(sf::Event event)
 	for (auto &comp : components)
 		if (comp->GetLayer() == currentLayer)
 			comp->HandleEvent(event);
-
-	if (!controllers.empty())
-		for (auto& contr : controllers)
-			contr->HandleEvent(event);
+	controllers.HandleEvent(event);
 }
 
 void GameState::OnDraw()
@@ -146,7 +139,5 @@ void GameState::OnDraw()
 		if (comp->GetLayer() == currentLayer)
 			renderWindow->draw(*comp);
 
-	if (!controllers.empty())
-		for (auto& contr : controllers)
-			contr->Draw();
+	controllers.Draw();
 }
