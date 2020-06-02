@@ -15,7 +15,7 @@ public:
 	OverState(const std::string& winnersName) : winnersName(winnersName) {}
 private:
 
-	virtual void OnUpdate() override;
+	virtual void OnUpdate(sf::Time elapsedTimes) override;
 	virtual void OnDraw() override;
 	virtual void OnHandleEvent() override;
 

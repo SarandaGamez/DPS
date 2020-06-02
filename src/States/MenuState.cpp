@@ -43,9 +43,9 @@ void MenuState::CloseGameWindow()
 
 }
 
-void MenuState::OnUpdate()
+void MenuState::OnUpdate(sf::Time elapsedTimes)
 {
-	components.Update(deltaTime);
+	components.Update(elapsedTimes);
 }
 
 void MenuState::OnDraw()

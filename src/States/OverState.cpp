@@ -3,7 +3,7 @@
 #include "States/MenuState.h"
 
 
-void OverState::OnUpdate()
+void OverState::OnUpdate(sf::Time elapsedTimes)
 {
 }
 

@@ -12,7 +12,7 @@ private:
 	std::shared_ptr<Slideshow> slideshow;
 
 	virtual void OnHandleEvent() override;
-	virtual void OnUpdate() override;
+	virtual void OnUpdate(sf::Time elapsedTimes) override;
 
 	virtual void OnEnter() override;
 	virtual void OnLeave() override;

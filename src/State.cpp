@@ -23,8 +23,7 @@ void State::Update(sf::Time deltaTime)
 	if (!transition) throw std::runtime_error("Cannot find StateTransition object");
 	if (!renderWindow) throw std::runtime_error("Cannot find sf::RenderWindow object");
 
-	this->deltaTime = deltaTime;
-	OnUpdate();
+	OnUpdate(deltaTime);
 }
 
 void State::Draw()

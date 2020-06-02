@@ -25,7 +25,7 @@ private:
 	virtual void OnHandleEvent() override;
 	virtual void OnDraw() override;
 
-	virtual void OnUpdate() override;
+	virtual void OnUpdate(sf::Time elapsedTimes) override;
 
 	virtual void OnEnter() override;
 	virtual void OnLeave() override;

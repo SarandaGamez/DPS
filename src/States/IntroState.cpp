@@ -37,7 +37,7 @@ void IntroState::OnHandleEvent()
 	}
 }
 
-void IntroState::OnUpdate()
+void IntroState::OnUpdate(sf::Time elapsedTimes)
 {
 	cout << "Intro updated" << endl;
 

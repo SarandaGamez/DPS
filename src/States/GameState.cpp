@@ -112,16 +112,16 @@ void GameState::AddUIComponent(std::shared_ptr<gui::UIComponent> component)
 	components.push_back(compositeBuilder.GetResult());
 }
 
-void GameState::OnUpdate()
+void GameState::OnUpdate(sf::Time elapsedTimes)
 {
 	if(!components.empty())
 	for (auto &comp : components)
 		if(comp->GetLayer() == currentLayer)
-			comp->Update(deltaTime);
+			comp->Update(elapsedTimes);
 
 	if (!controllers.empty())
 		for (auto& contr : controllers)
-			contr->Update(deltaTime);
+			contr->Update(elapsedTimes);
 
 }
 

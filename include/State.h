@@ -25,11 +25,10 @@ protected:
 	std::shared_ptr<sf::RenderWindow> renderWindow;
 	TexturesHolder textures;
 
-	sf::Time deltaTime;
 	sf::Event event;
 
 	virtual void OnHandleEvent() {}
-    virtual void OnUpdate() = 0;
+    virtual void OnUpdate(sf::Time elapsedTimes) = 0;
 	virtual void OnDraw() {}
 };
 
