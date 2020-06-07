@@ -11,7 +11,17 @@ void game::ActionsQueue::ExecuteAndPop()
 	actions.pop();
 }
 
-bool game::ActionsQueue::IsEmpty()
+bool game::ActionsQueue::IsEmpty() const
 {
 	return actions.empty();
+}
+
+bool game::ActionsQueue::IsReadyForNext() const
+{
+	return isReadyForNext;
+}
+
+void game::ActionsQueue::SetReadyForNext(bool isReady)
+{
+	this->isReadyForNext = isReady;
 }

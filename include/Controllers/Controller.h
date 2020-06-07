@@ -6,6 +6,7 @@
 #include "Utils/SignalObject.h"
 #include "StateTransition.h"
 #include "TexturesHolder.h"
+#include "Gameplay/ActionsQueue.h"
 
 namespace ctrl {
 
@@ -22,6 +23,7 @@ namespace ctrl {
 		static StateTransition* transition;
 		static std::shared_ptr<sf::RenderWindow> renderWindow;
 		static unsigned int currentLayer;
+		static game::ActionsQueue actions;
 	};
 }
 

@@ -16,6 +16,8 @@ ctrl::TurnsController::TurnsController()
 	nextTurnButton->GetSignal(gui::SignalTypes::onLeftMouseButtonReleased).Connect([=]() {
 		NextTurn();
 		});
+
+	actions.SetReadyForNext(true);
 }
 
 ctrl::TurnsController::~TurnsController()
@@ -25,6 +27,10 @@ ctrl::TurnsController::~TurnsController()
 void ctrl::TurnsController::Update(sf::Time time)
 {
 	nextTurnButton->Update(time);
+
+	if (actions.IsReadyForNext() == true && actions.IsEmpty() == false) {
+		actions.ExecuteAndPop();
+	}
 }
 
 void ctrl::TurnsController::HandleEvent(sf::Event event)

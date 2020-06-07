@@ -4,7 +4,6 @@
 #include "GUI/DialogWindowBuilder.h"
 #include "GUI/ButtonsBuilder.h"
 #include "GUI/ComponentsBuilder.h"
-#include "GUI/TooltipComponent.h"
 #include "Controllers/NotebookController.h"
 #include "Controllers/DebugController.h"
 #include "Controllers/IngameMenuController.h"
@@ -33,14 +32,6 @@ void GameState::OnEnter()
 	gui::ComponentsBuilder::SetFont(&font);
 	gui::ButtonsBuilder buttonsBuilder;
 
-	auto tooltip = std::shared_ptr<gui::TooltipComponent>(new gui::TooltipComponent(textures.GetTexture("Button"), font, "Not Available", { 1250, 400 }));
-	tooltip->SetVisible(false);
-	AddUIComponent(tooltip);
-
-	auto hoverable = buttonsBuilder.BuildHoverableRegion({ 850, 160, 400, 280 });
-	hoverable->GetSignal(gui::SignalTypes::onMouseEnter).Connect( [=]() { tooltip->SetVisible(true); });
-	hoverable->GetSignal(gui::SignalTypes::onMouseLeave).Connect([=]() { tooltip->SetVisible(false); });
-	AddUIComponent(hoverable);
 
 	auto clickable = buttonsBuilder.BuildClickableRegion({ 850, 160, 400, 280 });
 	clickable->GetSignal(gui::SignalTypes::onLeftMouseButtonReleased).Connect(std::bind(&GameState::OpenDialog, this));

@@ -10,9 +10,12 @@ namespace game {
 	public:
 		void Push(game::Action* action);
 		void ExecuteAndPop();
-		bool IsEmpty();
+		bool IsEmpty() const;
+		bool IsReadyForNext() const;
+		void SetReadyForNext(bool isReady);
 	private:
 		std::queue<std::shared_ptr<game::Action>> actions;
+		bool isReadyForNext = false;
 	};
 }
 

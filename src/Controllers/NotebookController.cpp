@@ -62,6 +62,20 @@ ctrl::NotebookController::NotebookController()
 
 	notebookWindow->SetPosition({ renderWindow->getSize().x / 2 - notebookWindow->GetWindowArea().width / 2, renderWindow->getSize().y / 2 - notebookWindow->GetWindowArea().height / 2 });
 	notebookWindow->SetActive(false);
+
+	actions.Push(new game::Action([=]() {
+		notebook->GetWindow()->SetActive(true);
+		currentLayer = 1;
+		actions.SetReadyForNext(false);
+		isWaiting = true;
+		}));
+	actions.Push(new game::Action([=]() {
+		notebook->GetWindow()->SetActive(false);
+		actions.SetReadyForNext(false);
+		isWaiting = true;
+		}));
+
+	waitingTime = sf::Time::Zero;
 }
 
 ctrl::NotebookController::~NotebookController()
@@ -76,6 +90,15 @@ void ctrl::NotebookController::Update(sf::Time time)
 	else if (notebookWindow->IsActive() == false && notebookWindow->IsVisible() == true) {
 		notebookWindow->SetVisible(false);
 		currentLayer = 0;
+	}
+
+	if (isWaiting) {
+		waitingTime += time;
+		if (waitingTime.asMilliseconds() > 2000) {
+			actions.SetReadyForNext(true);
+			waitingTime = sf::Time::Zero;
+			isWaiting = false;
+		}
 	}
 }
 

@@ -4,7 +4,6 @@
 #include "Controllers/Controller.h"
 #include <SFML/Window/Event.hpp>
 #include <SFML/System/Time.hpp>
-#include <SFML/Graphics/RenderWindow.hpp>
 #include <vector>
 #include <memory>
 

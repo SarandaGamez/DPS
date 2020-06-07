@@ -27,6 +27,8 @@ namespace ctrl {
 		std::shared_ptr<gui::ClickableComponent> button;
 		std::shared_ptr<gui::Button> leftArrow;
 		std::shared_ptr<gui::Button> rightArrow;
+		bool isWaiting = false;
+		sf::Time waitingTime;
 	};
 }
 
