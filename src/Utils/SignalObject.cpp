@@ -9,7 +9,7 @@ utils::Signal& utils::SignalObject::GetSignal(utils::Signal::GUID& id)
 	return signals[id];
 }
 
-utils::SignalsContainer& utils::SignalObject::GetSignals()
+utils::SignalsContainer<>& utils::SignalObject::GetSignals()
 {
 	return signals;
 }

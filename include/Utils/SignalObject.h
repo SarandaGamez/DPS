@@ -11,10 +11,10 @@ namespace utils {
 		utils::Signal& GetSignal(utils::Signal::GUID& id);
 
 	protected:
-		utils::SignalsContainer& GetSignals();
+		utils::SignalsContainer<>& GetSignals();
 
 	private:
-		utils::SignalsContainer signals;
+		utils::SignalsContainer<> signals;
 	};
 }
 
