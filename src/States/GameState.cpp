@@ -9,6 +9,7 @@
 #include "Controllers/IngameMenuController.h"
 #include "Controllers/LeftSideMenuController.h"
 #include "Controllers/TurnsController.h"
+#include "Controllers/FaxController.h"
 #include <string>
 #include "Utils/StringUtils.h"
 
@@ -41,10 +42,6 @@ void GameState::OnEnter()
 	clickable->GetSignal(gui::SignalTypes::onLeftMouseButtonReleased).Connect(std::bind(&GameState::OpenDialog, this));
 	AddUIComponent(clickable);
 
-	clickable = buttonsBuilder.BuildClickableRegion({ 1675, 800, 225, 145 });
-	clickable->GetSignal(gui::SignalTypes::onLeftMouseButtonReleased).Connect(std::bind(&GameState::OpenDialog, this));
-	AddUIComponent(clickable);
-
 	clickable = buttonsBuilder.BuildClickableRegion({ 1525, 800, 100, 90 });
 	clickable->GetSignal(gui::SignalTypes::onLeftMouseButtonReleased).Connect(std::bind(&GameState::OpenDialog, this));
 	AddUIComponent(clickable);
@@ -65,6 +62,7 @@ void GameState::OnEnter()
 	CloseDialog();
 
 	// Controllers
+	controllers.Add(new ctrl::FaxController);
 	controllers.Add(new ctrl::NotebookController);
 	controllers.Add(new ctrl::IngameMenuController);
 	controllers.Add(new ctrl::LeftSideMenuController);

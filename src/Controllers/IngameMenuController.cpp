@@ -36,13 +36,6 @@ ctrl::IngameMenuController::IngameMenuController()
 	clickableStructures.SetPosition({ menuWindow->GetWindowArea().width / 2.f, menuWindow->GetWindowArea().height / 2 });
 	menuWindow->Add(clickableStructures.MakeVertical(menuWindow->GetWindowArea().height / 2));
 	menuWindow->SetPosition({ renderWindow->getSize().x / 2.f - menuWindow->GetWindowArea().width / 2, 0 });
-
-	actions.Push(new game::Action([=]() {
-		menuWindow->SetActive(true);
-		currentLayer = 1;
-		}));
-
-
 }
 
 ctrl::IngameMenuController::~IngameMenuController()
