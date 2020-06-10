@@ -30,7 +30,7 @@ namespace utils {
 
 		if (signalItr == signals->end()) {
 			signalItr = signals->insert(
-				std::pair<Signal::GUID, Signal>(guid, Signal())
+				std::pair<T, Signal>(guid, Signal())
 			).first;
 		}
 

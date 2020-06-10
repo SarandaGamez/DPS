@@ -3,10 +3,11 @@
 
 #include <SFML/Window/Event.hpp>
 #include <SFML/Graphics.hpp>
-#include "Utils/SignalObject.h"
 #include "StateTransition.h"
 #include "TexturesHolder.h"
 #include "Gameplay/ActionsQueue.h"
+#include "Utils/SignalObject.h"
+#include "Utils/SignalsContainer.h"
 
 namespace ctrl {
 
@@ -24,6 +25,7 @@ namespace ctrl {
 		static std::shared_ptr<sf::RenderWindow> renderWindow;
 		static unsigned int currentLayer;
 		static game::ActionsQueue actions;
+		static utils::SignalsContainer<std::string> signals;
 	};
 }
 
