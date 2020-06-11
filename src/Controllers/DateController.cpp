@@ -8,7 +8,7 @@ ctrl::DateController::DateController()
 	turnNumber = 1;
 	dayTime = 8;
 
-	dayTimeText = std::shared_ptr<gui::TextComponent>(gui::ComponentsBuilder::BuildTextComponent(font, 30, {renderWindow->getSize().x - 700.f, renderWindow->getSize().y - 30.f }, std::to_string(dayTime)));
+	dayTimeText = std::shared_ptr<gui::TextComponent>(gui::ComponentsBuilder::BuildTextComponent(font, 30, {renderWindow->getSize().x - 775.f, renderWindow->getSize().y - 30.f }, std::to_string(dayTime)));
 	turnText = std::shared_ptr<gui::TextComponent>(gui::ComponentsBuilder::BuildTextComponent(font, 30, { renderWindow->getSize().x - 425.f, renderWindow->getSize().y - 30.f}, std::to_string(turnNumber)));
 
 	signals["DATE_NEXT_TURN"].Connect([=]() {
@@ -23,7 +23,7 @@ ctrl::DateController::DateController()
 		else {
 			dayTime += 1;
 		}
-		dayTimeText->SetText("Hour: " + std::to_string(dayTime));
+		dayTimeText->SetText("Hour: " + std::to_string(dayTime)  + ":00");
 		});
 
 	signals.Emit("DATE_NEXT_TURN");
