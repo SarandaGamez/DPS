@@ -5,6 +5,11 @@ void gui::Window::SetBackground(std::shared_ptr<gui::GraphicComponent> backgroun
 	this->background = background;
 }
 
+std::shared_ptr<gui::GraphicComponent> gui::Window::GetBackground()
+{
+	return background;
+}
+
 sf::FloatRect gui::Window::GetWindowArea()
 {
 	return this->background->GetGlobalBounds();

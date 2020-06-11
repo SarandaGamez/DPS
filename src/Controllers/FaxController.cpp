@@ -1,6 +1,7 @@
 #include "Controllers/FaxController.h"
 #include "GUI/ButtonsBuilder.h"
 #include "Gameplay/Action.h"
+#include "Utils/Collision.h"
 
 ctrl::FaxController::FaxController()
 {
@@ -24,6 +25,9 @@ ctrl::FaxController::FaxController()
 		}
 		});	
 
+	signals["FAX_SHOW_PAPER"].Connect([=]() {
+		reportButton->SetActive(true);
+		});
 }
 
 ctrl::FaxController::~FaxController()
@@ -53,8 +57,11 @@ void ctrl::FaxController::HandleEvent(sf::Event event)
 
 	// Close Report after clicking outside of it
 	if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) {
-		if (!reportWindow->GetWindowArea().contains(mousePosition) && currentLayer > 0 && reportWindow->IsActive())
+		if (Collision::PixelPerfectMouseTest(reportWindow->GetBackground()->GetSprite(), mousePosition) == false
+			&& currentLayer > 0 && reportWindow->IsActive()) 
+		{
 			reportWindow->SetActive(false);
+		}
 	}
 	if (event.type == sf::Event::KeyPressed) {
 		// Close Report with escape

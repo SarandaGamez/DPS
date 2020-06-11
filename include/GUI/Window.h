@@ -9,6 +9,7 @@ namespace gui {
 	class Window : public gui::UIComposite{
 	public:
 		void SetBackground(std::shared_ptr<gui::GraphicComponent> background);
+		std::shared_ptr<gui::GraphicComponent> GetBackground();
 		sf::FloatRect GetWindowArea();
 
 	private:
