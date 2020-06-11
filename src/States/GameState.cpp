@@ -10,6 +10,7 @@
 #include "Controllers/LeftSideMenuController.h"
 #include "Controllers/TurnsController.h"
 #include "Controllers/FaxController.h"
+#include "Controllers/DateController.h"
 #include <string>
 #include "Utils/StringUtils.h"
 
@@ -68,6 +69,7 @@ void GameState::OnEnter()
 	controllers.Add(new ctrl::LeftSideMenuController);
 	controllers.Add(new ctrl::DebugController);
 	controllers.Add(new ctrl::TurnsController);
+	controllers.Add(new ctrl::DateController);
 
 
 	cout << "Game loaded" << endl;

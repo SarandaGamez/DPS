@@ -89,6 +89,20 @@ namespace Collision
 		return false;
 	}
 
+	bool PixelPerfectMouseTest(const sf::Sprite& Object, const sf::Vector2f& mousePosition)
+	{
+		sf::FloatRect intersection;
+		if (Object.getGlobalBounds().intersects({ mousePosition,{1,1} }, intersection)) {
+			if (Object.getTexture() != nullptr) {
+				sf::Vector2f inverseTransform = Object.getInverseTransform().transformPoint(mousePosition);
+				auto clickedPixel = Object.getTexture()->copyToImage().getPixel(inverseTransform.x, inverseTransform.y);
+				if (clickedPixel != sf::Color::Transparent)
+					return true;
+			}
+		}
+		return false;
+	}
+
 	bool CreateTextureAndBitmask(sf::Texture& LoadInto, const std::string& Filename)
 	{
 		sf::Image img;

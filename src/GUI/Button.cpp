@@ -1,5 +1,6 @@
 #include "GUI/Button.h"
 #include "GUI/EventBehavior/MouseButtonReleasedBehavior.h"
+#include "Utils/Collision.h"
 
 namespace gui {
 
@@ -19,6 +20,11 @@ namespace gui {
 	void Button::Update(sf::Time time)
 	{
 		this->graphic->Update(time);
+	}
+
+	bool Button::IsMouseInRegion(const sf::Vector2f& mousePosition)
+	{
+		return Collision::PixelPerfectMouseTest(graphic->GetSprite(), mousePosition);
 	}
 
 	std::shared_ptr<gui::GraphicComponent> Button::GetGraphicComponent()

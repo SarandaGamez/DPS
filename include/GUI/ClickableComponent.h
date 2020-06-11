@@ -11,7 +11,7 @@ namespace gui {
 		
 	public:
 		ClickableComponent();
-		bool IsMouseInRegion(const sf::Vector2f& mousePosition);
+		virtual bool IsMouseInRegion(const sf::Vector2f& mousePosition);
 		void SetRegion(const sf::FloatRect& region);
 		sf::FloatRect GetRegion();
 

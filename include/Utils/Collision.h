@@ -1,6 +1,6 @@
 /*
  * File:   collision.h
- * Authors: Nick Koirala (original version), ahnonay (SFML2 compatibility)
+ * Authors: Nick Koirala (original version), ahnonay (SFML2 compatibility), Maciej Saranda (Mouse collision detection)
  *
  * Collision Detection and handling class
  * For SFML2.
@@ -31,6 +31,7 @@ it freely, subject to the following restrictions:
 
  *
  * Created on 30 January 2009, 11:02
+ * Modified on 12 June 2020, 12:04
  */
 
 #ifndef COLLISION_H
@@ -50,6 +51,8 @@ namespace Collision {
 	/// You can avoid this by using the "CreateTextureAndBitmask" function
 	//////
 	bool PixelPerfectTest(const sf::Sprite& Object1, const sf::Sprite& Object2, sf::Uint8 AlphaLimit = 0);
+
+	bool PixelPerfectMouseTest(const sf::Sprite& Object, const sf::Vector2f& mousePosition);
 
 	//////
 	/// Replaces Texture::loadFromFile

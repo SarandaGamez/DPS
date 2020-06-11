@@ -13,6 +13,7 @@ namespace gui {
 		Button(const sf::Texture& texture, const sf::Vector2f& position);
 		void SetTexture(const sf::Texture& texture);
 		virtual void Update(sf::Time time) override;
+		virtual bool IsMouseInRegion(const sf::Vector2f& mousePosition) override;
 		std::shared_ptr<gui::GraphicComponent> GetGraphicComponent();
 
 	private:
