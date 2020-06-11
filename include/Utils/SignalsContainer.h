@@ -40,7 +40,7 @@ namespace utils {
 	template<typename T>
 	inline void SignalsContainer<T>::Emit(const T& guid)
 	{
-		if (!signals || !guid) {
+		if (!signals) {
 			return;
 		}
 

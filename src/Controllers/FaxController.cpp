@@ -5,10 +5,11 @@
 ctrl::FaxController::FaxController()
 {
 	paperTexture.loadFromFile("assets/graphics/GUI/Paper.png");
+	windowTexture.loadFromFile("assets/graphics/GUI/ReportWindow.png");
 	gui::ButtonsBuilder buttonsBuilder;
 
 	reportWindow = std::shared_ptr<gui::Window>(new gui::Window());
-	reportWindow->SetBackground(std::shared_ptr<gui::GraphicComponent>(new gui::GraphicComponent(textures->GetTexture("Window"))));
+	reportWindow->SetBackground(std::shared_ptr<gui::GraphicComponent>(new gui::GraphicComponent(windowTexture)));
 	reportWindow->SetActive(false);
 	reportWindow->SetPosition({renderWindow->getSize().x / 2.f - reportWindow->GetWindowArea().width / 2,
 		renderWindow->getSize().y / 2.f - reportWindow->GetWindowArea().height / 2});
@@ -21,11 +22,7 @@ ctrl::FaxController::FaxController()
 			reportButton->SetActive(false);
 			currentLayer = 1;
 		}
-		});
-
-	actions.Push(new game::Action([=]() {
-			reportButton->SetActive(true);
-		}));
+		});	
 
 }
 

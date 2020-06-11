@@ -18,6 +18,7 @@ namespace ctrl {
 		std::shared_ptr<gui::Button> reportButton;
 		std::shared_ptr<gui::Window> reportWindow;
 		sf::Texture paperTexture;
+		sf::Texture windowTexture;
 
 	};
 }
