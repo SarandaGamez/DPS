@@ -28,8 +28,13 @@ void ctrl::TurnsController::Update(sf::Time time)
 {
 	nextTurnButton->Update(time);
 
-	if (actions.IsReadyForNext() == true && actions.IsEmpty() == false) {
-		actions.ExecuteAndPop();
+	if (actions.IsReadyForNext() == true){
+		if (actions.IsEmpty() == false) {
+			actions.ExecuteAndPop();
+		}
+		else {
+			actions.SetReadyForNext(false);
+		}
 	}
 }
 
