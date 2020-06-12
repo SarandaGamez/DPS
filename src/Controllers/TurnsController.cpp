@@ -28,7 +28,7 @@ void ctrl::TurnsController::Update(sf::Time time)
 {
 	nextTurnButton->Update(time);
 
-	if (actions.IsReadyForNext() == true){
+	if (actions.IsReadyForNext() == true && actions.IsWaiting() == false){
 		if (actions.IsEmpty() == false) {
 			actions.ExecuteAndPop();
 		}
@@ -36,6 +36,7 @@ void ctrl::TurnsController::Update(sf::Time time)
 			actions.SetReadyForNext(false);
 		}
 	}
+	actions.UpdateElapsedTime(time);
 }
 
 void ctrl::TurnsController::HandleEvent(sf::Event event)

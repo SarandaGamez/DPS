@@ -66,13 +66,14 @@ ctrl::NotebookController::NotebookController()
 	actions.Push(new game::Action([=]() {
 		notebook->GetWindow()->SetActive(true);
 		currentLayer = 1;
-		actions.SetReadyForNext(false);
-		isWaiting = true;
+		actions.Wait(1000);
 		}));
 	actions.Push(new game::Action([=]() {
 		notebook->GetWindow()->SetActive(false);
-		actions.SetReadyForNext(false);
-		isWaiting = true;
+		actions.Wait(500);
+		}));
+	actions.Push(new game::Action([=]() {
+		signals.Emit("FAX_SHOW_PAPER");
 		}));
 
 	waitingTime = sf::Time::Zero;
@@ -90,15 +91,6 @@ void ctrl::NotebookController::Update(sf::Time time)
 	else if (notebookWindow->IsActive() == false && notebookWindow->IsVisible() == true) {
 		notebookWindow->SetVisible(false);
 		currentLayer = 0;
-	}
-
-	if (isWaiting) {
-		waitingTime += time;
-		if (waitingTime.asMilliseconds() > 2000) {
-			actions.SetReadyForNext(true);
-			waitingTime = sf::Time::Zero;
-			isWaiting = false;
-		}
 	}
 }
 
