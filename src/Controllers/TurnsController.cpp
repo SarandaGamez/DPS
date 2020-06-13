@@ -17,7 +17,7 @@ ctrl::TurnsController::TurnsController()
 		NextTurn();
 		});
 
-	actions.SetReadyForNext(true);
+	actions.Block(false);
 }
 
 ctrl::TurnsController::~TurnsController()
@@ -28,12 +28,9 @@ void ctrl::TurnsController::Update(sf::Time time)
 {
 	nextTurnButton->Update(time);
 
-	if (actions.IsReadyForNext() == true && actions.IsWaiting() == false){
+	if (actions.IsBlocked() == false && actions.IsWaiting() == false){
 		if (actions.IsEmpty() == false) {
 			actions.ExecuteAndPop();
-		}
-		else {
-			actions.SetReadyForNext(false);
 		}
 	}
 	actions.UpdateElapsedTime(time);

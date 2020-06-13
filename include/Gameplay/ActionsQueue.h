@@ -12,15 +12,15 @@ namespace game {
 		void Push(game::Action* action);
 		void ExecuteAndPop();
 		bool IsEmpty() const;
-		bool IsReadyForNext() const;
-		void SetReadyForNext(bool isReady);
+		bool IsBlocked() const;
+		void Block(bool isBlocked);
 		bool IsWaiting() const;
 		void Wait(unsigned int milliseconds);
 		void UpdateElapsedTime(sf::Time elapsedTime);
 	private:
 		std::queue<std::shared_ptr<game::Action>> actions;
-		bool isReadyForNext = false;
-		bool isWaiting;
+		bool isBlocked = true;
+		bool isWaiting = false;
 		unsigned int waitTime;
 		sf::Time elapsedTime;
 	};

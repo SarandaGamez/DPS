@@ -16,14 +16,14 @@ bool game::ActionsQueue::IsEmpty() const
 	return actions.empty();
 }
 
-bool game::ActionsQueue::IsReadyForNext() const
+bool game::ActionsQueue::IsBlocked() const
 {
-	return isReadyForNext;
+	return isBlocked;
 }
 
-void game::ActionsQueue::SetReadyForNext(bool isReady)
+void game::ActionsQueue::Block(bool isBlocked)
 {
-	this->isReadyForNext = isReady;
+	this->isBlocked = isBlocked;
 }
 
 bool game::ActionsQueue::IsWaiting() const
