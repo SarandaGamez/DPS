@@ -11,6 +11,7 @@
 #include "Controllers/TurnsController.h"
 #include "Controllers/FaxController.h"
 #include "Controllers/DateController.h"
+#include "Controllers/MapController.h"
 #include <string>
 #include "Utils/StringUtils.h"
 
@@ -34,12 +35,7 @@ void GameState::OnEnter()
 	gui::ComponentsBuilder::SetFont(&font);
 	gui::ButtonsBuilder buttonsBuilder;
 
-
-	auto clickable = buttonsBuilder.BuildClickableRegion({ 850, 160, 400, 280 });
-	clickable->GetSignal(gui::SignalTypes::onLeftMouseButtonReleased).Connect(std::bind(&GameState::OpenDialog, this));
-	AddUIComponent(clickable);
-
-	clickable = buttonsBuilder.BuildClickableRegion({ 1230, 790, 190, 90});
+	auto clickable = buttonsBuilder.BuildClickableRegion({ 1230, 790, 190, 90});
 	clickable->GetSignal(gui::SignalTypes::onLeftMouseButtonReleased).Connect(std::bind(&GameState::OpenDialog, this));
 	AddUIComponent(clickable);
 
@@ -65,6 +61,7 @@ void GameState::OnEnter()
 	// Controllers
 	controllers.Add(new ctrl::FaxController);
 	controllers.Add(new ctrl::NotebookController);
+	controllers.Add(new ctrl::MapController);
 	controllers.Add(new ctrl::IngameMenuController);
 	controllers.Add(new ctrl::LeftSideMenuController);
 	controllers.Add(new ctrl::DebugController);
