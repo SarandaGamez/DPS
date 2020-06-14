@@ -27,7 +27,7 @@ ctrl::FaxController::FaxController()
 		}
 		});	
 
-	std::string testingText = "Hello Comrade,\n This is the first day of the service for the safety of the Graboria State. Until you will be able to praise the glory of the Greatest Leader you will have to complete the training.\n First of all you have to familiarize yourself with the tools given from the central planner.\n Open the notebook to see the next information.\n\n (You can finish reading the fax by clicking outside of it or by pressing escape button.)";
+	std::string testingText = "Hello Comrade,\n\nThis is the first day of the service for the safety of the Graboria State. Until you will be able to praise the glory of the Greatest Leader you will have to complete the training.\n First of all you have to familiarize yourself with the tools given from the central planner.\n Open the notebook to see the next information.\n\n (You can finish reading the fax by clicking outside of it or by pressing escape button.)";
 	testingText = utils::StringUtils::BreakLines(testingText, 35);
 	reportText = gui::ComponentsBuilder::BuildTextComponent(font, 17, { 220,200 }, testingText);
 	reportWindow->Add(reportText);
@@ -35,12 +35,13 @@ ctrl::FaxController::FaxController()
 	reportWindow->SetPosition({ renderWindow->getSize().x / 2.f - reportWindow->GetWindowArea().width / 2,
 		renderWindow->getSize().y / 2.f - reportWindow->GetWindowArea().height / 2 });
 
-	actions.Push(new game::Action([=]() {
-		actions.Wait(1500);
-		}));
-	actions.Push(new game::ConditionAction([=]() {
-		signals.Emit("FAX_SHOW_PAPER");
-		}, [=]() { return true; }));
+	signals["GAME_INITIALIZATION"].Connect([=]() {
+		actions.Push(new game::Action([=]() {
+			actions.Wait(1500);
+			}));
+		actions.Push(new game::ConditionAction([=]() {
+			signals.Emit("FAX_SHOW_PAPER");
+			}, [=]() { return true; })); });
 
 	signals["FAX_SHOW_PAPER"].Connect([=]() {
 		reportButton->SetActive(true);
