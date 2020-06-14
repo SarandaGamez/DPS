@@ -4,6 +4,9 @@
 #include "Controllers/Controller.h"
 #include "GUI/Button.h"
 #include "GUI/Window.h"
+#include "GUI/TextComponent.h"
+#include <SFML/Graphics/Font.hpp>
+#include <SFML/Graphics/Texture.hpp>
 #include <memory>
 
 namespace ctrl {
@@ -17,8 +20,10 @@ namespace ctrl {
 	private:
 		std::shared_ptr<gui::Button> reportButton;
 		std::shared_ptr<gui::Window> reportWindow;
+		std::shared_ptr<gui::TextComponent> reportText;
 		sf::Texture paperTexture;
 		sf::Texture windowTexture;
+		sf::Font font;
 
 	};
 }

@@ -2,18 +2,19 @@
 #include "GUI/ButtonsBuilder.h"
 #include "Gameplay/Action.h"
 #include "Utils/Collision.h"
+#include "Utils/StringUtils.h"
+#include "GUI/ComponentsBuilder.h"
 
 ctrl::FaxController::FaxController()
 {
 	paperTexture.loadFromFile("assets/graphics/GUI/Paper.png");
 	windowTexture.loadFromFile("assets/graphics/GUI/ReportWindow.png");
+	font.loadFromFile("assets/fonts/cinematic.ttf");
 	gui::ButtonsBuilder buttonsBuilder;
 
 	reportWindow = std::shared_ptr<gui::Window>(new gui::Window());
 	reportWindow->SetBackground(std::shared_ptr<gui::GraphicComponent>(new gui::GraphicComponent(windowTexture)));
 	reportWindow->SetActive(false);
-	reportWindow->SetPosition({renderWindow->getSize().x / 2.f - reportWindow->GetWindowArea().width / 2,
-		renderWindow->getSize().y / 2.f - reportWindow->GetWindowArea().height / 2});
 
 	reportButton = std::shared_ptr<gui::Button>(new gui::Button(paperTexture, { 1670, 630 }));
 	reportButton->SetActive(false);
@@ -24,6 +25,14 @@ ctrl::FaxController::FaxController()
 			currentLayer = 1;
 		}
 		});	
+
+	std::string testingText = "Hello Comrade,\n This is the first day of the service for the safety of the Graboria State. Until you will be able to praise the glory of the Greatest Leader you will have to complete the training.\n First of all you have to familiarize yourself with the tools given from the central planner.\n Open the notebook to see the next information.\n\n (You can finish reading the fax by clicking outside of it or by pressing escape button.)";
+	testingText = utils::StringUtils::BreakLines(testingText, 35);
+	reportText = gui::ComponentsBuilder::BuildTextComponent(font, 17, { 220,200 }, testingText);
+	reportWindow->Add(reportText);
+
+	reportWindow->SetPosition({ renderWindow->getSize().x / 2.f - reportWindow->GetWindowArea().width / 2,
+		renderWindow->getSize().y / 2.f - reportWindow->GetWindowArea().height / 2 });
 
 	signals["FAX_SHOW_PAPER"].Connect([=]() {
 		reportButton->SetActive(true);
