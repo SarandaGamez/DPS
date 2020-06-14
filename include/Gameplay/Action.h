@@ -7,7 +7,7 @@ namespace game {
 	class Action{
 	public:
 		Action(std::function<void()> const& slot);
-		void Execute();
+		virtual void Execute();
 	private:
 		utils::Signal signal;
 	};

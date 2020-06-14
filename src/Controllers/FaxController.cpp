@@ -1,6 +1,7 @@
 #include "Controllers/FaxController.h"
 #include "GUI/ButtonsBuilder.h"
 #include "Gameplay/Action.h"
+#include "Gameplay/ConditionAction.h"
 #include "Utils/Collision.h"
 #include "Utils/StringUtils.h"
 #include "GUI/ComponentsBuilder.h"
@@ -37,9 +38,9 @@ ctrl::FaxController::FaxController()
 	actions.Push(new game::Action([=]() {
 		actions.Wait(1500);
 		}));
-	actions.Push(new game::Action([=]() {
+	actions.Push(new game::ConditionAction([=]() {
 		signals.Emit("FAX_SHOW_PAPER");
-		}));
+		}, [=]() { return true; }));
 
 	signals["FAX_SHOW_PAPER"].Connect([=]() {
 		reportButton->SetActive(true);
