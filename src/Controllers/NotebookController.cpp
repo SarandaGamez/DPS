@@ -63,18 +63,7 @@ ctrl::NotebookController::NotebookController()
 	notebookWindow->SetPosition({ renderWindow->getSize().x / 2 - notebookWindow->GetWindowArea().width / 2, renderWindow->getSize().y / 2 - notebookWindow->GetWindowArea().height / 2 });
 	notebookWindow->SetActive(false);
 
-	actions.Push(new game::Action([=]() {
-		notebook->GetWindow()->SetActive(true);
-		currentLayer = 1;
-		actions.Wait(1000);
-		}));
-	actions.Push(new game::Action([=]() {
-		notebook->GetWindow()->SetActive(false);
-		actions.Wait(500);
-		}));
-	actions.Push(new game::Action([=]() {
-		signals.Emit("FAX_SHOW_PAPER");
-		}));
+	
 
 	waitingTime = sf::Time::Zero;
 }

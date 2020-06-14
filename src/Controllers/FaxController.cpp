@@ -34,6 +34,13 @@ ctrl::FaxController::FaxController()
 	reportWindow->SetPosition({ renderWindow->getSize().x / 2.f - reportWindow->GetWindowArea().width / 2,
 		renderWindow->getSize().y / 2.f - reportWindow->GetWindowArea().height / 2 });
 
+	actions.Push(new game::Action([=]() {
+		actions.Wait(1500);
+		}));
+	actions.Push(new game::Action([=]() {
+		signals.Emit("FAX_SHOW_PAPER");
+		}));
+
 	signals["FAX_SHOW_PAPER"].Connect([=]() {
 		reportButton->SetActive(true);
 		});
