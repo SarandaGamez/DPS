@@ -57,6 +57,11 @@ std::string utils::StringUtils::BreakLines(const std::string& text, unsigned int
 		std::string textToBreak = text;
 		std::vector<unsigned int> existingBreaks = findLocation(text, '\n');
 
+		if (existingBreaks.empty() == false) {
+			unsigned int numberOfLinesAfterBreak = existingBreaks[0] / numberOfCharactersInLine;
+			BreakMultipleLinesFromIndex(textToBreak, 0, numberOfCharactersInLine, numberOfLinesAfterBreak);
+		}
+
 		if (existingBreaks.size() >= 2)
 			BreakTextWithExistingBreaks(textToBreak, existingBreaks, numberOfCharactersInLine);
 		else
