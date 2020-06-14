@@ -5,7 +5,7 @@
 #include <vector>
 #include <memory>
 
-#include "Interpreter/Trigger.h"
+#include "Scripts/Trigger.h"
 
 namespace scripts {
 	class Parser {

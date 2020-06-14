@@ -1,4 +1,4 @@
-#include "Interpreter\ScriptInstruction.h"
+#include "Scripts\ScriptInstruction.h"
 
 namespace scripts {
 	ScriptInstruction::ScriptInstruction(std::string name)

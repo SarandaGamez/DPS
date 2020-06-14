@@ -1,4 +1,4 @@
-#include "Interpreter/Trigger.h"
+#include "Scripts/Trigger.h"
 
 namespace scripts {
 	void Trigger::AddEvent(std::shared_ptr<ScriptInstruction> event)

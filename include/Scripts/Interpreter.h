@@ -3,6 +3,7 @@
 
 #include "Lexer.h"
 #include "Parser.h"
+#include "Trigger.h"
 #include <string>
 #include <queue>
 

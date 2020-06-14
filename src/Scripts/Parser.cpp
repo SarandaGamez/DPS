@@ -1,4 +1,4 @@
-#include "Interpreter/Parser.h"
+#include "Scripts/Parser.h"
 #include <iostream>
 
 namespace scripts {

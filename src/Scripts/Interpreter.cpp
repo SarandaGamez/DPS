@@ -1,4 +1,4 @@
-#include "Interpreter/Interpreter.h"
+#include "Scripts/Interpreter.h"
 #include <fstream>
 #include <iostream>
 
