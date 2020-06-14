@@ -39,13 +39,16 @@ ctrl::FaxController::FaxController()
 		actions.Push(new game::Action([=]() {
 			actions.Wait(1500);
 			}));
-		actions.Push(new game::ConditionAction([=]() {
-			signals.Emit("FAX_SHOW_PAPER");
-			}, [=]() { return true; })); });
-
-	signals["FAX_SHOW_PAPER"].Connect([=]() {
-		reportButton->SetActive(true);
+		actions.Push(new game::ConditionAction(
+			[=]() { return true; },
+			[=]() {
+				signals.Emit("FAX_SHOW_PAPER");
+			}));
 		});
+
+		signals["FAX_SHOW_PAPER"].Connect([=]() {
+			reportButton->SetActive(true);
+			});
 }
 
 ctrl::FaxController::~FaxController()

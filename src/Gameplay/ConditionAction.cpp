@@ -1,6 +1,6 @@
 #include "Gameplay/ConditionAction.h"
 
-game::ConditionAction::ConditionAction(std::function<void()> const& slot, std::function<bool()> const& conditions) : game::Action(slot)
+game::ConditionAction::ConditionAction(std::function<bool()> const& conditions, std::function<void()> const& slot) : game::Action(slot)
 {
 	this->conditions = conditions;
 }

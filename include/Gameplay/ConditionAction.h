@@ -6,7 +6,7 @@
 namespace game {
 	class ConditionAction : public game::Action {
 	public:
-		ConditionAction(std::function<void()> const& slot, std::function<bool()> const& conditions);
+		ConditionAction(std::function<bool()> const& conditions, std::function<void()> const& slot);
 		virtual bool CheckConditions();
 		virtual void Execute() override;
 	private:
