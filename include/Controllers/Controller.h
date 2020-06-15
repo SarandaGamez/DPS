@@ -8,6 +8,7 @@
 #include "Gameplay/ActionsQueue.h"
 #include "Utils/SignalObject.h"
 #include "Utils/SignalsContainer.h"
+#include "Utils/ConditionSignalsContainer.h"
 
 namespace ctrl {
 
@@ -26,6 +27,7 @@ namespace ctrl {
 		static unsigned int currentLayer;
 		static game::ActionsQueue actions;
 		static utils::SignalsContainer<std::string> signals;
+		static utils::ConditionSignalsContainer<std::string> conditions;
 	};
 }
 
