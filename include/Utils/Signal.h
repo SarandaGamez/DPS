@@ -16,28 +16,12 @@ namespace utils {
 		// copy creates new signal
 		Signal(Signal const& other) : currentId(0) {}
 
-		// connects a member function to this Signal
-		template <typename T>
-		int Connect_member(T* inst, void (T::* func)(void)) {
-			return connect([=]() {
-				(inst->*func)();
-				});
-		}
-
-		// connects a const member function to this Signal
-		template <typename T>
-		int Connect_member(T* inst, void (T::* func)(void) const) {
-			return connect([=]() {
-				(inst->*func)();
-				});
-		}
-
 		// connects a std::function to the signal. The returned
 		// value can be used to disconnect the function again
 		int Connect(std::function<void()> const& slot) const;
 
 		// disconnects a previously connected function
-		void Disconnect(unsigned int id) const;
+		void Disconnect(Signal::GUID id) const;
 
 		// disconnects all previously connected functions
 		void Disconnect_all() const;

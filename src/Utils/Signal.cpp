@@ -9,7 +9,7 @@ namespace utils {
 		return currentId;
 	}
 
-	void Signal::Disconnect(unsigned int id) const
+	void Signal::Disconnect(Signal::GUID id) const
 	{
 		slots.erase(id);
 	}
