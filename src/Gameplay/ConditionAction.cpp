@@ -1,13 +1,21 @@
 #include "Gameplay/ConditionAction.h"
 
-game::ConditionAction::ConditionAction(std::function<bool()> const& conditions, std::function<void()> const& slot) : game::Action(slot)
+game::ConditionAction::ConditionAction(std::function<bool()> const& condition, std::function<void()> const& slot) : game::Action(slot)
 {
-	this->conditions = conditions;
+	AddCondition(condition);
 }
 
 bool game::ConditionAction::CheckConditions()
 {
-	return conditions();
+	for (auto condition : conditions)
+		if (condition() == false)
+			return false;
+	return true;
+}
+
+void game::ConditionAction::AddCondition(std::function<bool()> const& condition)
+{
+	conditions.push_back(condition);
 }
 
 void game::ConditionAction::Execute()
