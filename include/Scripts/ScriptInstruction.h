@@ -1,3 +1,6 @@
+#ifndef SCRIPTS_SCRIPT_INSTRUCTION_H
+#define SCRIPTS_SCRIPT_INSTRUCTION_H
+
 #include <string>
 #include <vector>
 
@@ -20,3 +23,5 @@ namespace scripts {
 		void Clear();
 	};
 }
+
+#endif // !SCRIPTS_SCRIPT_INSTRUCTION_H

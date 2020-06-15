@@ -6,6 +6,7 @@
 #include <memory>
 
 #include "Scripts/Trigger.h"
+#include "Scripts/TriggerBuilder.h"
 
 namespace scripts {
 	class Parser {
@@ -13,37 +14,21 @@ namespace scripts {
 		std::vector<std::string> conditionsAtlas;
 		std::vector<std::string> actionsAtlas;
 
-		std::vector<std::shared_ptr<Trigger>> triggers;
-
-		std::shared_ptr<ScriptInstruction> tempInstruction;
-		std::shared_ptr<Trigger> tempTrigger;
+		std::vector<std::shared_ptr<scripts::Trigger>> triggers;
 
 		bool isTriggerFound = false;
 		bool isLookingForArguments = false;
 		bool isInstructionFound = false;
 
+		scripts::TriggerBuilder triggerBuilder;
+
 	public:
 		Parser();
 		void CheckSyntax(std::string phrase);
-		std::vector<std::shared_ptr<Trigger>>* ReturnResult();
+		std::vector<std::shared_ptr<scripts::Trigger>>* ReturnResult();
 	private:
-		bool IsEventInstruction(const std::string& phrase);
-		bool IsConditionInstruction(const std::string& phrase);
-		bool IsActionInstruction(const std::string& phrase);
-
-		void LoadEvent(const std::string& phrase);
-		void LoadCondition(const std::string& phrase);
-		void LoadAction(const std::string& phrase);
-
-		void FinishEventLoading();
-		void FinishConditionLoading();
-		void FinishActionLoading();
-
-		void CreateInstruction(const std::string& phrase);
-		void LoadArgument(const std::string& phrase);
 
 		bool IsSpecialCharacter(char character);
-		bool IsPartOfCodeSyntax(const std::string& phrase);
 
 		enum class LoadingState {
 			nothing, event, condition, action

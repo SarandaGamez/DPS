@@ -2,6 +2,11 @@
 #include <iostream>
 
 namespace scripts {
+	const std::string TRIGGER_SYNTAX = "TRIGGER";
+	const std::string EVENT_SYNTAX = "WHEN";
+	const std::string CONDITION_SYNTAX = "IF";
+	const std::string ACTION_SYNTAX = "ACTIONS";
+
 	Parser::Parser()
 	{
 		eventsAtlas.push_back("GAME_INITIALIZED");
@@ -61,173 +66,76 @@ namespace scripts {
 		actionsAtlas.push_back("SET_TEXT");
 		actionsAtlas.push_back("SET_FLAG");
 		actionsAtlas.push_back("WAIT");
+
 	}
 
 	void Parser::CheckSyntax(std::string phrase)
 	{
 		std::transform(phrase.begin(), phrase.end(), phrase.begin(), ::toupper);
 
-		if (phrase == "TRIGGER") {
+		if (phrase == TRIGGER_SYNTAX) {
 			isTriggerFound = true;
-			tempTrigger = std::shared_ptr<Trigger>(new Trigger);
-		}
-		else if (phrase == "WHEN") {
-			loadingState = LoadingState::event;
-		}
-		else if (phrase == "IF") {
-			if (isInstructionFound == true)
-				LoadEvent(phrase);
-			loadingState = LoadingState::condition;
-		}
-		else if (phrase == "ACTIONS") {
-			if (isInstructionFound == true)
-				LoadCondition(phrase);
-			loadingState = LoadingState::action;
-		}
-
-
-		if (phrase == "}") {
-			if (isInstructionFound == true)
-				LoadAction(phrase);
-			triggers.push_back(tempTrigger);
-			isTriggerFound = false;
+			triggerBuilder.Reset();
 		}
 		else if (isTriggerFound == true) {
 
-			switch (loadingState)
-			{
-			case LoadingState::event:
-				if (isInstructionFound == false && IsEventInstruction(phrase)) {
-					CreateInstruction(phrase);
+			if (isInstructionFound == true) {
+				isInstructionFound = false;
+				switch (loadingState)
+				{
+				case LoadingState::event:
+					triggerBuilder.BuildEvent();
+					break;
+				case LoadingState::condition:
+					triggerBuilder.BuildCondition();
+					break;
+				case LoadingState::action:
+					triggerBuilder.BuildAction();
+					break;
 				}
-				else if (isInstructionFound == true) {
-					LoadEvent(phrase);
-				}
-				break;
-			case LoadingState::condition:
-				if (isInstructionFound == false && IsConditionInstruction(phrase)) {
-					CreateInstruction(phrase);
-				}
-				else if (isInstructionFound == true) {
-					LoadCondition(phrase);
-				}
-				break;
-			case LoadingState::action:
-				if (isInstructionFound == false && IsActionInstruction(phrase)) {
-					CreateInstruction(phrase);
-				}
-				else if (isInstructionFound == true) {
-					LoadAction(phrase);
-				}
-				break;
+			}
+			if (phrase == EVENT_SYNTAX) {
+				loadingState = LoadingState::event;
+				triggerBuilder.SetAtlas(eventsAtlas);
+			}
+			else if (phrase == CONDITION_SYNTAX) {
+				loadingState = LoadingState::condition;
+				triggerBuilder.SetAtlas(conditionsAtlas);
+			}
+			else if (phrase == ACTION_SYNTAX) {
+				loadingState = LoadingState::action;
+				triggerBuilder.SetAtlas(actionsAtlas);
+			}
+			else if (phrase == "}") {
+				triggers.push_back(triggerBuilder.GetResult());
+				isTriggerFound = false;
+			}
+			else if (phrase[0] == '(' && isLookingForArguments == false) {
+				isLookingForArguments = true;
+			}
+			else if (phrase[0] == ')' && isLookingForArguments == true) {
+				isLookingForArguments = false;
+				triggerBuilder.AddArgument(phrase);
+			}
+			else if (isLookingForArguments == true) {
+				if (IsSpecialCharacter(phrase[0]) == false || phrase[0] == '$')
+					triggerBuilder.AddArgument(phrase);
+			}
+			else if (isInstructionFound == false && triggerBuilder.IsExistingInstruction(phrase)) {
+				isInstructionFound = true;
+				triggerBuilder.AddInstruction(phrase);
 			}
 		}
 	}
 
-
-	std::vector<std::shared_ptr<Trigger>>* Parser::ReturnResult()
+	std::vector<std::shared_ptr<scripts::Trigger>>* scripts::Parser::ReturnResult()
 	{
 		return &triggers;
 	}
 
-	bool Parser::IsEventInstruction(const std::string& phrase)
-	{
-		return std::any_of(eventsAtlas.begin(), eventsAtlas.end(), [phrase](std::string str) { return phrase == str; });
-	}
-
-	bool Parser::IsConditionInstruction(const std::string& phrase)
-	{
-		return std::any_of(conditionsAtlas.begin(), conditionsAtlas.end(), [phrase](std::string str) { return phrase == str; });
-	}
-
-	bool Parser::IsActionInstruction(const std::string& phrase)
-	{
-		return std::any_of(actionsAtlas.begin(), actionsAtlas.end(), [phrase](std::string str) { return phrase == str; });
-	}
-
-	void Parser::LoadEvent(const std::string& phrase)
-	{
-		if (phrase[0] == '(') {
-			isLookingForArguments = true;
-		}
-		else if (isLookingForArguments == true) {
-			if (IsSpecialCharacter(phrase[0]) == false || phrase[0] == '$')
-				tempInstruction->AddArgument(phrase);
-		}
-		else if (phrase[0] == ')' || isLookingForArguments == false) {
-			FinishEventLoading();
-		}
-	}
-
-	void Parser::LoadCondition(const std::string& phrase)
-	{
-		if (phrase[0] == '(') {
-			isLookingForArguments = true;
-		}
-		else if (isLookingForArguments == true) {
-			if (IsSpecialCharacter(phrase[0]) == false || phrase[0] == '$')
-				tempInstruction->AddArgument(phrase);
-		}
-		else if (phrase[0] == ')' || isLookingForArguments == false) {
-			FinishConditionLoading();
-		}
-	}
-
-	void Parser::LoadAction(const std::string& phrase)
-	{
-		if (phrase[0] == '(') {
-			isLookingForArguments = true;
-		}
-		else if (isLookingForArguments == true) {
-			if (IsSpecialCharacter(phrase[0]) == false || phrase[0] == '$')
-				tempInstruction->AddArgument(phrase);
-		}
-		if (phrase[0] == ')' || isLookingForArguments == false) {
-			FinishActionLoading();
-		}
-	}
-
-	void Parser::FinishEventLoading()
-	{
-		isInstructionFound = false;
-		tempTrigger->AddEvent(tempInstruction);
-		loadingState = LoadingState::nothing;
-	}
-
-	void Parser::FinishConditionLoading()
-	{
-		isInstructionFound = false;
-		tempTrigger->AddCondition(tempInstruction);
-		loadingState = LoadingState::nothing;
-	}
-
-	void Parser::FinishActionLoading()
-	{
-		isInstructionFound = false;
-		tempTrigger->AddAction(tempInstruction);
-		loadingState = LoadingState::nothing;
-	}
-
-	void Parser::CreateInstruction(const std::string& phrase)
-	{
-		tempInstruction = std::shared_ptr<ScriptInstruction>(new ScriptInstruction);
-		tempInstruction->SetName(phrase);
-		isInstructionFound = true;
-	}
-
-	void Parser::LoadArgument(const std::string& phrase)
-	{
-	}
-
-	bool Parser::IsSpecialCharacter(char character)
+	bool scripts::Parser::IsSpecialCharacter(char character)
 	{
 		std::vector<char> charactersArray = { ' ', '\t', '{', '}', '(', ')', '"', ';', ':', ',', '.', '=', '#', '$' };
 		return std::any_of(charactersArray.begin(), charactersArray.end(), [character](char c) { return character == c; });
-	}
-
-	bool Parser::IsPartOfCodeSyntax(const std::string& phrase)
-	{
-		std::vector<std::string> stringsArray = { "TRIGGER:", "WHEN:", "IF:", "ACTION:" };
-		return std::any_of(stringsArray.begin(), stringsArray.end(), [phrase](std::string str) { return phrase == str; });
 	}
 }
