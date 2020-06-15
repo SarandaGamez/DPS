@@ -40,6 +40,7 @@ namespace scripts {
 		conditionsAtlas.push_back("IS_LESS_OR_EQUAL");
 		conditionsAtlas.push_back("IS_TRUE");
 		conditionsAtlas.push_back("IS_FALSE");
+		conditionsAtlas.push_back("TEST_CONDITION");
 
 		actionsAtlas.push_back("SHOW_FAX_BUTTON");
 		actionsAtlas.push_back("SHOW_MAP_BUTTON");
@@ -47,7 +48,7 @@ namespace scripts {
 		actionsAtlas.push_back("SHOW_MENU_BUTTON");
 		actionsAtlas.push_back("OPEN_FAX");
 		actionsAtlas.push_back("OPEN_MAP");
-		actionsAtlas.push_back("OPEN_NOTEPAD");
+		actionsAtlas.push_back("OPEN_NOTEBOOK");
 		actionsAtlas.push_back("OPEN_MENU");
 		actionsAtlas.push_back("CLOSE_FAX");
 		actionsAtlas.push_back("CLOSE_MAP");
@@ -74,14 +75,20 @@ namespace scripts {
 			loadingState = LoadingState::event;
 		}
 		else if (phrase == "IF") {
+			if (isInstructionFound == true)
+				LoadEvent(phrase);
 			loadingState = LoadingState::condition;
 		}
 		else if (phrase == "ACTIONS") {
+			if (isInstructionFound == true)
+				LoadCondition(phrase);
 			loadingState = LoadingState::action;
 		}
 
 
 		if (phrase == "}") {
+			if (isInstructionFound == true)
+				LoadAction(phrase);
 			triggers.push_back(tempTrigger);
 			isTriggerFound = false;
 		}
