@@ -7,30 +7,29 @@
 
 namespace utils {
 	
-	template<typename T = Signal::GUID>
+	template<typename T = ConditionSignal::GUID>
 	class ConditionSignalsContainer : public utils::ConditionSignal {
 
 	public:
 		ConditionSignal& operator[](const T& guid);
-		void Emit(const T& guid);
+		bool Emit(const T& guid);
 
 	private:
-		typedef std::map<T, utils::ConditionSignal> SignalMap;
-		std::unique_ptr<SignalMap> signals;
+		typedef std::map<T, utils::ConditionSignal> ConditionSignalMap;
+		std::unique_ptr<ConditionSignalMap> signals;
 	};
 	
 	template<typename T>
 	inline ConditionSignal& ConditionSignalsContainer<T>::operator[](const T& guid)
 	{
 		if (!signals) {
-			signals.reset(new SignalMap);
+			signals.reset(new ConditionSignalMap);
 		}
-
 		auto signalItr = signals->find(guid);
 
 		if (signalItr == signals->end()) {
 			signalItr = signals->insert(
-				std::pair<T, Signal>(guid, Signal())
+				std::pair<T, ConditionSignal>(guid, ConditionSignal())
 			).first;
 		}
 
@@ -38,17 +37,19 @@ namespace utils {
 	}
 
 	template<typename T>
-	inline void ConditionSignalsContainer<T>::Emit(const T& guid)
+	inline bool ConditionSignalsContainer<T>::Emit(const T& guid)
 	{
 		if (!signals) {
-			return;
+			return false;
 		}
 
 		auto signalItr = signals->find(guid);
 
 		if (signalItr != signals->end()) {
-			signalItr->second();
+			if (signalItr->second() == false)
+				return false;
 		}
+		return true;
 	}
 
 }

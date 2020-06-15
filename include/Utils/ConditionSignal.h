@@ -27,7 +27,7 @@ namespace utils {
 		void Disconnect_all() const;
 
 		// calls all connected functions
-		void operator()() const;
+		bool operator()() const;
 
 		static ConditionSignal::GUID GetGUID();
 	private:

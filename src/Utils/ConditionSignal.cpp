@@ -1,7 +1,7 @@
 #include "Utils/ConditionSignal.h"
 
 namespace utils {
-	ConditionSignal::GUID lastGuid = 0;
+	ConditionSignal::GUID lastConditionGuid = 0;
 
 	int ConditionSignal::Connect(std::function<bool()> const& slot) const
 	{
@@ -19,15 +19,17 @@ namespace utils {
 		slots.clear();
 	}
 
-	void ConditionSignal::operator()() const
+	bool ConditionSignal::operator()() const
 	{
 		for (auto const& it : slots) {
-			it.second();
+			if (it.second() == false)
+				return false;
 		}
+		return true;
 	}
 
 	ConditionSignal::GUID utils::ConditionSignal::GetGUID()
 	{
-		return ++lastGuid;
+		return ++lastConditionGuid;
 	}
 }

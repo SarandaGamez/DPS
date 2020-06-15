@@ -8,6 +8,7 @@ TexturesHolder* ctrl::Controller::textures = nullptr;
 unsigned int ctrl::Controller::currentLayer = 0;
 game::ActionsQueue ctrl::Controller::actions;
 utils::SignalsContainer<std::string> ctrl::Controller::signals;
+utils::ConditionSignalsContainer<std::string> ctrl::Controller::conditionSignals;
 
 void ctrl::Controller::Initialize(std::shared_ptr<sf::RenderWindow> renderWindow, TexturesHolder& texturesHolder, StateTransition* transition)
 {

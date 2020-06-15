@@ -27,7 +27,7 @@ namespace ctrl {
 		static unsigned int currentLayer;
 		static game::ActionsQueue actions;
 		static utils::SignalsContainer<std::string> signals;
-		static utils::ConditionSignalsContainer<std::string> conditions;
+		static utils::ConditionSignalsContainer<std::string> conditionSignals;
 	};
 }
 
