@@ -20,8 +20,13 @@ namespace ctrl {
 		scripts::Interpreter interpreter;
 		std::vector<std::shared_ptr<scripts::Trigger>>* triggers;
 
+		void InitializeTriggers();
+
+		void ConnectToSignal(std::shared_ptr<scripts::Trigger> trigger);
+
 		void AddAction(const std::string& actionName);
 		void AddConditionAction(std::shared_ptr<scripts::Trigger> trigger, const std::string& actionName);
+
 	};
 }
 
