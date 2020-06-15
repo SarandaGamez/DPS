@@ -12,6 +12,8 @@
 #include "Controllers/FaxController.h"
 #include "Controllers/DateController.h"
 #include "Controllers/MapController.h"
+#include "Controllers/GameController.h"
+#include "Controllers/TriggersController.h"
 #include <string>
 #include "Utils/StringUtils.h"
 
@@ -43,6 +45,10 @@ void GameState::OnEnter()
 	clickable->GetSignal(gui::SignalTypes::onLeftMouseButtonReleased).Connect(std::bind(&GameState::OpenDialog, this));
 	AddUIComponent(clickable);
 
+	clickable = buttonsBuilder.BuildClickableRegion({ 1715, 1030, 200, 50 });
+	clickable->GetSignal(gui::SignalTypes::onLeftMouseButtonReleased).Connect(std::bind(&GameState::OpenDialog, this));
+	AddUIComponent(clickable);
+
 
 	background.setTexture(textures.GetTexture("OfficeBackground"));
 
@@ -67,8 +73,8 @@ void GameState::OnEnter()
 	controllers.Add(new ctrl::DebugController);
 	controllers.Add(new ctrl::TurnsController);
 	controllers.Add(new ctrl::DateController);
-
-
+	controllers.Add(new ctrl::GameController);
+	controllers.Add(new ctrl::TriggersController);
 	cout << "Game loaded" << endl;
 }
 

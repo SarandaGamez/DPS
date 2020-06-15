@@ -8,7 +8,7 @@ namespace scripts {
 
 	void Trigger::AddCondition(std::shared_ptr<ScriptInstruction> condition)
 	{
-		conditions.push(condition);
+		conditions.push_back(condition);
 	}
 
 	void Trigger::AddAction(std::shared_ptr<ScriptInstruction> action)
@@ -19,11 +19,6 @@ namespace scripts {
 	bool Trigger::IsEventsQueueEmpty()
 	{
 		return this->events.empty();
-	}
-
-	bool Trigger::IsConditionsQueueEmpty()
-	{
-		return this->conditions.empty();
 	}
 
 	bool Trigger::IsActionsQueueEmpty()
@@ -38,18 +33,16 @@ namespace scripts {
 		return event;
 	}
 
-	std::shared_ptr<ScriptInstruction> Trigger::GetConditionAndPop()
-	{
-		auto condition = conditions.front();
-		conditions.pop();
-		return condition;
-	}
-
 	std::shared_ptr<ScriptInstruction> Trigger::GetActionAndPop()
 	{
 		auto action = actions.front();
 		actions.pop();
 		return action;
+	}
+
+	const std::vector<std::shared_ptr<ScriptInstruction>>& Trigger::GetConditions()
+	{
+		return conditions;
 	}
 
 }

@@ -3,13 +3,14 @@
 
 #include <string>
 #include <queue>
+#include <vector>
 #include <memory>
 #include "ScriptInstruction.h"
 
 namespace scripts {
 	class Trigger {
 		std::queue<std::shared_ptr<ScriptInstruction>> events;
-		std::queue<std::shared_ptr<ScriptInstruction>> conditions;
+		std::vector<std::shared_ptr<ScriptInstruction>> conditions;
 		std::queue<std::shared_ptr<ScriptInstruction>> actions;
 
 	public:
@@ -18,12 +19,12 @@ namespace scripts {
 		void AddAction(std::shared_ptr<ScriptInstruction> action);
 
 		bool IsEventsQueueEmpty();
-		bool IsConditionsQueueEmpty();
 		bool IsActionsQueueEmpty();
 
 		std::shared_ptr<ScriptInstruction> GetEventAndPop();
-		std::shared_ptr<ScriptInstruction> GetConditionAndPop();
 		std::shared_ptr<ScriptInstruction> GetActionAndPop();
+
+		const std::vector<std::shared_ptr<ScriptInstruction>>& GetConditions();
 	};
 }
 #endif // !TRIGGER_H
