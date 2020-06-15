@@ -12,7 +12,7 @@ void ctrl::GameController::Update(sf::Time elapsedTime)
 {
 	if (isGameInitialized == false) {
 		isGameInitialized = true;
-		signals["GAME_INITIALIZATION"]();
+		signals["GAME_INITIALIZED"]();
 	}
 }
 

@@ -23,6 +23,11 @@ ctrl::MapController::MapController()
 		}
 		});
 
+	signals["OPEN_MAP"].Connect([=]() {
+			mapWindow->SetActive(true);
+			currentLayer = 1;
+		});
+
 	auto placeButton = buttonsBuilder.BuildTextButton("Place1", { 70,430 });
 	mapWindow->Add(placeButton);
 	placeButton = buttonsBuilder.BuildTextButton("Place2", { 350,445 });

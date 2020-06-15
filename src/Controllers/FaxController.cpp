@@ -15,7 +15,8 @@ ctrl::FaxController::FaxController()
 
 	reportWindow = std::shared_ptr<gui::Window>(new gui::Window());
 	reportWindow->SetBackground(std::shared_ptr<gui::GraphicComponent>(new gui::GraphicComponent(windowTexture)));
-	reportWindow->SetActive(false);
+	reportWindow->SetActive(false); 
+	reportWindow->SetVisible(false);
 
 	reportButton = std::shared_ptr<gui::Button>(new gui::Button(paperTexture, { 1670, 630 }));
 	reportButton->SetActive(false);
@@ -35,18 +36,13 @@ ctrl::FaxController::FaxController()
 	reportWindow->SetPosition({ renderWindow->getSize().x / 2.f - reportWindow->GetWindowArea().width / 2,
 		renderWindow->getSize().y / 2.f - reportWindow->GetWindowArea().height / 2 });
 
-	signals["GAME_INITIALIZATION"].Connect([=]() {
+	signals["GAME_INITIALIZED"].Connect([=]() {
 		actions.Push(new game::Action([=]() {
 			actions.Wait(1500);
 			}));
-		actions.Push(new game::ConditionAction(
-			[=]() { return true; },
-			[=]() {
-				signals.Emit("FAX_SHOW_PAPER");
-			}));
 		});
 
-		signals["FAX_SHOW_PAPER"].Connect([=]() {
+		signals["SHOW_FAX_BUTTON"].Connect([=]() {
 			reportButton->SetActive(true);
 			});
 }
@@ -63,6 +59,7 @@ void ctrl::FaxController::Update(sf::Time elapsedTime)
 	else if (reportWindow->IsActive() == false && reportWindow->IsVisible() == true) {
 		reportWindow->SetVisible(false);
 		currentLayer = 0;
+		signals.Emit("CLOSED_FAX");
 	}
 	if (reportButton->IsActive() == true && reportButton->IsVisible() == false)
 		reportButton->SetVisible(true);
