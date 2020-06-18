@@ -79,7 +79,13 @@ namespace scripts {
 		}
 		else if (isTriggerFound == true) {
 
-			if (isInstructionFound == true) {
+			if (phrase[0] == '(' && isLookingForArguments == false) {
+				isLookingForArguments = true;
+			}
+			else if (phrase[0] == ')' && isLookingForArguments == true) {
+				isLookingForArguments = false;
+			}
+			else if (isInstructionFound == true && isLookingForArguments == false) {
 				isInstructionFound = false;
 				switch (loadingState)
 				{
@@ -109,13 +115,6 @@ namespace scripts {
 			else if (phrase == "}") {
 				triggers.push_back(triggerBuilder.GetResult());
 				isTriggerFound = false;
-			}
-			else if (phrase[0] == '(' && isLookingForArguments == false) {
-				isLookingForArguments = true;
-			}
-			else if (phrase[0] == ')' && isLookingForArguments == true) {
-				isLookingForArguments = false;
-				triggerBuilder.AddArgument(phrase);
 			}
 			else if (isLookingForArguments == true) {
 				if (IsSpecialCharacter(phrase[0]) == false || phrase[0] == '$')
