@@ -1,7 +1,6 @@
 #include "Controllers/FaxController.h"
 #include "GUI/ButtonsBuilder.h"
 #include "Gameplay/Action.h"
-#include "Gameplay/ConditionAction.h"
 #include "Utils/Collision.h"
 #include "Utils/StringUtils.h"
 #include "GUI/ComponentsBuilder.h"
@@ -42,9 +41,9 @@ ctrl::FaxController::FaxController()
 			}));
 		});
 
-		signals["SHOW_FAX_BUTTON"].Connect([=]() {
-			reportButton->SetActive(true);
-			});
+	signals["SHOW_FAX_BUTTON"].Connect([=]() {
+		reportButton->SetActive(true);
+		});
 }
 
 ctrl::FaxController::~FaxController()

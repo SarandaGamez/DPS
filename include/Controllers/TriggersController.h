@@ -24,10 +24,11 @@ namespace ctrl {
 
 		void ConnectToSignal(std::shared_ptr<scripts::Trigger> trigger);
 
-		void AddAction(const std::string& actionName);
-		void AddConditionAction(std::shared_ptr<scripts::Trigger> trigger, const std::string& actionName);
+		void AddAction(std::shared_ptr<scripts::ScriptInstruction> instruction);
+		void AddConditionAction(std::shared_ptr<scripts::Trigger> trigger, std::shared_ptr<scripts::ScriptInstruction> instruction);
 
 		bool CheckConditions(std::shared_ptr<scripts::Trigger> trigger) const;
+		void EmitSignalWithArguments(std::shared_ptr<scripts::ScriptInstruction> instruction);
 
 	};
 }

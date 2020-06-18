@@ -1,4 +1,5 @@
 #include "Controllers/TriggersController.h"
+#include <iostream>
 
 ctrl::TriggersController::TriggersController()
 {
@@ -8,6 +9,14 @@ ctrl::TriggersController::TriggersController()
 
 	conditionSignals["TEST_CONDITION"].Connect([=]() {
 		return true;
+		});
+
+
+	signals["WAIT"].Connect([=]() {
+		if (arguments.empty() == false) {
+			std::cout << "WAIT " << arguments[0] << std::endl;
+			actions.Wait(std::stoi(arguments[0]));
+		}
 		});
 
 }
@@ -34,34 +43,34 @@ void ctrl::TriggersController::ConnectToSignal(std::shared_ptr<scripts::Trigger>
 	std::string eventName = trigger->GetEventAndPop()->GetName();
 	while (trigger->IsActionsQueueEmpty() == false)
 	{
-		std::string actionName = trigger->GetActionAndPop()->GetName();
+		auto instruction = trigger->GetActionAndPop();
 		if (trigger->GetConditions().size() > 0)
 		{
 			signals[eventName].Connect([=]() {
-				AddConditionAction(trigger, actionName);
+				AddConditionAction(trigger, instruction);
 				});
 		}
 		else
 		{
 			signals[eventName].Connect([=]() {
-				AddAction(actionName);
+				AddAction(instruction);
 				});
 		}
 	}
 }
 
-void ctrl::TriggersController::AddAction(const std::string& actionName)
+void ctrl::TriggersController::AddAction(std::shared_ptr<scripts::ScriptInstruction> instruction)
 {
 	actions.Push(new game::Action([=]() {
-		signals.Emit(actionName);
+		EmitSignalWithArguments(instruction);
 		}));
 }
 
-void ctrl::TriggersController::AddConditionAction(std::shared_ptr<scripts::Trigger> trigger, const std::string& actionName)
+void ctrl::TriggersController::AddConditionAction(std::shared_ptr<scripts::Trigger> trigger, std::shared_ptr<scripts::ScriptInstruction> instruction)
 {
 	actions.Push(new game::Action([=]() {
-			if(CheckConditions(trigger))
-				signals.Emit(actionName);
+		if (CheckConditions(trigger))
+			EmitSignalWithArguments(instruction);
 		}));
 }
 
@@ -71,4 +80,12 @@ bool ctrl::TriggersController::CheckConditions(std::shared_ptr<scripts::Trigger>
 		if (conditionSignals.Emit(condition->GetName()) == false)
 			return false;
 	return true;
+}
+
+void ctrl::TriggersController::EmitSignalWithArguments(std::shared_ptr<scripts::ScriptInstruction> instruction)
+{
+	for (auto arg = instruction->GetArgumentsBegin(); arg != instruction->GetArgumentsEnd(); arg++)
+		arguments.push_back(*arg);
+	signals.Emit(instruction->GetName());
+	arguments.clear();
 }

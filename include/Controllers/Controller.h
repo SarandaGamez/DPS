@@ -28,6 +28,7 @@ namespace ctrl {
 		static game::ActionsQueue actions;
 		static utils::SignalsContainer<std::string> signals;
 		static utils::ConditionSignalsContainer<std::string> conditionSignals;
+		static std::vector<std::string> arguments;
 	};
 }
 
