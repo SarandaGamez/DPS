@@ -1,6 +1,4 @@
 #include "Controllers/TriggersController.h"
-#include "Gameplay/ConditionAction.h"
-#include <iostream>
 
 ctrl::TriggersController::TriggersController()
 {
@@ -61,13 +59,16 @@ void ctrl::TriggersController::AddAction(const std::string& actionName)
 
 void ctrl::TriggersController::AddConditionAction(std::shared_ptr<scripts::Trigger> trigger, const std::string& actionName)
 {
-	actions.Push(new game::ConditionAction([=]() {
-		for (auto condition : trigger->GetConditions())
-			if (conditionSignals.Emit(condition->GetName()) == false)
-				return false;
-		return true;
-		},
-		[=]() {
-			signals.Emit(actionName);
+	actions.Push(new game::Action([=]() {
+			if(CheckConditions(trigger))
+				signals.Emit(actionName);
 		}));
+}
+
+bool ctrl::TriggersController::CheckConditions(std::shared_ptr<scripts::Trigger> trigger) const
+{
+	for (auto condition : trigger->GetConditions())
+		if (conditionSignals.Emit(condition->GetName()) == false)
+			return false;
+	return true;
 }

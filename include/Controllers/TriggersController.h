@@ -27,6 +27,8 @@ namespace ctrl {
 		void AddAction(const std::string& actionName);
 		void AddConditionAction(std::shared_ptr<scripts::Trigger> trigger, const std::string& actionName);
 
+		bool CheckConditions(std::shared_ptr<scripts::Trigger> trigger) const;
+
 	};
 }
 
