@@ -8,7 +8,10 @@ ctrl::TriggersController::TriggersController()
 	InitializeTriggers();
 
 	conditionSignals["TEST_CONDITION"].Connect([=]() {
-		return true;
+		if (arguments.empty() == false)
+			if (arguments[0] == "TRUE")	
+			return true;
+		return false;
 		});
 
 
@@ -76,10 +79,15 @@ void ctrl::TriggersController::AddConditionAction(std::shared_ptr<scripts::Trigg
 
 bool ctrl::TriggersController::CheckConditions(std::shared_ptr<scripts::Trigger> trigger) const
 {
-	for (auto condition : trigger->GetConditions())
+	bool result = true;
+	for (auto condition : trigger->GetConditions()) {
+		for (auto arg = condition->GetArgumentsBegin(); arg != condition->GetArgumentsEnd(); arg++)
+			arguments.push_back(*arg);
 		if (conditionSignals.Emit(condition->GetName()) == false)
-			return false;
-	return true;
+			result = false;
+		arguments.clear();
+	}
+	return result;
 }
 
 void ctrl::TriggersController::EmitSignalWithArguments(std::shared_ptr<scripts::ScriptInstruction> instruction)
