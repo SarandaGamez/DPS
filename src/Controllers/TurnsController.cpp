@@ -27,13 +27,6 @@ ctrl::TurnsController::~TurnsController()
 void ctrl::TurnsController::Update(sf::Time time)
 {
 	nextTurnButton->Update(time);
-
-	if (actions.IsBlocked() == false && actions.IsWaiting() == false){
-		if (actions.IsEmpty() == false) {
-			actions.ExecuteAndPop();
-		}
-	}
-	actions.UpdateElapsedTime(time);
 }
 
 void ctrl::TurnsController::HandleEvent(sf::Event event)
