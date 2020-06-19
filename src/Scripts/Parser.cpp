@@ -51,6 +51,7 @@ namespace scripts {
 		actionsAtlas.push_back("SHOW_MAP_BUTTON");
 		actionsAtlas.push_back("SHOW_NOTEPAD_BUTTON");
 		actionsAtlas.push_back("SHOW_MENU_BUTTON");
+		actionsAtlas.push_back("HIDE_FAX_BUTTON");
 		actionsAtlas.push_back("OPEN_FAX");
 		actionsAtlas.push_back("OPEN_MAP");
 		actionsAtlas.push_back("OPEN_NOTEBOOK");

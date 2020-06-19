@@ -24,6 +24,7 @@ ctrl::FaxController::FaxController()
 			reportWindow->SetActive(true);
 			reportButton->SetActive(false);
 			currentLayer = 1;
+			signals.Emit("OPENED_FAX");
 		}
 		});	
 
@@ -43,6 +44,10 @@ ctrl::FaxController::FaxController()
 
 	signals["SHOW_FAX_BUTTON"].Connect([=]() {
 		reportButton->SetActive(true);
+		});
+
+	signals["HIDE_FAX_BUTTON"].Connect([=]() {
+		reportButton->SetActive(false);
 		});
 }
 
