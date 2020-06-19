@@ -20,12 +20,27 @@ ctrl::MapController::MapController()
 		if (currentLayer == 0 && mapWindow->IsActive() == false) {
 			mapWindow->SetActive(true);
 			currentLayer = 1;
+			signals.Emit("OPENED_MAP");
 		}
 		});
 
 	signals["OPEN_MAP"].Connect([=]() {
-			mapWindow->SetActive(true);
-			currentLayer = 1;
+		mapWindow->SetActive(true);
+		currentLayer = 1;
+		signals.Emit("OPENED_MAP");
+		});
+
+	signals["CLOSE_MAP"].Connect([=]() {
+		mapWindow->SetActive(false);
+		signals.Emit("CLOSED_MAP");
+		});
+
+	signals["SHOW_MAP_BUTTON"].Connect([=]() {
+		openMapButton->SetActive(true);
+		});
+
+	signals["HIDE_MAP_BUTTON"].Connect([=]() {
+		openMapButton->SetActive(false);
 		});
 
 	auto placeButton = buttonsBuilder.BuildTextButton("Place1", { 70,430 });
@@ -66,13 +81,16 @@ void ctrl::MapController::HandleEvent(sf::Event event)
 
 	// Close the window after clicking outside of it
 	if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) {
-		if (Collision::PixelPerfectMouseTest(mapWindow->GetBackground()->GetSprite(), mousePosition) == false)
+		if (Collision::PixelPerfectMouseTest(mapWindow->GetBackground()->GetSprite(), mousePosition) == false) {
 			mapWindow->SetActive(false);
+			signals.Emit("CLOSED_MAP");
+		}
 	}
 	// Close window with escape
 	if (event.type == sf::Event::KeyPressed) {
 		if (event.key.code == sf::Keyboard::Escape && currentLayer > 0 && mapWindow->IsActive()) {
 			mapWindow->SetActive(false);
+			signals.Emit("CLOSED_MAP");
 		}
 	}
 }
