@@ -23,11 +23,26 @@ ctrl::NotebookController::NotebookController()
 		if (currentLayer == 0 && notebook->GetWindow()->IsActive() == false)
 			notebook->GetWindow()->SetActive(true);
 		currentLayer = 1;
+		signals.Emit("CLICKED_NOTEBOOK");
 		});
 
 	signals["OPEN_NOTEBOOK"].Connect([=]() {
 		notebook->GetWindow()->SetActive(true);
 		currentLayer = 1;
+		signals.Emit("OPENED_NOTEBOOK");
+		});
+
+	signals["CLOSE_NOTEBOOK"].Connect([=]() {
+		notebookWindow->SetActive(false);
+		signals.Emit("CLOSED_NOTEBOOK");
+		});
+
+	signals["SHOW_NOTEBOOK_BUTTON"].Connect([=]() {
+		button->SetActive(true);
+		});
+
+	signals["HIDE_NOTEBOOK_BUTTON"].Connect([=]() {
+		button->SetActive(false);
 		});
 
 	// Notebook background
@@ -101,12 +116,12 @@ void ctrl::NotebookController::HandleEvent(sf::Event event)
 	// Close notebook after clicking outside of it
 	if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left) {
 		if (!notebookWindow->GetWindowArea().contains(mousePosition) && !leftArrow->GetRegion().contains(mousePosition) && !rightArrow->GetRegion().contains(mousePosition))
-			notebookWindow->SetActive(false);
+			signals.Emit("CLOSE_NOTEPAD");
 	}
 	// Close notebook with escape
 	if (event.type == sf::Event::KeyPressed) {
 		if (event.key.code == sf::Keyboard::Escape && currentLayer > 0 && notebookWindow->IsActive()) {
-			notebookWindow->SetActive(false);
+			signals.Emit("CLOSE_NOTEPAD");
 		}
 	}
 }

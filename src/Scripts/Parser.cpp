@@ -15,7 +15,7 @@ namespace scripts {
 		eventsAtlas.push_back("EVERY");
 		eventsAtlas.push_back("CLICKED_FAX");
 		eventsAtlas.push_back("CLICKED_MAP");
-		eventsAtlas.push_back("CLICKED_NOTEPAD");
+		eventsAtlas.push_back("CLICKED_NOTEBOOK");
 		eventsAtlas.push_back("CLICKED_NEXTTURN");
 		eventsAtlas.push_back("CLICKED_MENU");
 		eventsAtlas.push_back("TURN_CHANGE_FINISHED");
@@ -23,20 +23,20 @@ namespace scripts {
 		eventsAtlas.push_back("TURN_CHANGE_INTERRUPTED");
 		eventsAtlas.push_back("CLOSED_FAX");
 		eventsAtlas.push_back("CLOSED_MAP");
-		eventsAtlas.push_back("CLOSED_NOTEPAD");
+		eventsAtlas.push_back("CLOSED_NOTEBOOK");
 		eventsAtlas.push_back("CLOSED_MENU");
 		eventsAtlas.push_back("OPENED_FAX");
 		eventsAtlas.push_back("OPENED_MAP");
-		eventsAtlas.push_back("OPENED_NOTEPAD");
+		eventsAtlas.push_back("OPENED_NOTEBOOK");
 		eventsAtlas.push_back("OPENED_MENU");
 
 		conditionsAtlas.push_back("IS_FAX_OPEN");
 		conditionsAtlas.push_back("IS_MAP_OPEN");
-		conditionsAtlas.push_back("IS_NOTEPAD_OPEN");
+		conditionsAtlas.push_back("IS_NOTEBOOK_OPEN");
 		conditionsAtlas.push_back("IS_MENU_OPEN");
 		conditionsAtlas.push_back("IS_FAX_CLOSE");
 		conditionsAtlas.push_back("IS_MAP_CLOSE");
-		conditionsAtlas.push_back("IS_NOTEPAD_CLOSE");
+		conditionsAtlas.push_back("IS_NOTEBOOK_CLOSE");
 		conditionsAtlas.push_back("IS_MENU_CLOSE");
 		conditionsAtlas.push_back("IS_EQUAL");
 		conditionsAtlas.push_back("IS_GREATER_THAN");
@@ -49,17 +49,18 @@ namespace scripts {
 
 		actionsAtlas.push_back("SHOW_FAX_BUTTON");
 		actionsAtlas.push_back("SHOW_MAP_BUTTON");
-		actionsAtlas.push_back("SHOW_NOTEPAD_BUTTON");
+		actionsAtlas.push_back("SHOW_NOTEBOOK_BUTTON");
 		actionsAtlas.push_back("SHOW_MENU_BUTTON");
 		actionsAtlas.push_back("HIDE_FAX_BUTTON");
 		actionsAtlas.push_back("HIDE_MAP_BUTTON");
+		actionsAtlas.push_back("HIDE_NOTEBOOK_BUTTON");
 		actionsAtlas.push_back("OPEN_FAX");
 		actionsAtlas.push_back("OPEN_MAP");
 		actionsAtlas.push_back("OPEN_NOTEBOOK");
 		actionsAtlas.push_back("OPEN_MENU");
 		actionsAtlas.push_back("CLOSE_FAX");
 		actionsAtlas.push_back("CLOSE_MAP");
-		actionsAtlas.push_back("CLOSE_NOTEPAD");
+		actionsAtlas.push_back("CLOSE_NOTEBOOK");
 		actionsAtlas.push_back("CLOSE_MENU");
 		actionsAtlas.push_back("MOVE_TO_NEXT_TURN");
 		actionsAtlas.push_back("DISPLAY_DIALOG");
