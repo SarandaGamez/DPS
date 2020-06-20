@@ -23,6 +23,27 @@ ctrl::IngameMenuController::IngameMenuController()
 		}
 		});
 
+	conditionSignals["IS_MENU_OPEN"].Connect([=]() {
+		return menuWindow->IsActive();
+		});
+	conditionSignals["IS_MENU_CLOSED"].Connect([=]() {
+		return !menuWindow->IsActive();
+		});
+	signals["SHOW_MENU_BUTTON"].Connect([=]() {
+		button->SetActive(true);
+		});
+	signals["HIDE_MENU_BUTTON"].Connect([=]() {
+		button->SetActive(false);
+		});
+	signals["OPEN_MENU"].Connect([=]() {
+		menuWindow->SetActive(true);
+		currentLayer = 1;
+		});
+	signals["CLOSE_MENU"].Connect([=]() {
+		menuWindow->SetActive(false);
+		CloseMenu();
+		});
+
 	gui::ClickableStructuresBuilder clickableStructures;
 	clickableStructures.Add(buttonsBuilder.BuildTextButton("Save", { 0,0 }));
 	clickableStructures.Add(buttonsBuilder.BuildTextButton("Load", { 0,0 }));
@@ -80,10 +101,12 @@ void ctrl::IngameMenuController::Draw() const
 void ctrl::IngameMenuController::OpenMenu()
 {
 	menuWindow->SetVisible(true);
+	signals.Emit("OPENED_MENU");
 }
 
 void ctrl::IngameMenuController::CloseMenu()
 {
 	menuWindow->SetVisible(false);
 	currentLayer = 0;
+	signals.Emit("CLOSED_MENU");
 }

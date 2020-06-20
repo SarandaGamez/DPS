@@ -37,7 +37,7 @@ namespace scripts {
 		conditionsAtlas.push_back("IS_FAX_CLOSE");
 		conditionsAtlas.push_back("IS_MAP_CLOSE");
 		conditionsAtlas.push_back("IS_NOTEBOOK_CLOSE");
-		conditionsAtlas.push_back("IS_MENU_CLOSE");
+		conditionsAtlas.push_back("IS_MENU_CLOSED");
 		conditionsAtlas.push_back("IS_EQUAL");
 		conditionsAtlas.push_back("IS_GREATER_THAN");
 		conditionsAtlas.push_back("IS_LESS_THAN");
@@ -54,6 +54,7 @@ namespace scripts {
 		actionsAtlas.push_back("HIDE_FAX_BUTTON");
 		actionsAtlas.push_back("HIDE_MAP_BUTTON");
 		actionsAtlas.push_back("HIDE_NOTEBOOK_BUTTON");
+		actionsAtlas.push_back("HIDE_MENU_BUTTON");
 		actionsAtlas.push_back("OPEN_FAX");
 		actionsAtlas.push_back("OPEN_MAP");
 		actionsAtlas.push_back("OPEN_NOTEBOOK");
