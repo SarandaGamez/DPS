@@ -34,9 +34,9 @@ namespace scripts {
 		conditionsAtlas.push_back("IS_MAP_OPEN");
 		conditionsAtlas.push_back("IS_NOTEBOOK_OPEN");
 		conditionsAtlas.push_back("IS_MENU_OPEN");
-		conditionsAtlas.push_back("IS_FAX_CLOSE");
-		conditionsAtlas.push_back("IS_MAP_CLOSE");
-		conditionsAtlas.push_back("IS_NOTEBOOK_CLOSE");
+		conditionsAtlas.push_back("IS_FAX_CLOSED");
+		conditionsAtlas.push_back("IS_MAP_CLOSED");
+		conditionsAtlas.push_back("IS_NOTEBOOK_CLOSED");
 		conditionsAtlas.push_back("IS_MENU_CLOSED");
 		conditionsAtlas.push_back("IS_EQUAL");
 		conditionsAtlas.push_back("IS_GREATER_THAN");

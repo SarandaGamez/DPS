@@ -2,6 +2,11 @@
 
 ctrl::GameController::GameController()
 {
+	signals["GAME_INITIALIZED"].Connect([=]() {
+		actions.Push(new game::Action([=]() {
+			actions.Wait(1500);
+			}));
+		});
 }
 
 ctrl::GameController::~GameController()

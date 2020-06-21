@@ -43,4 +43,5 @@ void ctrl::TurnsController::Draw() const
 
 void ctrl::TurnsController::NextTurn()
 {
+	signals.Emit("TURN_CHANGE_STARTED");
 }

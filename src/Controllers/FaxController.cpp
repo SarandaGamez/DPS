@@ -20,12 +20,8 @@ ctrl::FaxController::FaxController()
 	reportButton = std::shared_ptr<gui::Button>(new gui::Button(paperTexture, { 1670, 630 }));
 	reportButton->SetActive(false);
 	reportButton->GetSignal(gui::SignalTypes::onLeftMouseButtonReleased).Connect([=]() {
-		if (currentLayer == 0) {
-			reportWindow->SetActive(true);
-			reportButton->SetActive(false);
-			currentLayer = 1;
-			signals.Emit("OPENED_FAX");
-		}
+		signals.Emit("OPEN_FAX");
+		signals.Emit("CLICKED_FAX");
 		});	
 
 	std::string testingText = "Hello Comrade,\n\nThis is the first day of the service for the safety of the Graboria State. Until you will be able to praise the glory of the Greatest Leader you will have to complete the training.\n First of all you have to familiarize yourself with the tools given from the central planner.\n Open the notebook to see the next information.\n\n (You can finish reading the fax by clicking outside of it or by pressing escape button.)";
@@ -35,19 +31,22 @@ ctrl::FaxController::FaxController()
 
 	reportWindow->SetPosition({ renderWindow->getSize().x / 2.f - reportWindow->GetWindowArea().width / 2,
 		renderWindow->getSize().y / 2.f - reportWindow->GetWindowArea().height / 2 });
-
-	signals["GAME_INITIALIZED"].Connect([=]() {
-		actions.Push(new game::Action([=]() {
-			actions.Wait(1500);
-			}));
-		});
-
+	
 	signals["SHOW_FAX_BUTTON"].Connect([=]() {
 		reportButton->SetActive(true);
 		});
-
 	signals["HIDE_FAX_BUTTON"].Connect([=]() {
 		reportButton->SetActive(false);
+		});
+	signals["OPEN_FAX"].Connect([=]() {
+		if (currentLayer == 0) {
+			reportWindow->SetActive(true);
+			reportButton->SetActive(false);
+			currentLayer = 1;
+		}
+		});
+	signals["CLOSE_FAX"].Connect([=]() {
+		reportWindow->SetActive(false);
 		});
 }
 
@@ -58,12 +57,16 @@ ctrl::FaxController::~FaxController()
 void ctrl::FaxController::Update(sf::Time elapsedTime)
 {
 	reportWindow->Update(elapsedTime);
-	if (reportWindow->IsActive() == true && reportWindow->IsVisible() == false)
+	if (reportWindow->IsActive() == true && reportWindow->IsVisible() == false) {
 		reportWindow->SetVisible(true);
+		signals.Emit("OPENED_FAX");
+	}
 	else if (reportWindow->IsActive() == false && reportWindow->IsVisible() == true) {
-		reportWindow->SetVisible(false);
-		currentLayer = 0;
-		signals.Emit("CLOSED_FAX");
+		if (currentLayer >= 1) {
+			reportWindow->SetVisible(false);
+			currentLayer = 0;
+			signals.Emit("CLOSED_FAX");
+		}
 	}
 	if (reportButton->IsActive() == true && reportButton->IsVisible() == false)
 		reportButton->SetVisible(true);
@@ -88,7 +91,7 @@ void ctrl::FaxController::HandleEvent(sf::Event event)
 	if (event.type == sf::Event::KeyPressed) {
 		// Close Report with escape
 		if (event.key.code == sf::Keyboard::Escape && currentLayer > 0 && reportWindow->IsActive()) {
-			reportWindow->SetActive(false);
+			signals.Emit("CLOSE_FAX");
 		}
 		// Generate new report
 		if (event.key.code == sf::Keyboard::F && currentLayer == 0 && reportWindow->IsActive() == false) {
