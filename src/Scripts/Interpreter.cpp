@@ -3,6 +3,11 @@
 #include <iostream>
 
 namespace scripts {
+	void Interpreter::ConnectToInstructionsAtlas(scripts::InstructionsAtlas* instructionsAtlas)
+	{
+		this->parser.ConnectToInstructionsAtlas(instructionsAtlas);
+	}
+
 	void Interpreter::LoadScriptFromFile(const std::string& source)
 	{
 		std::fstream file(source, std::ios::in | std::ios::out);

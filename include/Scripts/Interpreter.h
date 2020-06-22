@@ -6,6 +6,7 @@
 #include "Trigger.h"
 #include <string>
 #include <queue>
+#include "Scripts/InstructionsAtlas.h"
 
 namespace scripts {
 	class Interpreter {
@@ -14,6 +15,7 @@ namespace scripts {
 		std::queue<std::string> phrasesQueue;
 		std::vector<std::shared_ptr<Trigger>>* triggers;
 	public:
+		void ConnectToInstructionsAtlas(scripts::InstructionsAtlas* instructionsAtlas);
 		void LoadScriptFromFile(const std::string& source);
 		void ShowLoadedPhrases();
 		std::vector<std::shared_ptr<Trigger>>* GetLoadedTriggers();

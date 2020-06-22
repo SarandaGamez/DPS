@@ -9,68 +9,12 @@ namespace scripts {
 
 	Parser::Parser()
 	{
-		eventsAtlas.push_back("GAME_INITIALIZED");
-		eventsAtlas.push_back("EVERY_SEC_MIN");
-		eventsAtlas.push_back("EVERY_SEC");
-		eventsAtlas.push_back("EVERY");
-		eventsAtlas.push_back("CLICKED_FAX");
-		eventsAtlas.push_back("CLICKED_MAP");
-		eventsAtlas.push_back("CLICKED_NOTEBOOK");
-		eventsAtlas.push_back("CLICKED_NEXTTURN");
-		eventsAtlas.push_back("CLICKED_MENU");
-		eventsAtlas.push_back("TURN_CHANGE_FINISHED");
-		eventsAtlas.push_back("TURN_CHANGE_STARTED");
-		eventsAtlas.push_back("TURN_CHANGE_INTERRUPTED");
-		eventsAtlas.push_back("CLOSED_FAX");
-		eventsAtlas.push_back("CLOSED_MAP");
-		eventsAtlas.push_back("CLOSED_NOTEBOOK");
-		eventsAtlas.push_back("CLOSED_MENU");
-		eventsAtlas.push_back("OPENED_FAX");
-		eventsAtlas.push_back("OPENED_MAP");
-		eventsAtlas.push_back("OPENED_NOTEBOOK");
-		eventsAtlas.push_back("OPENED_MENU");
+		currentAtlas = nullptr;
+	}
 
-		conditionsAtlas.push_back("IS_FAX_OPEN");
-		conditionsAtlas.push_back("IS_MAP_OPEN");
-		conditionsAtlas.push_back("IS_NOTEBOOK_OPEN");
-		conditionsAtlas.push_back("IS_MENU_OPEN");
-		conditionsAtlas.push_back("IS_FAX_CLOSED");
-		conditionsAtlas.push_back("IS_MAP_CLOSED");
-		conditionsAtlas.push_back("IS_NOTEBOOK_CLOSED");
-		conditionsAtlas.push_back("IS_MENU_CLOSED");
-		conditionsAtlas.push_back("IS_EQUAL");
-		conditionsAtlas.push_back("IS_GREATER_THAN");
-		conditionsAtlas.push_back("IS_LESS_THAN");
-		conditionsAtlas.push_back("IS_GREATER_OR_EQUAL");
-		conditionsAtlas.push_back("IS_LESS_OR_EQUAL");
-		conditionsAtlas.push_back("IS_TRUE");
-		conditionsAtlas.push_back("IS_FALSE");
-		conditionsAtlas.push_back("TEST_CONDITION");
-
-		actionsAtlas.push_back("SHOW_FAX_BUTTON");
-		actionsAtlas.push_back("SHOW_MAP_BUTTON");
-		actionsAtlas.push_back("SHOW_NOTEBOOK_BUTTON");
-		actionsAtlas.push_back("SHOW_MENU_BUTTON");
-		actionsAtlas.push_back("HIDE_FAX_BUTTON");
-		actionsAtlas.push_back("HIDE_MAP_BUTTON");
-		actionsAtlas.push_back("HIDE_NOTEBOOK_BUTTON");
-		actionsAtlas.push_back("HIDE_MENU_BUTTON");
-		actionsAtlas.push_back("OPEN_FAX");
-		actionsAtlas.push_back("OPEN_MAP");
-		actionsAtlas.push_back("OPEN_NOTEBOOK");
-		actionsAtlas.push_back("OPEN_MENU");
-		actionsAtlas.push_back("CLOSE_FAX");
-		actionsAtlas.push_back("CLOSE_MAP");
-		actionsAtlas.push_back("CLOSE_NOTEBOOK");
-		actionsAtlas.push_back("CLOSE_MENU");
-		actionsAtlas.push_back("MOVE_TO_NEXT_TURN");
-		actionsAtlas.push_back("DISPLAY_DIALOG");
-		actionsAtlas.push_back("SET_INTEGER");
-		actionsAtlas.push_back("SET_REAL");
-		actionsAtlas.push_back("SET_TEXT");
-		actionsAtlas.push_back("SET_FLAG");
-		actionsAtlas.push_back("WAIT");
-
+	void Parser::ConnectToInstructionsAtlas(scripts::InstructionsAtlas* instructionsAtlas)
+	{
+		this->instructionsAtlas = instructionsAtlas;
 	}
 
 	void Parser::CheckSyntax(std::string phrase)
@@ -83,7 +27,7 @@ namespace scripts {
 		}
 		else if (isTriggerFound == true) {
 
-			if (phrase[0] == '(' && isLookingForArguments == false) {
+			if (phrase[0] == '(' && isInstructionFound == true && isLookingForArguments == false) {
 				isLookingForArguments = true;
 			}
 			else if (phrase[0] == ')' && isLookingForArguments == true) {
@@ -105,16 +49,16 @@ namespace scripts {
 				}
 			}
 			if (phrase == EVENT_SYNTAX) {
+				currentAtlas = instructionsAtlas->GetEventsAtlas();
 				loadingState = LoadingState::event;
-				triggerBuilder.SetAtlas(eventsAtlas);
 			}
 			else if (phrase == CONDITION_SYNTAX) {
 				loadingState = LoadingState::condition;
-				triggerBuilder.SetAtlas(conditionsAtlas);
+				currentAtlas = instructionsAtlas->GetConditionsAtlas();
 			}
 			else if (phrase == ACTION_SYNTAX) {
 				loadingState = LoadingState::action;
-				triggerBuilder.SetAtlas(actionsAtlas);
+				currentAtlas = instructionsAtlas->GetActionsAtlas();
 			}
 			else if (phrase == "}") {
 				triggers.push_back(triggerBuilder.GetResult());
@@ -124,7 +68,7 @@ namespace scripts {
 				if (IsSpecialCharacter(phrase[0]) == false || phrase[0] == '$')
 					triggerBuilder.AddArgument(phrase);
 			}
-			else if (isInstructionFound == false && triggerBuilder.IsExistingInstruction(phrase)) {
+			else if (isInstructionFound == false && IsInstructionExisting(phrase)) {
 				isInstructionFound = true;
 				triggerBuilder.AddInstruction(phrase);
 			}
@@ -134,6 +78,16 @@ namespace scripts {
 	std::vector<std::shared_ptr<scripts::Trigger>>* scripts::Parser::ReturnResult()
 	{
 		return &triggers;
+	}
+
+	bool Parser::IsInstructionExisting(const std::string& value)
+	{
+		if (currentAtlas != nullptr) {
+			auto valueFinder = currentAtlas->begin();
+			valueFinder = currentAtlas->find(value);
+			return valueFinder != currentAtlas->end();
+		}
+		return false;
 	}
 
 	bool scripts::Parser::IsSpecialCharacter(char character)

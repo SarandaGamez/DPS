@@ -7,12 +7,12 @@
 
 #include "Scripts/Trigger.h"
 #include "Scripts/TriggerBuilder.h"
+#include "Scripts/InstructionsAtlas.h"
 
 namespace scripts {
 	class Parser {
-		std::vector<std::string> eventsAtlas;
-		std::vector<std::string> conditionsAtlas;
-		std::vector<std::string> actionsAtlas;
+		std::map<std::string, std::string>* currentAtlas;
+		scripts::InstructionsAtlas* instructionsAtlas;
 
 		std::vector<std::shared_ptr<scripts::Trigger>> triggers;
 
@@ -24,10 +24,12 @@ namespace scripts {
 
 	public:
 		Parser();
+		void ConnectToInstructionsAtlas(scripts::InstructionsAtlas* instructionsAtlas);
 		void CheckSyntax(std::string phrase);
 		std::vector<std::shared_ptr<scripts::Trigger>>* ReturnResult();
 	private:
 
+		bool IsInstructionExisting(const std::string& value);
 		bool IsSpecialCharacter(char character);
 
 		enum class LoadingState {
