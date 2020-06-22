@@ -10,6 +10,7 @@
 #include "Utils/SignalsContainer.h"
 #include "Utils/ConditionSignalsContainer.h"
 #include "Scripts/InstructionsAtlas.h"
+#include "Scripts/Variables.h"
 
 namespace ctrl {
 
@@ -31,6 +32,7 @@ namespace ctrl {
 		static utils::ConditionSignalsContainer<std::string> conditionSignals;
 		static std::vector<std::string> arguments;
 		static scripts::InstructionsAtlas instructionsAtlas;
+		static scripts::Variables variables;
 
 	};
 }

@@ -72,16 +72,54 @@ ctrl::TriggersController::TriggersController()
 
 	conditionSignals["TEST_CONDITION"].Connect([=]() {
 		if (arguments.empty() == false)
-			if (arguments[0] == "TRUE")	
-			return true;
+			if (arguments[0] == "TRUE")
+				return true;
 		return false;
 		});
 
 
 	signals["WAIT"].Connect([=]() {
 		if (arguments.empty() == false) {
-			std::cout << "WAIT " << arguments[0] << std::endl;
-			actions.Wait(std::stoi(arguments[0]));
+			if (variables.CheckIfExists(arguments[0].substr(1))) {
+				if (variables.IsType(arguments[0].substr(1), scripts::VariableType::integer)) {
+					int milliseconds = std::any_cast<int>(variables.Get(arguments[0].substr(1)).GetValue());
+					std::cout << "WAIT " << std::to_string(milliseconds) << std::endl;
+					actions.Wait(milliseconds);
+				}
+				else {
+					std::cout << "WAIT 0" << std::endl;
+					actions.Wait(0);
+				}
+			}
+			else {
+				std::cout << "WAIT " << arguments[0] << std::endl;
+				actions.Wait(std::stoi(arguments[0]));
+			}
+		}
+		});
+
+	signals["SET_REAL"].Connect([=]() {
+		if (arguments.size() >= 2) {
+			variables.Add(arguments[0], scripts::VariableType::real, std::stof(arguments[1]));
+		}
+		});
+	signals["SET_TEXT"].Connect([=]() {
+		if (arguments.size() >= 2) {
+			variables.Add(arguments[0], scripts::VariableType::text, std::string(arguments[1]));
+		}
+		});
+	signals["SET_FLAG"].Connect([=]() {
+		if (arguments.size() >= 2) {
+			if(arguments[1] == "TRUE" || arguments[1] == "1")
+				variables.Add(arguments[0], scripts::VariableType::flag, true);
+			else
+				variables.Add(arguments[0], scripts::VariableType::flag, false);
+		}
+		});
+	signals["SET_INTEGER"].Connect([=]() {
+		if (arguments.size() >= 2) {
+			std::cout << "SET_INTEGER " << arguments[0] << " " << arguments[1] << std::endl;
+			variables.Add(arguments[0], scripts::VariableType::integer, std::stoi(arguments[1]));
 		}
 		});
 
