@@ -18,7 +18,7 @@ namespace ctrl {
 
 	private:
 		scripts::Interpreter interpreter;
-		std::vector<std::shared_ptr<scripts::Trigger>>* triggers;
+		std::vector<std::shared_ptr<scripts::Trigger>> triggers;
 
 		void InitializeTriggers();
 

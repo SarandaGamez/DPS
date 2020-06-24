@@ -1,5 +1,6 @@
 #include "Controllers/TriggersController.h"
 #include <iostream>
+#include <filesystem>
 
 ctrl::TriggersController::TriggersController()
 {
@@ -67,9 +68,17 @@ ctrl::TriggersController::TriggersController()
 	instructionsAtlas.AddAction("WAIT", "WAIT");
 
 	interpreter.ConnectToInstructionsAtlas(&instructionsAtlas);
-	interpreter.LoadScriptFromFile("assets/scripts/test.pscript");
-	triggers = interpreter.GetLoadedTriggers();
-	InitializeTriggers();
+	
+	std::string path = "assets/scripts/";
+	for (const auto& entry : std::filesystem::recursive_directory_iterator(path))
+		if (entry.path().extension().string() == ".pscript") {
+			interpreter.LoadScriptFromFile(entry.path().string());
+			for (auto trigger : *interpreter.GetLoadedTriggers())
+				triggers.push_back(trigger);
+		}
+
+	if(triggers.empty() == false)
+		InitializeTriggers();
 
 	conditionSignals["TEST_CONDITION"].Connect([=]() {
 		if (arguments.empty() == false)
@@ -143,7 +152,7 @@ void ctrl::TriggersController::HandleEvent(sf::Event event)
 
 void ctrl::TriggersController::InitializeTriggers()
 {
-	for (auto trigger : *triggers) {
+	for (auto trigger : triggers) {
 		while (trigger->IsEventsQueueEmpty() == false) {
 			ConnectToSignal(trigger);
 		}
