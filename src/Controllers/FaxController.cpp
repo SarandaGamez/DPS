@@ -33,6 +33,15 @@ ctrl::FaxController::FaxController()
 		renderWindow->getSize().y / 2.f - reportWindow->GetWindowArea().height / 2 });
 	
 	signals["SHOW_FAX_BUTTON"].Connect([=]() {
+		if (arguments.size() > 0 && variables.CheckIfExists(arguments[0].substr(1))) {
+				if (variables.IsType(arguments[0].substr(1), scripts::VariableType::text)) {
+					std::string txt = std::any_cast<std::string>(variables.Get(arguments[0].substr(1)).GetValue());
+					reportText->SetText(txt);
+				}
+				else {
+					reportText->SetText(arguments[0]);
+				}
+			}
 		reportButton->SetActive(true);
 		});
 	signals["HIDE_FAX_BUTTON"].Connect([=]() {

@@ -3,6 +3,7 @@
 
 ctrl::TriggersController::TriggersController()
 {
+	instructionsAtlas.AddEvent("GAME_PREINITIALIZED", "GAME_PREINITIALIZED");
 	instructionsAtlas.AddEvent("GAME_INITIALIZED", "GAME_INITIALIZED");
 	instructionsAtlas.AddEvent("EVERY_SEC_MIN", "EVERY_SEC_MIN");
 	instructionsAtlas.AddEvent("EVERY_SEC", "EVERY_SEC");
@@ -77,7 +78,6 @@ ctrl::TriggersController::TriggersController()
 		return false;
 		});
 
-
 	signals["WAIT"].Connect([=]() {
 		if (arguments.empty() == false) {
 			if (variables.CheckIfExists(arguments[0].substr(1))) {
@@ -105,7 +105,13 @@ ctrl::TriggersController::TriggersController()
 		});
 	signals["SET_TEXT"].Connect([=]() {
 		if (arguments.size() >= 2) {
-			variables.Add(arguments[0], scripts::VariableType::text, std::string(arguments[1]));
+			std::string value = arguments[1];
+			if(arguments.size() >= 3)
+			for (int i = 2; i < arguments.size(); i++)
+				value += " " + arguments[i];
+				
+			variables.Add(arguments[0], scripts::VariableType::text, value);
+			std::cout << "SET_TEXT " << arguments[0] << " " << value << std::endl;
 		}
 		});
 	signals["SET_FLAG"].Connect([=]() {
@@ -122,6 +128,8 @@ ctrl::TriggersController::TriggersController()
 			variables.Add(arguments[0], scripts::VariableType::integer, std::stoi(arguments[1]));
 		}
 		});
+
+	signals.Emit("GAME_PREINITIALIZED");
 
 }
 
