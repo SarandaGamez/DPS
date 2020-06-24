@@ -11,20 +11,35 @@ namespace scripts {
 			if (phrase == "//")
 				return phrasesQueue;
 
+			if (backslashFound == true) {
+				backslashFound = false;
+				if (character == 'n') {
+					phrase.push_back('\n');
+					phrasesQueue.push(phrase);
+					phrase.clear();
+					continue;
+				}
+			}
+
 			if (IsSpecialCharacter(character))
 			{
+				if (character == '\\') {
+					backslashFound = true;
+				}
+
 				if (!phrase.empty())
 				{
 					phrasesQueue.push(phrase);
 					phrase.clear();
 				}
 
-				if (character != '	' && character != ' ')
+				if (character != '	' && character != ' ' && character != '\\')
 				{
 					phrase.push_back(character);
 					phrasesQueue.push(phrase);
 					phrase.clear();
 				}
+
 			}
 			else
 			{
@@ -40,7 +55,7 @@ namespace scripts {
 
 	bool Lexer::IsSpecialCharacter(const char& character) const
 	{
-		std::vector<char> charactersArray = { ' ', '\t', '{', '}', '(', ')', '"', ';', ',', '.', '=' };
+		std::vector<char> charactersArray = { ' ', '\t', '{', '}', '(', ')', '"', ';', '.', '=', '\\' };
 		return std::any_of(charactersArray.begin(), charactersArray.end(), [character](char c) { return character == c; });
 	}
 }

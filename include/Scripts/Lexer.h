@@ -10,6 +10,7 @@ namespace scripts {
 		std::queue<std::string> FindPhrases(const std::string& line);
 	private:
 		bool IsSpecialCharacter(const char& character) const;
+		bool backslashFound = false;
 	};
 }
 
