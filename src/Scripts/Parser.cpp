@@ -27,10 +27,10 @@ namespace scripts {
 		}
 		else if (isTriggerFound == true) {
 
-			if (phrase[0] == '(' && isInstructionFound == true && isLookingForArguments == false) {
+			if (phrase[0] == '{' && isInstructionFound == true && isLookingForArguments == false) {
 				isLookingForArguments = true;
 			}
-			else if (phrase[0] == ')' && isLookingForArguments == true) {
+			else if (phrase[0] == '}' && isLookingForArguments == true) {
 				isLookingForArguments = false;
 			}
 			else if (isInstructionFound == true && isLookingForArguments == false) {
@@ -60,7 +60,7 @@ namespace scripts {
 				loadingState = LoadingState::action;
 				currentAtlas = instructionsAtlas->GetActionsAtlas();
 			}
-			else if (phrase == "}") {
+			else if (phrase == "}" && isTriggerFound == true && isInstructionFound == false) {
 				triggers.push_back(triggerBuilder.GetResult());
 				isTriggerFound = false;
 			}
@@ -92,7 +92,7 @@ namespace scripts {
 
 	bool scripts::Parser::IsSpecialCharacter(char character)
 	{
-		std::vector<char> charactersArray = { ' ', '\t', '{', '}', '(', ')', '"', ';', ':', ',', '.', '=', '#', '$' };
+		std::vector<char> charactersArray = { ' ', '\t', '{', '}', '"', ';', ':', ',', '.', '=', '#', '$' };
 		return std::any_of(charactersArray.begin(), charactersArray.end(), [character](char c) { return character == c; });
 	}
 }
