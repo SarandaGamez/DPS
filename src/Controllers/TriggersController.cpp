@@ -1,72 +1,12 @@
 #include "Controllers/TriggersController.h"
 #include <iostream>
 #include <filesystem>
+#include "Scripts/InstructionsLoader.h"
 
 ctrl::TriggersController::TriggersController()
 {
-	instructionsAtlas.AddEvent("GAME_PREINITIALIZED", "GAME_PREINITIALIZED");
-	instructionsAtlas.AddEvent("GAME_INITIALIZED", "GAME_INITIALIZED");
-	instructionsAtlas.AddEvent("EVERY_SEC_MIN", "EVERY_SEC_MIN");
-	instructionsAtlas.AddEvent("EVERY_SEC", "EVERY_SEC");
-	instructionsAtlas.AddEvent("EVERY", "EVERY");
-	instructionsAtlas.AddEvent("CLICKED_FAX", "CLICKED_FAX");
-	instructionsAtlas.AddEvent("CLICKED_MAP", "CLICKED_MAP");
-	instructionsAtlas.AddEvent("CLICKED_NOTEBOOK", "CLICKED_NOTEBOOK");
-	instructionsAtlas.AddEvent("CLICKED_NEXTTURN", "CLICKED_NEXTTURN");
-	instructionsAtlas.AddEvent("CLICKED_MENU", "CLICKED_MENU");
-	instructionsAtlas.AddEvent("TURN_CHANGE_FINISHED", "TURN_CHANGE_FINISHED");
-	instructionsAtlas.AddEvent("TURN_CHANGE_STARTED", "TURN_CHANGE_STARTED");
-	instructionsAtlas.AddEvent("TURN_CHANGE_INTERRUPTED", "TURN_CHANGE_INTERRUPTED");
-	instructionsAtlas.AddEvent("CLOSED_FAX", "CLOSED_FAX");
-	instructionsAtlas.AddEvent("CLOSED_MAP", "CLOSED_MAP");
-	instructionsAtlas.AddEvent("CLOSED_NOTEBOOK", "CLOSED_NOTEBOOK");
-	instructionsAtlas.AddEvent("CLOSED_MENU", "CLOSED_MENU");
-	instructionsAtlas.AddEvent("OPENED_FAX", "OPENED_FAX");
-	instructionsAtlas.AddEvent("OPENED_MAP", "OPENED_MAP");
-	instructionsAtlas.AddEvent("OPENED_NOTEBOOK", "OPENED_NOTEBOOK");
-	instructionsAtlas.AddEvent("OPENED_MENU", "OPENED_MENU");
-
-	instructionsAtlas.AddCondition("IS_FAX_OPEN", "IS_FAX_OPEN");
-	instructionsAtlas.AddCondition("IS_MAP_OPEN", "IS_MAP_OPEN");
-	instructionsAtlas.AddCondition("IS_NOTEBOOK_OPEN", "IS_NOTEBOOK_OPEN");
-	instructionsAtlas.AddCondition("IS_MENU_OPEN", "IS_MENU_OPEN");
-	instructionsAtlas.AddCondition("IS_FAX_CLOSED", "IS_FAX_CLOSED");
-	instructionsAtlas.AddCondition("IS_MAP_CLOSED", "IS_MAP_CLOSED");
-	instructionsAtlas.AddCondition("IS_NOTEBOOK_CLOSED", "IS_NOTEBOOK_CLOSED");
-	instructionsAtlas.AddCondition("IS_MENU_CLOSED", "IS_MENU_CLOSED");
-	instructionsAtlas.AddCondition("IS_EQUAL", "IS_EQUAL");
-	instructionsAtlas.AddCondition("IS_GREATER_THAN", "IS_GREATER_THAN");
-	instructionsAtlas.AddCondition("IS_LESS_THAN", "IS_LESS_THAN");
-	instructionsAtlas.AddCondition("IS_GREATER_OR_EQUAL", "IS_GREATER_OR_EQUAL");
-	instructionsAtlas.AddCondition("IS_LESS_OR_EQUAL", "IS_LESS_OR_EQUAL");
-	instructionsAtlas.AddCondition("IS_TRUE", "IS_TRUE");
-	instructionsAtlas.AddCondition("IS_FALSE", "IS_FALSE");
-	instructionsAtlas.AddCondition("TEST_CONDITION", "TEST_CONDITION");
-
-	instructionsAtlas.AddAction("SHOW_FAX_BUTTON", "SHOW_FAX_BUTTON");
-	instructionsAtlas.AddAction("SHOW_MAP_BUTTON", "SHOW_MAP_BUTTON");
-	instructionsAtlas.AddAction("SHOW_NOTEBOOK_BUTTON", "SHOW_NOTEBOOK_BUTTON");
-	instructionsAtlas.AddAction("SHOW_MENU_BUTTON", "SHOW_MENU_BUTTON");
-	instructionsAtlas.AddAction("HIDE_FAX_BUTTON", "HIDE_FAX_BUTTON");
-	instructionsAtlas.AddAction("HIDE_MAP_BUTTON", "HIDE_MAP_BUTTON");
-	instructionsAtlas.AddAction("HIDE_NOTEBOOK_BUTTON", "HIDE_NOTEBOOK_BUTTON");
-	instructionsAtlas.AddAction("HIDE_MENU_BUTTON", "HIDE_MENU_BUTTON");
-	instructionsAtlas.AddAction("OPEN_FAX", "OPEN_FAX");
-	instructionsAtlas.AddAction("OPEN_MAP", "OPEN_MAP");
-	instructionsAtlas.AddAction("OPEN_NOTEBOOK", "OPEN_NOTEBOOK");
-	instructionsAtlas.AddAction("OPEN_MENU", "OPEN_MENU");
-	instructionsAtlas.AddAction("CLOSE_FAX", "CLOSE_FAX");
-	instructionsAtlas.AddAction("CLOSE_MAP", "CLOSE_MAP");
-	instructionsAtlas.AddAction("CLOSE_NOTEBOOK", "CLOSE_NOTEBOOK");
-	instructionsAtlas.AddAction("CLOSE_MENU", "CLOSE_MENU");
-	instructionsAtlas.AddAction("MOVE_TO_NEXT_TURN", "MOVE_TO_NEXT_TURN");
-	instructionsAtlas.AddAction("DISPLAY_DIALOG", "DISPLAY_DIALOG");
-	instructionsAtlas.AddAction("SET_INTEGER", "SET_INTEGER");
-	instructionsAtlas.AddAction("SET_REAL", "SET_REAL");
-	instructionsAtlas.AddAction("SET_TEXT", "SET_TEXT");
-	instructionsAtlas.AddAction("SET_FLAG", "SET_FLAG");
-	instructionsAtlas.AddAction("WAIT", "WAIT");
-
+	scripts::InstructionsLoader instructionsLoader(&instructionsAtlas);
+	instructionsLoader.LoadInstructionsFromFile("assets/scripts/instructions.pconfig");
 	interpreter.ConnectToInstructionsAtlas(&instructionsAtlas);
 	
 	std::string path = "assets/scripts/";
