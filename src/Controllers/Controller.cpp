@@ -10,7 +10,7 @@ game::ActionsQueue ctrl::Controller::actions;
 utils::SignalsContainer<std::string> ctrl::Controller::signals;
 utils::ConditionSignalsContainer<std::string> ctrl::Controller::conditionSignals;
 std::vector<std::string> ctrl::Controller::arguments;
-scripts::InstructionsAtlas ctrl::Controller::instructionsAtlas;
+scripts::InstructionsSet ctrl::Controller::instructionsAtlas;
 scripts::Variables ctrl::Controller::variables;
 
 void ctrl::Controller::Initialize(std::shared_ptr<sf::RenderWindow> renderWindow, TexturesHolder& texturesHolder, StateTransition* transition)

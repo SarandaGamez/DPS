@@ -2,7 +2,7 @@
 #define SCRIPTS_INSTRUCTIONS_LOADER_H
 
 #include "Scripts/Lexer.h"
-#include "Scripts/InstructionsAtlas.h"
+#include "Scripts/InstructionsSet.h"
 #include <memory>
 
 namespace scripts {
@@ -14,9 +14,9 @@ namespace scripts {
 
 		Lexer lexer;
 		std::queue<std::string> phrasesQueue;
-		scripts::InstructionsAtlas* atlas;
+		scripts::InstructionsSet* atlas;
 	public:
-		InstructionsLoader(scripts::InstructionsAtlas* instructionsAtlas);
+		InstructionsLoader(scripts::InstructionsSet* instructionsAtlas);
 		void LoadInstructionsFromFile(const std::string& source);
 	};
 }

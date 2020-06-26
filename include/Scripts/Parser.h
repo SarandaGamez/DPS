@@ -4,15 +4,16 @@
 #include <string>
 #include <vector>
 #include <memory>
+#include <set>
 
 #include "Scripts/Trigger.h"
 #include "Scripts/TriggerBuilder.h"
-#include "Scripts/InstructionsAtlas.h"
+#include "Scripts/InstructionsSet.h"
 
 namespace scripts {
 	class Parser {
-		std::map<std::string, std::string>* currentAtlas;
-		scripts::InstructionsAtlas* instructionsAtlas;
+		std::set<std::string>* currentAtlas;
+		scripts::InstructionsSet* instructionsAtlas;
 
 		std::vector<std::shared_ptr<scripts::Trigger>> triggers;
 
@@ -24,7 +25,7 @@ namespace scripts {
 
 	public:
 		Parser();
-		void ConnectToInstructionsAtlas(scripts::InstructionsAtlas* instructionsAtlas);
+		void ConnectToInstructionsAtlas(scripts::InstructionsSet* instructionsAtlas);
 		void CheckSyntax(std::string phrase);
 		std::vector<std::shared_ptr<scripts::Trigger>>* ReturnResult();
 	private:

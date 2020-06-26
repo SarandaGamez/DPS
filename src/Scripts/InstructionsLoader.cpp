@@ -2,7 +2,7 @@
 #include <fstream>
 
 namespace scripts {
-	InstructionsLoader::InstructionsLoader(scripts::InstructionsAtlas* instructionsAtlas)
+	InstructionsLoader::InstructionsLoader(scripts::InstructionsSet* instructionsAtlas)
 	{
 		this->atlas = instructionsAtlas;
 	}
@@ -27,7 +27,6 @@ namespace scripts {
 			file.close();
 		}
 
-		std::string key = "";
 		currentInstructionType = InstructionType::event;
 		while (!phrasesQueue.empty())
 		{
@@ -49,24 +48,19 @@ namespace scripts {
 				}
 			}
 
-			else if (key != "") {
-				switch (currentInstructionType)
-				{
-				case scripts::InstructionsLoader::InstructionType::event:
-					atlas->AddEvent(key, frontPhrase);
-					break;
-				case scripts::InstructionsLoader::InstructionType::condition:
-					atlas->AddCondition(key, frontPhrase);
-					break;
-				case scripts::InstructionsLoader::InstructionType::action:
-					atlas->AddAction(key, frontPhrase);
-					break;
-				}
-				key = "";
+			switch (currentInstructionType)
+			{
+			case scripts::InstructionsLoader::InstructionType::event:
+				atlas->AddEvent(frontPhrase);
+				break;
+			case scripts::InstructionsLoader::InstructionType::condition:
+				atlas->AddCondition(frontPhrase);
+				break;
+			case scripts::InstructionsLoader::InstructionType::action:
+				atlas->AddAction(frontPhrase);
+				break;
 			}
-			else {
-				key = frontPhrase;
-			}
+
 		}
 	}
 }

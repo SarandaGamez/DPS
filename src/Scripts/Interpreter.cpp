@@ -3,7 +3,7 @@
 #include <iostream>
 
 namespace scripts {
-	void Interpreter::ConnectToInstructionsAtlas(scripts::InstructionsAtlas* instructionsAtlas)
+	void Interpreter::ConnectToInstructionsAtlas(scripts::InstructionsSet* instructionsAtlas)
 	{
 		this->parser.ConnectToInstructionsAtlas(instructionsAtlas);
 	}

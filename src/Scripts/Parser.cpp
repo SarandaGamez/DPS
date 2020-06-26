@@ -12,7 +12,7 @@ namespace scripts {
 		currentAtlas = nullptr;
 	}
 
-	void Parser::ConnectToInstructionsAtlas(scripts::InstructionsAtlas* instructionsAtlas)
+	void Parser::ConnectToInstructionsAtlas(scripts::InstructionsSet* instructionsAtlas)
 	{
 		this->instructionsAtlas = instructionsAtlas;
 	}
