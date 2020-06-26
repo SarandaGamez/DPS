@@ -4,6 +4,7 @@
 #include "Controllers/Controller.h"
 #include <memory>
 #include "GUI/TextComponent.h"
+#include "GUI/Window.h"
 
 namespace ctrl {
 	class DebugController : public ctrl::Controller {
@@ -17,6 +18,7 @@ namespace ctrl {
 	private:
 		sf::Font font;
 		bool isWindowClosed = false;
+		std::shared_ptr<gui::Window> dialogWindow;
 		std::shared_ptr<gui::TextComponent> debugText;
 	};
 }
