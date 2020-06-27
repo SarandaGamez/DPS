@@ -2,6 +2,7 @@
 #include <iostream>
 #include <filesystem>
 #include "Scripts/InstructionsLoader.h"
+#include "Utils/StringUtils.h"
 
 ctrl::TriggersController::TriggersController()
 {
@@ -75,6 +76,22 @@ ctrl::TriggersController::TriggersController()
 		if (arguments.size() >= 2) {
 			std::cout << "SET_INTEGER " << arguments[0] << " " << arguments[1] << std::endl;
 			variables.Add(arguments[0], scripts::VariableType::integer, std::stoi(arguments[1]));
+		}
+		});
+	signals["TEXT_BREAKLINE"].Connect([=]() {
+		if (arguments.size() > 0) {
+			if (arguments[0][0] == '$') {
+				std::string arg = arguments[0].substr(1);
+				if (variables.CheckIfExists(arg) && variables.IsType(arg, scripts::VariableType::text)) {
+					std::string txt = std::any_cast<std::string>(variables.Get(arg).GetValue());
+					if (arguments.size() >= 2)
+						txt = utils::StringUtils::BreakLines(txt, std::stoi(arguments[1]));
+					else {
+						txt = utils::StringUtils::BreakLines(txt, 30);
+					}
+					variables.Add(arg, scripts::VariableType::text, txt);
+				}
+			}
 		}
 		});
 
