@@ -4,7 +4,12 @@ If :
 Actions : 
 SET_TEXT{
 FAX1 
-Hello Comrade,\n this is testing message from the Great Leader
+Hello Comrade, this is testing message from the Great Leader
+}
+
+TEXT_BREAKLINE{
+$FAX1
+45
 }
 
 SET_TEXT{
@@ -27,7 +32,10 @@ NOTEBOOK4
 Mauris sed elementum felis. Nullam magna velit, dapibus vitae consectetur non, lacinia sed augue. Donec in leo non ante tempus aliquam. Phasellus odio libero, tempor quis aliquet fringilla, ultricies eu diam. Morbi in placerat arcu. Praesent id nisi et est consectetur varius. Nulla at arcu eu felis euismod tincidunt. Proin sit amet libero eget sem blandit congue. Mauris eget ornare nisl. Duis dignissim, orci non varius consequat, lectus ex ultricies risus, tempus porttitor libero turpis nec libero. Maecenas augue neque, faucibus condimentum tortor quis, feugiat venenatis quam. Sed pretium sem arcu, sed fermentum nisi porttitor in. Nam laoreet, augue quis aliquam placerat, lacus dolor pellentesque libero, vel molestie enim lectus sit amet nulla. Cras vel condimentum mauris.
 }
 
-
+SET_TEXT{
+DIALOG_NOT_AVAILABLE
+Feature is not available at the moment
+}
 
 
 }
