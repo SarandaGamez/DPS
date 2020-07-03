@@ -11,6 +11,8 @@
 #include "Utils/ConditionSignalsContainer.h"
 #include "Scripts/InstructionsSet.h"
 #include "Scripts/Variables.h"
+#include "GUI/UIComposite.h"
+#include <list>
 
 namespace ctrl {
 
@@ -33,6 +35,7 @@ namespace ctrl {
 		static std::vector<std::string> arguments;
 		static scripts::InstructionsSet instructionsAtlas;
 		static scripts::Variables variables;
+		static std::list<std::shared_ptr<gui::UIComposite>> uiComponents;
 
 	};
 }
