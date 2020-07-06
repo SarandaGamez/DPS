@@ -14,6 +14,7 @@
 #include "Controllers/MapController.h"
 #include "Controllers/GameController.h"
 #include "Controllers/TriggersController.h"
+#include "Controllers/LocationController.h"
 #include <string>
 #include "Utils/StringUtils.h"
 
@@ -65,6 +66,7 @@ void GameState::OnEnter()
 	CloseDialog();
 
 	// Controllers
+	controllers.Add(new ctrl::LocationController);
 	controllers.Add(new ctrl::FaxController);
 	controllers.Add(new ctrl::NotebookController);
 	controllers.Add(new ctrl::MapController);

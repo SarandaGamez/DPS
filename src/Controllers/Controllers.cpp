@@ -21,6 +21,11 @@ void ctrl::Controllers::Update(sf::Time elapsedTimes)
 
 void ctrl::Controllers::Draw()
 {
+
+	for (auto uicomp : drawablesList) {
+		renderWindow->draw(*uicomp);
+	}
+
 	if (!controllers.empty())
 		for (auto& contr : controllers)
 			contr->Draw();

@@ -8,7 +8,7 @@
 #include <memory>
 
 namespace ctrl {
-	class Controllers{
+	class Controllers : public ctrl::Controller{
 	public:
 		void Add(ctrl::Controller* controller);
 		void HandleEvent(sf::Event event);

@@ -35,7 +35,7 @@ namespace ctrl {
 		static std::vector<std::string> arguments;
 		static scripts::InstructionsSet instructionsAtlas;
 		static scripts::Variables variables;
-		static std::list<std::shared_ptr<gui::UIComposite>> uiComponents;
+		static std::list<std::shared_ptr<gui::UIComponent>> drawablesList;
 
 	};
 }
