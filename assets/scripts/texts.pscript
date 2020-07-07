@@ -37,5 +37,10 @@ DIALOG_NOT_AVAILABLE
 Feature is not available at the moment
 }
 
+SET_TEXT{
+DIALOG_TEST_MESSAGE
+This is a test message
+}
+
 
 }
