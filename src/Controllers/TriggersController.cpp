@@ -2,10 +2,14 @@
 #include <iostream>
 #include <filesystem>
 #include "Scripts/InstructionsLoader.h"
+#include "Scripts/InstructionsSet.h"
+#include "Scripts/Interpreter.h"
 #include "Utils/StringUtils.h"
 
 ctrl::TriggersController::TriggersController()
 {
+	scripts::Interpreter interpreter; 
+	scripts::InstructionsSet instructionsAtlas;
 	scripts::InstructionsLoader instructionsLoader(&instructionsAtlas);
 	instructionsLoader.LoadInstructionsFromFile("assets/scripts/instructions.pconfig");
 	interpreter.ConnectToInstructionsAtlas(&instructionsAtlas);

@@ -9,7 +9,6 @@
 #include "Utils/SignalObject.h"
 #include "Utils/SignalsContainer.h"
 #include "Utils/ConditionSignalsContainer.h"
-#include "Scripts/InstructionsSet.h"
 #include "Scripts/Variables.h"
 #include "GUI/UIComposite.h"
 #include <list>
@@ -34,7 +33,6 @@ namespace ctrl {
 		static utils::SignalsContainer<std::string> signals;
 		static utils::ConditionSignalsContainer<std::string> conditionSignals;
 		static std::vector<std::string> arguments;
-		static scripts::InstructionsSet instructionsAtlas;
 		static scripts::Variables variables;
 		static std::list<std::shared_ptr<gui::UIComponent>> drawablesList;
 

@@ -2,9 +2,7 @@
 #define CTRL_TRIGGERS_CONTROLLER_H
 
 #include "Controllers/Controller.h"
-#include "Scripts/Interpreter.h"
 #include "Scripts/Trigger.h"
-#include "Utils/ConditionSignalsContainer.h"
 #include <vector>
 #include <memory>
 
@@ -17,7 +15,6 @@ namespace ctrl {
 		virtual void HandleEvent(sf::Event event) override;
 
 	private:
-		scripts::Interpreter interpreter;
 		std::vector<std::shared_ptr<scripts::Trigger>> triggers;
 
 		void InitializeTriggers();

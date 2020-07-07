@@ -10,7 +10,6 @@ game::ActionsQueue ctrl::Controller::actions;
 utils::SignalsContainer<std::string> ctrl::Controller::signals;
 utils::ConditionSignalsContainer<std::string> ctrl::Controller::conditionSignals;
 std::vector<std::string> ctrl::Controller::arguments;
-scripts::InstructionsSet ctrl::Controller::instructionsAtlas;
 scripts::Variables ctrl::Controller::variables;
 std::list<std::shared_ptr<gui::UIComponent>> ctrl::Controller::drawablesList;
 
