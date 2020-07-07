@@ -18,8 +18,9 @@ ctrl::NotebookController::NotebookController()
 	// Initialize tools
 	gui::ButtonsBuilder buttonsBuilder;
 	
-	button = std::shared_ptr<gui::Button>(new gui::Button(textures->GetTexture("NotebookButton"), { 850, 875 }));
+	button = std::shared_ptr<gui::Button>(new gui::Button(textures->GetTexture("NotebookButton"), { 750, 775 }));
 	button->SetActive(true);
+	button->SetLayer(5);
 	button->GetSignal(gui::SignalTypes::onLeftMouseButtonReleased).Connect([=]() {
 		if (currentLayer == 0 && notebook->GetWindow()->IsActive() == false)
 		notebook->GetWindow()->SetActive(true);

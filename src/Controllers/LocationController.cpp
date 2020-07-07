@@ -19,8 +19,8 @@ ctrl::LocationController::LocationController()
 	desk->SetLayer(4);
 	chair->SetLayer(2);
 	windowView->SetPosition({ 150,150 });
-	chair->SetPosition({ renderWindow->getSize().x - 928.f, renderWindow->getSize().y - 288.f });
-	desk->SetPosition({ renderWindow->getSize().x - 1100.f, renderWindow->getSize().y - 288.f });
+	chair->SetPosition({ renderWindow->getSize().x - 1250.f, renderWindow->getSize().y - 600.f });
+	desk->SetPosition({ renderWindow->getSize().x - 1740.f, renderWindow->getSize().y - 500.f });
 
 	drawablesList.push_back(windowView);
 	drawablesList.push_back(background);

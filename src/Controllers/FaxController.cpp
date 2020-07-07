@@ -22,16 +22,18 @@ ctrl::FaxController::FaxController()
 	reportWindow->SetVisible(false);
 
 	auto fax = std::shared_ptr<gui::GraphicComponent>(new gui::GraphicComponent(textures->GetTexture("FaxNoPaper")));
-	fax->SetLayer(4);
-	fax->SetPosition({ 1400, 550 });
+	fax->SetLayer(5);
+	fax->SetPosition({ 1600,650 });
 	drawablesList.push_back(fax);
 
-	reportButton = std::shared_ptr<gui::Button>(new gui::Button(textures->GetTexture("FaxPaper"), { 1400,550 }));
+	reportButton = std::shared_ptr<gui::Button>(new gui::Button(textures->GetTexture("FaxPaper"), { 1600,650 }));
+	reportButton->SetLayer(6);
 	reportButton->SetActive(false);
 	reportButton->GetSignal(gui::SignalTypes::onLeftMouseButtonReleased).Connect([=]() {
 		signals.Emit("OPEN_FAX");
 		signals.Emit("CLICKED_FAX");
 		});	
+	drawablesList.push_back(reportButton);
 
 	std::string testingText = "Hello Comrade,\n\nThis is the first day of the service for the safety of the Graboria State. Until you will be able to praise the glory of the Greatest Leader you will have to complete the training.\n First of all you have to familiarize yourself with the tools given from the central planner.\n Open the notebook to see the next information.\n\n (You can finish reading the fax by clicking outside of it or by pressing escape button.)";
 	testingText = utils::StringUtils::BreakLines(testingText, 35);
@@ -127,5 +129,4 @@ void ctrl::FaxController::HandleEvent(sf::Event event)
 void ctrl::FaxController::Draw() const
 {
 	renderWindow->draw(*reportWindow);
-	renderWindow->draw(*reportButton);
 }
