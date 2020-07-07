@@ -23,7 +23,8 @@ void ctrl::Controllers::Draw()
 {
 
 	for (auto uicomp : drawablesList) {
-		renderWindow->draw(*uicomp);
+		if(uicomp->IsVisible() == true)
+			renderWindow->draw(*uicomp);
 	}
 
 	if (!controllers.empty())
