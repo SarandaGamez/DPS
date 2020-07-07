@@ -9,6 +9,10 @@ ctrl::FaxController::FaxController()
 {
 	paperTexture.loadFromFile("assets/graphics/GUI/Paper.png");
 	windowTexture.loadFromFile("assets/graphics/GUI/ReportWindow.png");
+
+	textures->Load("FaxNoPaper", "assets/graphics/locations/fax.png");
+	textures->Load("FaxPaper", "assets/graphics/locations/faxPaper.png");
+
 	font.loadFromFile("assets/fonts/cinematic.ttf");
 	gui::ButtonsBuilder buttonsBuilder;
 
@@ -17,7 +21,12 @@ ctrl::FaxController::FaxController()
 	reportWindow->SetActive(false); 
 	reportWindow->SetVisible(false);
 
-	reportButton = std::shared_ptr<gui::Button>(new gui::Button(paperTexture, { 1670, 630 }));
+	auto fax = std::shared_ptr<gui::GraphicComponent>(new gui::GraphicComponent(textures->GetTexture("FaxNoPaper")));
+	fax->SetLayer(4);
+	fax->SetPosition({ 1400, 550 });
+	drawablesList.push_back(fax);
+
+	reportButton = std::shared_ptr<gui::Button>(new gui::Button(textures->GetTexture("FaxPaper"), { 1400,550 }));
 	reportButton->SetActive(false);
 	reportButton->GetSignal(gui::SignalTypes::onLeftMouseButtonReleased).Connect([=]() {
 		signals.Emit("OPEN_FAX");
