@@ -12,19 +12,31 @@ ctrl::NotebookController::NotebookController()
 	textures->Load("Notebook", "assets/graphics/GUI/Notebook.png");
 	textures->Load("ArrowLeft", "assets/graphics/GUI/ArrowLeft.png");
 	textures->Load("ArrowRight", "assets/graphics/GUI/ArrowRight.png");
+	textures->Load("NotebookButton", "assets/graphics/locations/notebook.png");
 	font.loadFromFile("assets/fonts/cinematic.ttf");
 
 	// Initialize tools
 	gui::ButtonsBuilder buttonsBuilder;
 
 	// Notebook button
-	button = buttonsBuilder.BuildClickableRegion({ 850, 875, 210, 75 });
+	//button = buttonsBuilder.BuildClickableRegion({ 850, 875, 210, 75 });
+	//button->GetSignal(gui::SignalTypes::onLeftMouseButtonReleased).Connect([=]() {
+	//	if (currentLayer == 0 && notebook->GetWindow()->IsActive() == false)
+	//		notebook->GetWindow()->SetActive(true);
+	//	currentLayer = 1;
+	//	signals.Emit("CLICKED_NOTEBOOK");
+	//	});
+
+
+	button = std::shared_ptr<gui::Button>(new gui::Button(textures->GetTexture("NotebookButton"), { 850, 875 }));
+	button->SetActive(true);
 	button->GetSignal(gui::SignalTypes::onLeftMouseButtonReleased).Connect([=]() {
 		if (currentLayer == 0 && notebook->GetWindow()->IsActive() == false)
-			notebook->GetWindow()->SetActive(true);
-		currentLayer = 1;
-		signals.Emit("CLICKED_NOTEBOOK");
+		notebook->GetWindow()->SetActive(true);
+	currentLayer = 1;
+	signals.Emit("CLICKED_NOTEBOOK");
 		});
+	drawablesList.push_back(button);
 
 	signals["OPEN_NOTEBOOK"].Connect([=]() {
 		notebook->GetWindow()->SetActive(true);

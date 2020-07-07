@@ -24,7 +24,7 @@ namespace ctrl {
 		sf::Font font;
 		std::shared_ptr<gui::Notebook> notebook;
 		std::shared_ptr<gui::Window> notebookWindow;
-		std::shared_ptr<gui::ClickableComponent> button;
+		std::shared_ptr<gui::Button> button;
 		std::shared_ptr<gui::Button> leftArrow;
 		std::shared_ptr<gui::Button> rightArrow;
 		bool isWaiting = false;
