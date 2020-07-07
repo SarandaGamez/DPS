@@ -20,8 +20,9 @@ namespace ctrl {
 		virtual void Draw() const;
 	private:
 		sf::Texture mapWindowTexture;
+		sf::Texture mapWindowButtonTexture;
 		std::shared_ptr<gui::Window> mapWindow;
-		std::shared_ptr<gui::ClickableComponent> openMapButton;
+		std::shared_ptr<gui::Button> openMapButton;
 		sf::Font font;
 	};
 }
