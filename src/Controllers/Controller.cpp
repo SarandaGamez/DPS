@@ -20,3 +20,10 @@ void ctrl::Controller::Initialize(std::shared_ptr<sf::RenderWindow> renderWindow
 	ctrl::Controller::textures = &texturesHolder;
 	ctrl::Controller::transition = transition;
 }
+
+void ctrl::Controller::SortDrawablesList()
+{
+	drawablesList.sort([](std::shared_ptr<gui::UIComponent> uicomp1, std::shared_ptr<gui::UIComponent> uicomp2) {
+		return uicomp1->GetLayer() < uicomp2->GetLayer();
+		});
+}

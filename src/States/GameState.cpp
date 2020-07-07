@@ -48,6 +48,8 @@ void GameState::OnEnter()
 	controllers.Add(new ctrl::GameController);
 	controllers.Add(new ctrl::TriggersController);
 	cout << "Game loaded" << endl;
+
+	ctrl::Controller::SortDrawablesList();
 }
 
 void GameState::OnLeave()

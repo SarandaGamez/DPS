@@ -20,6 +20,7 @@ namespace ctrl {
 	public:
 
 		static void Initialize(std::shared_ptr<sf::RenderWindow> renderWindow, TexturesHolder& texturesHolder, StateTransition* transition);
+		static void SortDrawablesList();
 
 		virtual void Update(sf::Time time) {}
 		virtual void HandleEvent(sf::Event event) {}
