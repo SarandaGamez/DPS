@@ -5,6 +5,7 @@
 #include "GUI/Button.h"
 #include "GUI/Window.h"
 #include "GUI/TextComponent.h"
+#include "GUI/AnimatedButton.h"
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/Texture.hpp>
 #include <memory>
@@ -18,7 +19,7 @@ namespace ctrl {
 		virtual void HandleEvent(sf::Event event) override;
 		virtual void Draw() const override;
 	private:
-		std::shared_ptr<gui::Button> reportButton;
+		std::shared_ptr<gui::AnimatedButton> reportButton;
 		std::shared_ptr<gui::Window> reportWindow;
 		std::shared_ptr<gui::TextComponent> reportText;
 		sf::Texture paperTexture;

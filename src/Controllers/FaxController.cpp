@@ -4,6 +4,7 @@
 #include "Utils/Collision.h"
 #include "Utils/StringUtils.h"
 #include "GUI/ComponentsBuilder.h"
+#include "GUI/AnimatedComponent.h"
 
 ctrl::FaxController::FaxController()
 {
@@ -12,13 +13,14 @@ ctrl::FaxController::FaxController()
 
 	textures->Load("FaxNoPaper", "assets/graphics/locations/fax.png");
 	textures->Load("FaxPaper", "assets/graphics/locations/faxPaper.png");
+	textures->Load("FaxRun", "assets/graphics/locations/faxRun.png");
 
 	font.loadFromFile("assets/fonts/cinematic.ttf");
 	gui::ButtonsBuilder buttonsBuilder;
 
 	reportWindow = std::shared_ptr<gui::Window>(new gui::Window());
 	reportWindow->SetBackground(std::shared_ptr<gui::GraphicComponent>(new gui::GraphicComponent(windowTexture)));
-	reportWindow->SetActive(false); 
+	reportWindow->SetActive(false);
 	reportWindow->SetVisible(false);
 
 	auto fax = std::shared_ptr<gui::GraphicComponent>(new gui::GraphicComponent(textures->GetTexture("FaxNoPaper")));
@@ -26,7 +28,15 @@ ctrl::FaxController::FaxController()
 	fax->SetPosition({ 1600,650 });
 	drawablesList.push_back(fax);
 
-	reportButton = std::shared_ptr<gui::Button>(new gui::Button(textures->GetTexture("FaxPaper"), { 1600,650 }));
+	auto faxAnim = std::shared_ptr<gui::AnimatedComponent>(new gui::AnimatedComponent(textures->GetTexture("FaxRun")));
+	faxAnim->AddAnimation("NewFax", 31, 0, 256, 220);
+	faxAnim->Play("NewFax");
+	faxAnim->SetPosition({ 1600,650 });
+	faxAnim->SetFrameTime(sf::seconds(0.1));
+	faxAnim->SetActive(true);
+	faxAnim->SetVisible(true);
+
+	reportButton = std::shared_ptr<gui::AnimatedButton>(new gui::AnimatedButton(faxAnim, { 1600,650 }));
 	reportButton->SetLayer(6);
 	reportButton->SetActive(false);
 	reportButton->GetSignal(gui::SignalTypes::onLeftMouseButtonReleased).Connect([=]() {
@@ -53,16 +63,19 @@ ctrl::FaxController::FaxController()
 					reportText->SetText(arguments[0]);
 				}
 			}
+		reportButton->GetAnimatedComponent()->Play("NewFax");
 		reportButton->SetActive(true);
 		});
 	signals["HIDE_FAX_BUTTON"].Connect([=]() {
 		reportButton->SetActive(false);
+		reportButton->GetAnimatedComponent()->Stop();
 		});
 	signals["OPEN_FAX"].Connect([=]() {
 		if (currentLayer == 0) {
 			reportWindow->SetActive(true);
 			reportButton->SetActive(false);
 			currentLayer = 1;
+			reportButton->GetAnimatedComponent()->Play("NewFax");
 		}
 		});
 	signals["CLOSE_FAX"].Connect([=]() {
@@ -93,6 +106,9 @@ void ctrl::FaxController::Update(sf::Time elapsedTime)
 	else if (reportButton->IsActive() == false && reportButton->IsVisible() == true) {
 		reportButton->SetVisible(false);
 	}
+
+	if(reportButton->IsActive() == true)
+		reportButton->Update(elapsedTime);
 }
 
 void ctrl::FaxController::HandleEvent(sf::Event event)
@@ -119,11 +135,12 @@ void ctrl::FaxController::HandleEvent(sf::Event event)
 		}
 	}
 
-	if(currentLayer > 0)
-		reportWindow->HandleEvent(event);
-	if(currentLayer == 0)
-		reportButton->HandleEvent(event);
-
+	if (event.mouseButton.button == sf::Mouse::Left) {
+		if (currentLayer > 0)
+			reportWindow->HandleEvent(event);
+		if (currentLayer == 0)
+			reportButton->HandleEvent(event);
+	}
 }
 
 void ctrl::FaxController::Draw() const
