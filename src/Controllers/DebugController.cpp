@@ -13,6 +13,8 @@ ctrl::DebugController::DebugController()
 	gui::ComponentsBuilder componentsBuilder;
 	debugText = componentsBuilder.BuildTextComponent(font, 20, { 20,20 }, "");
 	dialogWindow = std::shared_ptr<gui::Window>(new gui::Window);
+	dialogWindow->SetActive(false);
+	dialogWindow->SetVisible(false);
 
 
 	signals["DISPLAY_DIALOG"].Connect([=]() {
