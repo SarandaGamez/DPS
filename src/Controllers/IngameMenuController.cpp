@@ -100,12 +100,14 @@ void ctrl::IngameMenuController::Draw() const
 
 void ctrl::IngameMenuController::OpenMenu()
 {
+	actions.Block(true);
 	menuWindow->SetVisible(true);
 	signals.Emit("OPENED_MENU");
 }
 
 void ctrl::IngameMenuController::CloseMenu()
 {
+	actions.Block(false);
 	menuWindow->SetVisible(false);
 	currentLayer = 0;
 	signals.Emit("CLOSED_MENU");
